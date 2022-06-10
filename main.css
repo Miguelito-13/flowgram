@@ -189,6 +189,14 @@ footer{
     border: none;
     color: white;
 }
+.stop{
+    background-color: #89888F;
+    border: none;
+    border-radius: 5rem;
+    color: white;
+    padding: 10px 20px;
+    margin-right: 10px;
+}
 .run{
     background-color: #89888F;
     border: none;
