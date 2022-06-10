@@ -141,8 +141,8 @@
               <p>Input Window</p>
             </div>
             <div class="input-window">
-              <form>
-                <input type="text">
+              <form action="" id="form" onsubmit="sampConsole(event)">
+                <input type="text" name="sample" id="data">
                 <input type="submit" name="Submit">
               </form>
             </div>
@@ -151,6 +151,15 @@
 
 
     <script src="index.js"></script>
+    <script>
+
+      function sampConsole(event) {
+        event.preventDefault();
+        var data = document.getElementById("data");
+        console.log(data.value);
+      }
+
+    </script>
     
 </body>
 </html>
