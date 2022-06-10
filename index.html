@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/all.css">
+    <link rel="stylesheet" href="main.css">
+    <title>Flowgram</title>
+</head>
+<body onload="move()">
+    <header>
+        <div class="tool-bar">
+            <div class="tool-bar-items">
+                <ul>
+                    <li><a href="">File</a></li>
+                    <li><a href="">Settings</a></li>
+                    <li><a href="">View</a></li>
+                    <li><a href="">Help</a></li>
+                </ul> 
+            </div>
+            <p>Flowgram</p>
+        </div>
+
+        <div class="nav-bar"> 
+            <div class="nav-items">
+                <ul> 
+                    <li><button><i class=""><img src="./ThesisSVG/navigation.svg"></i></button></li>
+                    <li><button><i class=""><img src="./ThesisSVG/Text.svg"></i></button></li>
+                    <li><button><i class=""><img src="./ThesisSVG/zoom-in.svg"></i></button></li>             
+                    <li><button><i class=""><img src="./ThesisSVG/zoom-out.svg"></i></button></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+
+        <main>   
+      <section>
+        <div class="cards">
+          
+          <div class="card draggable" draggable="true">
+            <input type="text" id="start" name="decision" value="START / END">
+          </div>
+
+          <div class="card draggable" draggable="true">
+            <input type="text" id="connector" name="decision" value="">
+          </div>
+
+          <div class="card draggable" draggable="true">
+            <input type="text" id="input" name="decision" value="INPUT / OUTPUT">
+          </div>
+
+          <div class="card draggable" draggable="true">
+            <input type="text" id="process" name="decision" value="PROCESS">
+          </div>
+
+          <div class="card draggable" draggable="true">
+            <div class="decision-box">            
+              <input type="text" id="decision" name="decision" value="DECISION">
+            </div>   
+          </div>
+          
+        </div>
+
+
+        <!--
+          all images from pexels.com
+        -->
+      </section>
+      <section class="drop">
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+       
+       
+       
+        <!-- <div class="dropzone">&nbsp;</div> -->
+
+
+      </section>
+    </main>
+
+
+    <!-- <section class="content">
+        <div class="side-bar">
+            <div class="side-bar-items">
+                <ul>
+                    <li><div class="shapes"><img src="./ThesisSVG/Start.svg"><button onclick="Start()">Start / End</button></div></li>
+                    <li><div class="shapes"><img src="./ThesisSVG/Connector.svg"><button onclick="Connector()">Connector</button></div></li>
+                    <li><div class="shapes"><img src="./ThesisSVG/Output.svg"><button onclick="Input()">Input / Output</button></div></li>
+                    <li><div class="shapes"><img src="./ThesisSVG/Process.svg"><button onclick="Process()">Process</button></div></li>
+                    <li><div class="shapes"><img src="./ThesisSVG/Decision.svg"><button id="decision-parent" onclick="Decision()">Decision</button></div></li>
+                </ul>
+            </div>
+        </div>
+        <div id="display"></div>
+        <div id="display1"></div>
+    </section> -->
+
+ 
+
+    <footer>
+        <div class="output">
+            <div class="output-bar">
+                <p>Output Window</p>
+                <div class="output-bar-items">
+                    <button class="gear"><i class=""><img src="./ThesisSVG/debug.svg"></i></button>
+                    <button class="run">Run</button>
+                </div>
+            </div>
+            <div class="output-window"></div>
+        </div>
+    </footer>
+
+
+    <script src="index.js"></script>
+    
+</body>
+</html>
