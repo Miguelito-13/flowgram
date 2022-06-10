@@ -198,9 +198,36 @@ footer{
 }
 
 .output-window{
-    background-color: #333333;
+    background-color: white;
     height: 80px;
     margin: 0px 50px;
+    overflow: scroll;
+}
+.output-window p{
+    color: red;
+    margin-left: 20px;
+}
+.input-bar p{
+    margin-left: 50px;
+}
+.input-window{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+form{
+    display: flex;
+    justify-content: space-between;
+}
+input[type=text]{
+    flex: 5;
+    height: 30px;
+    /* width: 1000px; */
+    margin-right: 25px;
+    padding-left: 20px;
+}
+input[type=submit]{
+    flex: 1;
+    height: 35px;
 }
 
 
