@@ -146,5 +146,4 @@ export default class Flowgram{
         })
     }
 
-
 }
