@@ -81,6 +81,8 @@ function replaceIdentifiers(mathOp, flowgram){
 function calculate(mathOp){
 
     let cloneOp = [...mathOp]
+    cloneOp.shift()
+    cloneOp.pop()
 
     let status = "MD"                                   //MD - Multiply/Divide      AS - Add/Subtract
     while(cloneOp.length > 1){
