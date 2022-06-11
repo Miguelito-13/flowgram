@@ -129,6 +129,10 @@ export default class Flowgram{
         }
     }
 
+    resetVariables(){
+        this.variables = [];
+    }
+
     resetFlowgram(){
 
         return new Promise((resolve, reject) => {
