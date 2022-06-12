@@ -69,7 +69,12 @@ export default function ProcessLogic(groupedTokens, flowgram){
             }
 
             if(varInfo.variableName && varInfo.value != null && varInfo.type){
-                flowgram.addVariable(varInfo.variableName, varInfo.value, varInfo.type);
+                const existingVar = flowgram.getVariable(varInfo.variableName);
+                if(existingVar){
+                    flowgram.addVariable(varInfo.variableName, varInfo.value, varInfo.type);
+                } else {
+                    flowgram.updateVariable(varInfo.variableName, varInfo.value, varInfo.type);
+                }
             }
         }
     }
