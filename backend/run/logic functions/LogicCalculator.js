@@ -44,7 +44,7 @@ export default function LogicCalculation(logicalOp, flowgram){
             opClone[openIndex] = calculate(subOp);                              //Calculate the highest prio operation and replace it with the result ex. ((true AND 4==4) OR true) -> (true OR true)
             opClone.splice((openIndex + 1), (closeIndex - openIndex));
         } else {
-            opClone[0] = calculate(opClone);                                    //Calculate the simplified mathematical operation ex. true OR true -> true
+            opClone[0] = calculate(opClone);                                    //Calculate the simplified logical operation ex. true OR true -> true
         }
     }
 
