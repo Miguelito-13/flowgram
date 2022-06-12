@@ -37,7 +37,15 @@ export default class Variable{
 
     set value ({value, type}){
         this.type = validateType(type)
-        this._value = value;
+        if(value == "true"){
+            this._value = true;
+        } else if(value == "false"){
+            this._value = false;
+        } else if(this.type == "Number") {
+            this.value = parseFloat(value)
+        } else {
+            this.value = value;
+        }
     }
 
     get value (){

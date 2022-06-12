@@ -6,7 +6,13 @@ export default function Calculator(mathematicalOp, flowgram){
     }
 
     let opClone = [...mathematicalOp]
-    opClone = replaceIdentifiers(opClone, flowgram);                            //Replace all variables with their values ex. x + 1 -> 1 + 1
+    const ret = replaceIdentifiers(opClone, flowgram);                          //Replace all variables with their values ex. x + 1 -> 1 + 1
+    if(ret.error){
+        res.error = ret.error;
+        return res;
+    }
+
+    opClone = ret.replacedOp
 
     while(opClone.length > 1){                                                  
         let highestPeak = 0
