@@ -7,6 +7,7 @@ let myData = {
   timestamp: 0,
   url: '',
 };
+var symbol;
 
 document.addEventListener('DOMContentLoaded', () => {
   
@@ -14,9 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.addEventListener('dragstart', handleDragStart); //for draggable
   document.body.addEventListener('drop', handleDrop); //for dropzone
   document.body.addEventListener('dragover', handleOver); //for dropzone
+  document.body.addEventListener('click', handleClick); //for dropzone
   
   //optional but useful events
-  document.body.addEventListener('mousedown', handleCursorGrab);
+  // document.body.addEventListener('mousedown', handleCursorGrab);
   document.body.addEventListener('dragenter', handleEnter);
   document.body.addEventListener('dragleave', handleLeave);
   
@@ -60,7 +62,7 @@ function handleDrop(ev) {
   if (!dropzone.classList.contains('dropzone')) return;
 
   ev.preventDefault();
-  // console.log('DROP', ev.dataTransfer);
+  console.log('DROP', dropzone);
   // let data = ev.dataTransfer.getData('text/plain');
   let data = JSON.parse(ev.dataTransfer.getData('application/json'));
   let draggable = document.querySelector(`[data-ts="${data.timestamp}"]`);
@@ -98,11 +100,11 @@ function handleOver(ev) {
 }
 
 //optional but useful visual stuff...
-function handleCursorGrab(ev) {
-  let obj = ev.target;
-  if (!obj.closest('.draggable')) return;
-  obj.style.cursor = 'grabbing'; //close the hand
-}
+// function handleCursorGrab(ev) {
+//   let obj = ev.target;
+//   if (!obj.closest('.draggable')) return;
+//   obj.style.cursor = 'grabbing'; //close the hand
+// }
 function handleEnter(ev) {
   //fires once
   let dropzone = ev.target;
@@ -117,4 +119,28 @@ function handleLeave(ev) {
   ev.preventDefault();
   dropzone.classList.remove('over');
   // console.log('dragleave dropzone');
+}
+function handleClick(ev) {
+  if(document.querySelector("button.active")!=null){
+    let dropzone = ev.target;
+    if (!dropzone.classList.contains('dropzone')) return;
+    ev.preventDefault();
+    let symbol = dropzone.querySelector("div.dropzone > input");
+    symbol.remove();
+    // console.log(symbol);
+  }
+
+  // console.log('DROP', dropzone);
+}
+
+function deleteSymbol(){
+  document.getElementById("delete")
+  .addEventListener("click", function(){
+    if(this.classList.contains("active")){
+      this.classList.remove("active");
+    } else this.classList.add("active");
+  });
+
+  // console.log(act);
+  // symbol.remove();
 }
