@@ -120,19 +120,30 @@ function handleLeave(ev) {
   // console.log('dragleave dropzone');
 }
 function handleClick(ev) {
+  // FOR DELETING A SYMBOL
   if(document.querySelector("button.active")!=null){
     let dropzone = ev.target;
     if (!dropzone.classList.contains('dropzone')) return;
     ev.preventDefault();
     let symbol = dropzone.querySelector("div.dropzone > input");
-    symbol.remove();
-    // console.log(symbol);
+    if(symbol!=null){
+      symbol.remove();
+    } else { // FOR DELETING DECISION SYMBOL
+      let symbol = dropzone.querySelector("div.dropzone > div.decision-box > input");
+      symbol.remove();
+      let symbol1 = dropzone.querySelector("div.dropzone > div.decision-box");
+      symbol1.remove();
+      // console.log(symbol);
+    }
+    
   }
 
+  
   // console.log('DROP', dropzone);
 }
 
 function deleteSymbol(){
+  // DELETE BUTTON MUST BE ACTIVE TO DELETE SYMBOL
   document.getElementById("delete")
   .addEventListener("click", function(){
     if(this.classList.contains("active")){
