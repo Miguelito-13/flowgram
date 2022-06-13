@@ -1,10 +1,11 @@
-export default function InputLogic(groupedTokens, flowgram){
+export default function InputLogic(symbol, flowgram){
     
     let res = {
+        nextSymbol: symbol.out,
         error: false,
     }
 
-    let cloneTokens = [...groupedTokens];
+    let cloneTokens = [...symbol.groupedTokens.tokens]
 
     if (cloneTokens[0].Token == "INPUT"){
         cloneTokens.shift();

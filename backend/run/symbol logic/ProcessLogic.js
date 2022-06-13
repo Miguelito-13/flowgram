@@ -14,13 +14,14 @@ const validValues = {
     ]
 }
 
-export default function ProcessLogic(groupedTokens, flowgram){
+export default function ProcessLogic(symbol, flowgram){
 
     let res = {
+        nextSymbol: symbol.out,
         error: false
     }
 
-    let groupedClone = [...groupedTokens];
+    let groupedClone = [...symbol.groupedTokens.tokens]
     let varInfo = {
         variableName: null,
         value: null,
@@ -46,7 +47,7 @@ export default function ProcessLogic(groupedTokens, flowgram){
                     }
                 }
             } else if(validValues.ValidGroupedTypes[0] == groupedClone[0].groupedTokensType){       //Mathematical Operation
-                const ret = Calculator(groupedClone[0].groupedTokens, flowgram);
+                const ret = Calculator(groupedClone[0].tokens, flowgram);
                 if(ret.error){
                     res.error = ret.error;
                     return res;
@@ -57,7 +58,7 @@ export default function ProcessLogic(groupedTokens, flowgram){
                 groupedClone.shift()
 
             } else if(validValues.ValidGroupedTypes[1] == groupedClone[0].groupedTokensType){       //Concatenation
-                const ret = Concatenator(groupedClone[0].groupedTokens, flowgram);
+                const ret = Concatenator(groupedClone[0].tokens, flowgram);
                 if(ret.error){
                     res.error = ret.error;
                     return res;

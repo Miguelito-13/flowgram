@@ -10,7 +10,8 @@ export default function ConcatenationOpFA(tokenizedText, returnRemaining){
     let tokenizedClone = [...tokenizedText]
     let res = {
         groupedToken: {
-            groupedTokens: [],
+            tokens: [],
+            groupedTokensType: "Concatenation Operation"
         },
         remainingTokens: [],
         error: false,
@@ -20,11 +21,11 @@ export default function ConcatenationOpFA(tokenizedText, returnRemaining){
     while  (tokenizedClone.length > 0){
 
         if(state == 0 && tokenizedClone[0] && validFirstToken.includes(tokenizedClone[0].Type)){
-            res.groupedToken.groupedTokens.push(tokenizedClone[0]);
+            res.groupedToken.tokens.push(tokenizedClone[0]);
             tokenizedClone.shift()
             state = 1;
         } else if(state = 1 && tokenizedClone[0] && tokenizedClone[0].Type == "Concatenator"){
-            res.groupedToken.groupedTokens.push(tokenizedClone[0]);
+            res.groupedToken.tokens.push(tokenizedClone[0]);
             tokenizedClone.shift()
             state = 0;
         } else {
@@ -47,11 +48,6 @@ export default function ConcatenationOpFA(tokenizedText, returnRemaining){
         res.remainingTokens = tokenizedClone;
         return res;
     }
-
-    res.groupedToken = {
-        groupedTokens: tokenizedText,
-        groupedTokensType: "Concatenation Operation"
-    };
 
     return res;
 }

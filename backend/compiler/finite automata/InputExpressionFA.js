@@ -6,14 +6,15 @@ export default function InputExpressionFA(tokenizedText, flowgram){
     let tokenizedClone = [...tokenizedText]
     let res = {
         groupedToken: {
-            groupedTokens: [],
+            tokens: [],
+            groupedTokensType: "Input Expression"
         },
         error: false,
     }
 
     //=================================================
     if (tokenizedClone[0] && tokenizedClone[0].Token == "INPUT"){
-        res.groupedToken.groupedTokens.push(tokenizedClone[0])
+        res.groupedToken.tokens.push(tokenizedClone[0])
         tokenizedClone.shift()
     } else {
         res.error = "ERROR: Invalid Syntax for Input Expression"
@@ -27,7 +28,7 @@ export default function InputExpressionFA(tokenizedText, flowgram){
             res.error = "ERROR: Undefined variable '" + tokenizedClone[0].Token + "'"
             return res;
         } else {
-            res.groupedToken.groupedTokens.push(tokenizedClone[0])
+            res.groupedToken.tokens.push(tokenizedClone[0])
             tokenizedClone.shift()
         }
     } else {
@@ -41,11 +42,6 @@ export default function InputExpressionFA(tokenizedText, flowgram){
         return res;
     }
   
-
-    res.groupedToken = {
-        groupedTokens: tokenizedText,
-        groupedTokensType: "Input Expression"
-    };
 
     return res;
 }

@@ -15,7 +15,8 @@ export default function AssignmentFA(tokenizedText, flowgram){
     let tokenizedClone = [...tokenizedText];
     let res = {
         groupedToken: {
-            groupedTokens: [],
+            tokens: [],
+            groupedTokensType: "Assignment"
         },
         error: false,
     }
@@ -26,7 +27,7 @@ export default function AssignmentFA(tokenizedText, flowgram){
         //===========================================
         if (tokenizedClone[0] && tokenizedClone[0].Type === "Identifier"){                   //Check first token (~x~ = 1)
             variableInfo.name = tokenizedClone[0].Token
-            res.groupedToken.groupedTokens.push(tokenizedClone[0])
+            res.groupedToken.tokens.push(tokenizedClone[0])
             tokenizedClone.shift()    
         } else {         
             res.error = "ERROR: Invalid assignment syntax";
@@ -35,7 +36,7 @@ export default function AssignmentFA(tokenizedText, flowgram){
     
         //===========================================
         if (tokenizedClone[0] && tokenizedClone[0].Type === "Assign Operator"){             //Check second token (x ~=~ 1)
-            res.groupedToken.groupedTokens.push(tokenizedClone[0])
+            res.groupedToken.tokens.push(tokenizedClone[0])
             tokenizedClone.shift()
         } else {         
             res.error = "ERROR: Invalid assignment syntax";
@@ -57,7 +58,7 @@ export default function AssignmentFA(tokenizedText, flowgram){
                 variableInfo.value = tokenizedClone[0].Token;
                 variableInfo.type = tokenizedClone[0].Type;
             }
-            res.groupedToken.groupedTokens.push(tokenizedClone[0])
+            res.groupedToken.tokens.push(tokenizedClone[0])
             tokenizedClone.shift()
     
         //===========================================
@@ -69,15 +70,15 @@ export default function AssignmentFA(tokenizedText, flowgram){
                     res.error = "ERROR: Invalid assignment syntax";
                     return res;
                 } else {
-                    variableInfo.value = result.groupedToken.groupedTokens;
+                    variableInfo.value = result.groupedToken.tokens;
                     variableInfo.type = result.groupedToken.groupedTokensType;
-                    res.groupedToken.groupedTokens.push(result.groupedToken)
+                    res.groupedToken.tokens.push(result.groupedToken)
                     tokenizedClone = result.remainingTokens;
                 } 
             } else {
-                variableInfo.value = result.groupedToken.groupedTokens;
+                variableInfo.value = result.groupedToken.tokens;
                 variableInfo.type = result.groupedToken.groupedTokensType;
-                res.groupedToken.groupedTokens.push(result.groupedToken)
+                res.groupedToken.tokens.push(result.groupedToken)
                 tokenizedClone = result.remainingTokens;
             }
         }
@@ -100,12 +101,8 @@ export default function AssignmentFA(tokenizedText, flowgram){
     if (tokenizedClone.length > 0){
         res.error = "ERROR: Invalid assignment syntax";
         return res;
-    } else {
-        res.groupedToken = {
-            groupedTokensType: "Assignment"
-        };
-
-        return res;
     }
+    
+    return res
 
 }

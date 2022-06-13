@@ -1,4 +1,4 @@
-export default function LogicCalculation(logicalOp, flowgram){
+export default function LogicCalculator(logicalOp, flowgram){
     
     let res = {
         result: null,
@@ -92,7 +92,7 @@ function calculateRelation(relationalOp, flowgram){
     }
 
     if(relationalOp.groupedTokensType == "Relational Operation"){
-        let tokenizedTexts = replaceIdentifiers(relationalOp.groupedTokens, "Relational", flowgram).replacedOp
+        let tokenizedTexts = replaceIdentifiers(relationalOp.tokens, "Relational", flowgram).replacedOp
         if(tokenizedTexts && tokenizedTexts[1].Token == "=="){
             return tokenizedTexts[0].Token == tokenizedTexts[2].Token
 

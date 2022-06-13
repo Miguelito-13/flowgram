@@ -7,14 +7,15 @@ export default function OutputExpressionFA(tokenizedText, flowgram){
     let tokenizedClone = [...tokenizedText]
     let res = {
         groupedToken: {
-            groupedTokens: [],
+            tokens: [],
+            groupedTokensType: "Output Expression"
         },
         error: false,
     }
 
     //=================================================
     if (tokenizedClone[0] && tokenizedClone[0].Token == "OUTPUT"){
-        res.groupedToken.groupedTokens.push(tokenizedClone[0])
+        res.groupedToken.tokens.push(tokenizedClone[0])
         tokenizedClone.shift()
     } else {
         res.error = "ERROR: Invalid Syntax for Output Expression"
@@ -27,10 +28,7 @@ export default function OutputExpressionFA(tokenizedText, flowgram){
         return res;
     }
 
-    res.groupedToken = {
-        groupedTokens: tokenizedText,
-        groupedTokensType: "Output Expression"
-    };
+    res.groupedToken.tokens.push(result.groupedToken);
 
     return res;
 }
