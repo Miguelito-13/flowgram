@@ -79,7 +79,7 @@ header{
     margin-left: 20px;
 }
 #delete.active{
-    background-color: red;
+    background-color: #333333;
 }
 
 
@@ -315,7 +315,7 @@ input[type=submit]{
     height: 100px;
     width: 250px; 
     transform: skew(0deg);
-    /* background-color: rgb(255, 255, 255); */
+    /* background-color: red; */
     /* border: 2.5px solid black;
     text-align: center;
     font-family: 'Poppins', sans-serif;

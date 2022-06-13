@@ -7,7 +7,6 @@ let myData = {
   timestamp: 0,
   url: '',
 };
-var symbol;
 
 document.addEventListener('DOMContentLoaded', () => {
   
