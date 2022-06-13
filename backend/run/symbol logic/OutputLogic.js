@@ -1,18 +1,19 @@
 import Concatenator from "../logic functions/Concatenator";
 
-export default function OutputLogic(groupedTokens, flowgram){
+export default function OutputLogic(symbol, flowgram){
     
     let res = {
+        nextSymbol: symbol.out,
         error: false
     }
-    let clonedTokens = [...groupedTokens];
+    let clonedTokens = [...symbol.groupedTokens.tokens]
 
     if(clonedTokens[0].Token == "OUTPUT"){
         clonedTokens.shift()
     }
 
     if(clonedTokens[0].groupedTokensType == "Concatenation Operation"){
-        let ret = Concatenator(clonedTokens[0].groupedTokens, flowgram);
+        let ret = Concatenator(clonedTokens[0].tokens, flowgram);
 
         if (ret.error){
             res.error = ret.error;

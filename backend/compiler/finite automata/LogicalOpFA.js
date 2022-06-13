@@ -11,7 +11,8 @@ export default function LogicalOpFA(tokenizedText){
     let tokenizedClone = [...tokenizedText]
     let res = {
         groupedToken: {
-            groupedTokens: [],
+            tokens: [],
+            groupedTokensType: "Logical Operation"
         },
         error: false,
     }
@@ -25,16 +26,16 @@ export default function LogicalOpFA(tokenizedText){
             const relationalParam = [tokenizedClone[0], tokenizedClone[1], tokenizedClone[2]]
             const result = RelationalOpFA(relationalParam)
             if(!result.error){
-                res.groupedToken.groupedTokens.push(result.groupedToken)
+                res.groupedToken.tokens.push(result.groupedToken)
                 tokenizedClone.splice(0, 3);
                 state = 1;
             } else {
                 if (state == 0 && tokenizedClone[0] && validFirstAndThirdToken.includes(tokenizedClone[0].Type)){
-                    res.groupedToken.groupedTokens.push(tokenizedClone[0])
+                    res.groupedToken.tokens.push(tokenizedClone[0])
                     tokenizedClone.shift()
                     state = 1;
                 } else if (state == 0 && tokenizedClone[0] && tokenizedClone[0].Token == "("){
-                    res.groupedToken.groupedTokens.push(tokenizedClone[0])
+                    res.groupedToken.tokens.push(tokenizedClone[0])
                     tokenizedClone.shift()
                     parenthesisCount++;
                     state = 0;
@@ -48,11 +49,11 @@ export default function LogicalOpFA(tokenizedText){
 
         //=================================================
         if (state == 1 && tokenizedClone[0] && tokenizedClone[0].Type == "Logical Operator"){
-            res.groupedToken.groupedTokens.push(tokenizedClone[0])
+            res.groupedToken.tokens.push(tokenizedClone[0])
             tokenizedClone.shift()
             state = 0;
         } else if(state == 1 && tokenizedClone[0] && tokenizedClone[0].Token == ")"){
-            res.groupedToken.groupedTokens.push(tokenizedClone[0])
+            res.groupedToken.tokens.push(tokenizedClone[0])
             tokenizedClone.shift()
             parenthesisCount--;
             state = 1;
@@ -78,11 +79,6 @@ export default function LogicalOpFA(tokenizedText){
         res.error = "ERROR: Unexpected ')' Symbol"
         return res;
     }
-
-    res.groupedToken = {
-        groupedTokens: tokenizedText,
-        groupedTokensType: "Logical Operation"
-    };
 
     return res;
 }

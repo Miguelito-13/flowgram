@@ -6,14 +6,15 @@ export default function StartEndFA(tokenizedText){
     let tokenizedClone = [...tokenizedText]
     let res = {
         groupedToken: {
-            groupedTokens: [],
+            tokens: [],
+            groupedTokensType: "StartEnd"
         },
         error: false,
     }
 
     //=================================================
     if (tokenizedClone[0] && tokenizedClone[0].Token == "START" || tokenizedClone[0].Token == "END"){
-        res.groupedToken.groupedTokens.push(tokenizedClone[0])
+        res.groupedToken.tokens.push(tokenizedClone[0])
         tokenizedClone.shift()
     } else {
         res.error = "ERROR: Invalid Syntax for Start/End symbol"
@@ -25,12 +26,6 @@ export default function StartEndFA(tokenizedText){
         res.error = "ERROR: Invalid Syntax for Start/End symbol"
         return res;
     }
-  
-
-    res.groupedToken = {
-        groupedTokens: tokenizedText,
-        groupedTokensType: "StartEnd"
-    };
 
     return res;
 }

@@ -11,14 +11,15 @@ export default function RelationalOpFA(tokenizedText){
     let tokenizedClone = [...tokenizedText]
     let res = {
         groupedToken: {
-            groupedTokens: [],
+            tokens: [],
+            groupedTokensType: "Relational Operation"
         },
         error: false,
     }
 
     //=================================================
     if (tokenizedClone[0] && validFirstAndThirdToken.includes(tokenizedClone[0].Type)){
-        res.groupedToken.groupedTokens.push(tokenizedClone[0])
+        res.groupedToken.tokens.push(tokenizedClone[0])
         tokenizedClone.shift()
     } else {
         res.error = "ERROR: Invalid Syntax for Relational Operation"
@@ -27,7 +28,7 @@ export default function RelationalOpFA(tokenizedText){
 
     //=================================================
     if (tokenizedClone[0] && tokenizedClone[0].Type == "Relational Operator"){
-        res.groupedToken.groupedTokens.push(tokenizedClone[0])
+        res.groupedToken.tokens.push(tokenizedClone[0])
         tokenizedClone.shift()
     } else {
         res.error = "ERROR: Invalid Syntax for Relational Operation"
@@ -36,7 +37,7 @@ export default function RelationalOpFA(tokenizedText){
 
     //=================================================
     if (tokenizedClone[0] && validFirstAndThirdToken.includes(tokenizedClone[0].Type)){
-        res.groupedToken.groupedTokens.push(tokenizedClone[0])
+        res.groupedToken.tokens.push(tokenizedClone[0])
         tokenizedClone.shift()
     } else {
         res.error = "ERROR: Invalid Syntax for Relational Operation"
@@ -48,12 +49,6 @@ export default function RelationalOpFA(tokenizedText){
         res.error = "ERROR: Invalid Syntax for Relational Operation"
         return res;
     }
-  
-
-    res.groupedToken = {
-        groupedTokens: tokenizedText,
-        groupedTokensType: "Relational Operation"
-    };
 
     return res;
 }

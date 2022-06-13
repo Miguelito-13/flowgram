@@ -8,7 +8,8 @@ export default function MathematicalOpFA(tokenizedText, returnRemaining){
     let tokenizedClone = [...tokenizedText]
     let res = {
         groupedToken: {
-            groupedTokens: [],
+            tokens: [],
+            groupedTokensType: "Mathematical Operation"
         },
         remainingTokens: [],
         error: false,
@@ -20,20 +21,20 @@ export default function MathematicalOpFA(tokenizedText, returnRemaining){
     while  (tokenizedClone.length > 0){
 
         if((pastCount == 1 || pastCount == 2) && tokenizedClone[0] && validFirstToken.includes(tokenizedClone[0].Type)){
-            res.groupedToken.groupedTokens.push(tokenizedClone[0]);
+            res.groupedToken.tokens.push(tokenizedClone[0]);
             tokenizedClone.shift()
             pastCount = 0;
         } else if((pastCount == 0 || pastCount == 3) && tokenizedClone[0] && tokenizedClone[0].Type == "Mathematical Operator"){
-            res.groupedToken.groupedTokens.push(tokenizedClone[0]);
+            res.groupedToken.tokens.push(tokenizedClone[0]);
             tokenizedClone.shift()
             pastCount = 1;
         } else if((pastCount == 1 || pastCount == 2) && tokenizedClone[0] && tokenizedClone[0].Token == "("){
-            res.groupedToken.groupedTokens.push(tokenizedClone[0]);
+            res.groupedToken.tokens.push(tokenizedClone[0]);
             tokenizedClone.shift()
             parenthesisCount++;
             pastCount = 2;
         } else if((pastCount == 0 || pastCount == 3) && tokenizedClone[0] && tokenizedClone[0].Token == ")"){
-            res.groupedToken.groupedTokens.push(tokenizedClone[0]);
+            res.groupedToken.tokens.push(tokenizedClone[0]);
             tokenizedClone.shift()
             parenthesisCount--;
             pastCount = 3;
@@ -57,11 +58,6 @@ export default function MathematicalOpFA(tokenizedText, returnRemaining){
         res.error = "ERROR: Invalid Mathematical Operation, Unexpected ')' Symbol";
         return res;
     }
-
-    res.groupedToken = {
-        groupedTokens: [...tokenizedText].splice(0, checkedIndex),
-        groupedTokensType: "Mathematical Operation"
-    };
 
     if (returnRemaining){
         res.remainingTokens = tokenizedClone;

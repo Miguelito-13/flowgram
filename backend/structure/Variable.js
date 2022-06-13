@@ -21,7 +21,7 @@ export default class Variable{
 
     constructor(name, value, type){
         this.name = name;
-        this.value = {value, type};
+        this.value = {value: value, type: type};
     }
 
     set name (newName){
@@ -39,12 +39,18 @@ export default class Variable{
         this.type = validateType(type)
         if(value == "true"){
             this._value = true;
+            this.type = "Boolean"
         } else if(value == "false"){
             this._value = false;
-        } else if(this.type == "Number") {
-            this.value = parseFloat(value)
+            this.type = "Boolean"
+        } else if(isANumber(value)) {
+            this._value = parseFloat(value)
+            this.type = "Number"
+        } else if(typeof(value) == "string"){
+            this._value = '"' + value + '"';
+            this.type = "String"
         } else {
-            this.value = value;
+            this._value = value;
         }
     }
 
@@ -68,4 +74,15 @@ function validateType(type){
     }
     
     return varType;
+}
+
+function isANumber(value){
+    if(typeof(value) == "string"){
+        const num = parseFloat(value);
+        if(num && num.toString().length == value.replace(/\s/g, "").length){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
