@@ -34,8 +34,10 @@ export default function ProcessLogic(symbol, flowgram){
         if (state == 0 && groupedClone[0].Type == "Identifier"){
             varInfo.variableName = groupedClone[0].Token
             groupedClone.shift()
+            state = 1;
         } else if(state == 1 && groupedClone[0].Type == "Assign Operator"){
             groupedClone.shift()
+            state = 2;
         } else if(state == 2){
             if(validValues.ConstantsAndVariables.includes(groupedClone[0].Type)){                   // Constant or variable
                 if(groupedClone[0].Type == "Identifier"){
@@ -43,9 +45,13 @@ export default function ProcessLogic(symbol, flowgram){
                     if(existingVar){
                         varInfo.value = existingVar.value
                         varInfo.type = existingVar.type
-                        groupedClone.shift()
                     }
+                } else {
+                    varInfo.value = groupedClone[0].Token
+                    varInfo.type = groupedClone[0].Type
                 }
+
+                groupedClone.shift()
             } else if(validValues.ValidGroupedTypes[0] == groupedClone[0].groupedTokensType){       //Mathematical Operation
                 const ret = Calculator(groupedClone[0].tokens, flowgram);
                 if(ret.error){
@@ -70,13 +76,21 @@ export default function ProcessLogic(symbol, flowgram){
             }
 
             if(varInfo.variableName && varInfo.value != null && varInfo.type){
+                console.log("VariableInfo:", varInfo);
                 const existingVar = flowgram.getVariable(varInfo.variableName);
+                let result = {}
                 if(existingVar){
-                    flowgram.addVariable(varInfo.variableName, varInfo.value, varInfo.type);
+                    result = flowgram.updateVariable(varInfo.variableName, varInfo.value, varInfo.type);
                 } else {
-                    flowgram.updateVariable(varInfo.variableName, varInfo.value, varInfo.type);
+                    result = flowgram.addVariable(varInfo.variableName, varInfo.value, varInfo.type);
+                }
+    
+                if(result.error){
+                    res.error = result.error;
                 }
             }
+
+            state = 0;
         }
     }
 

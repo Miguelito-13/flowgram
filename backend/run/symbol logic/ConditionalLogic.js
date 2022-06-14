@@ -1,4 +1,4 @@
-import LogicCalculator from "../logic functions/LogicCalculator";
+import LogicCalculator from "../logic functions/LogicCalculator.js";
 
 export default function ConditionalLogic(symbol, flowgram){
 
@@ -16,9 +16,10 @@ export default function ConditionalLogic(symbol, flowgram){
             return res;
         }
 
-        res.nextSymbol = getNextSymbol(symbol, result.result);
-        return res;
+        res.nextSymbol = getNextSymbol(symbol, result.result.Token);
     }
+    
+    return res;
 
 }
 

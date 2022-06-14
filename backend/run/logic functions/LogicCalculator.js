@@ -29,7 +29,7 @@ export default function LogicCalculator(logicalOp, flowgram){
             }
             if(v.Token == ")"){
                 parenthesisCount--;
-                if(highestPeak != 0){
+                if(highestPeak != 0 && closeIndex == 0){
                     closeIndex = i;
                 }
             }
@@ -37,22 +37,23 @@ export default function LogicCalculator(logicalOp, flowgram){
     
         if(highestPeak != 0){
             let subOp = []
-            for(i = openIndex; i <= closeIndex; i++){
+            for(let i = openIndex; i <= closeIndex; i++){
                 subOp.push(opClone[i]);
             }
     
             opClone[openIndex] = calculate(subOp, flowgram);                              //Calculate the highest prio operation and replace it with the result ex. ((true AND 4==4) OR true) -> (true OR true)
             opClone.splice((openIndex + 1), (closeIndex - openIndex));
         } else {
-            if(opClone.length > 1){
-                opClone[0] = calculate(opClone, flowgram);                                    //Calculate the simplified logical operation ex. true OR true -> true
-            } else {
-                opClone[0] = calculateRelation(opClone, flowgram);
-            }
+            opClone = [calculate(opClone, flowgram)];                                    //Calculate the simplified logical operation ex. true OR true -> true
+            
         }
     }
 
-    res.result = opClone;
+    if(opClone[0].groupedTokensType == "Relational Operation") {
+        opClone[0] = calculateRelation(opClone[0], flowgram);
+    }
+
+    res.result = opClone[0];
     return res;
 
 }
@@ -62,27 +63,45 @@ export default function LogicCalculator(logicalOp, flowgram){
 function calculate(logicOp, flowgram){
 
     let cloneOp = [...logicOp]
-    cloneOp.shift()
-    cloneOp.pop()
+    if(cloneOp[0].Token == "("){
+        cloneOp.shift()
+        cloneOp.pop()
+    }
 
     while(cloneOp.length > 1){
         for(let i = 0; i < cloneOp.length; i++){
             let result
             if(cloneOp[i].Token == "AND"){
                 result = calculateRelation(cloneOp[i-1], flowgram) && calculateRelation(cloneOp[i+1], flowgram);
+                cloneOp[i-1] = {
+                    Token: result,
+                    Type: "Boolean Constant"
+                }
+                cloneOp.splice(i, 2);
+                i--;
+
             } else if(cloneOp[i].Token == "OR"){
                 result = calculateRelation(cloneOp[i-1], flowgram) || calculateRelation(cloneOp[i+1], flowgram);
-            }
 
-            cloneOp[i-1] = {
-                Token: result,
-                Type: "Boolean Constant"
+                cloneOp[i-1] = {
+                    Token: result,
+                    Type: "Boolean Constant"
+                }
+                cloneOp.splice(i, 2);
+                i--;
+
             }
-            cloneOp.splice(i, 2);
         }
     }
 
-    return cloneOp;
+    if(cloneOp[0].groupedTokensType == "Relational Operation"){
+        cloneOp[0] = {
+            Token: calculateRelation(cloneOp[0], flowgram),
+            Type: "Boolean Constant"
+        }
+    }
+
+    return cloneOp[0];
 }
 
 //Calculate a relational operation

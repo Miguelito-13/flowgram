@@ -1,5 +1,6 @@
 import { NotifyError, NotifySuccess} from './common/Notify.js'
 import Compile from "./compiler/Compile.js";
+import Run from './run/Run.js';
 import Flowgram from "./structure/Flowgram.js";
 
 export function newFlowgram(name){
@@ -22,6 +23,10 @@ export default async function startRunCompile(flowgram){
         } else {
             NotifyError("ERROR: Missing End Symbol");
         }
+        console.log(flowgram)
+        
+        flowgram.resetVariables()
+        await Run(flowgram.main.start, flowgram);
 
         flowgram.status.run = false;
         console.log(flowgram)

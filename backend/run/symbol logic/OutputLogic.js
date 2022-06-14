@@ -1,4 +1,4 @@
-import Concatenator from "../logic functions/Concatenator";
+import Concatenator from "../logic functions/Concatenator.js";
 
 export default function OutputLogic(symbol, flowgram){
     
@@ -21,8 +21,9 @@ export default function OutputLogic(symbol, flowgram){
         }
 
         // Call UI function to display output
+        console.log("OUTPUT ", ret.result)
     }
 
-
+    return res;
 
 }

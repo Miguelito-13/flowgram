@@ -14,7 +14,7 @@ form.addEventListener('submit', (e) => {
         throw new Error(res.error);
     }
     newFlowgramObj.main.start.out = res.newSymbol;
-    res.newSymbol.text = 'x = (1 + (1) + 2 * 3 + (100)) \n y = 5'
+    res.newSymbol.text = 'x = (1 + (1/0) + 2 * 3 + (100)) \n y = "5"'
     let pastRes = res
 
 
@@ -32,7 +32,7 @@ form.addEventListener('submit', (e) => {
         throw new Error(res.error);
     }
     pastRes.newSymbol.out = res.newSymbol;
-    res.newSymbol.text = '((x) AND (x == 1) AND 5 != 5) OR y == "Nice"'
+    res.newSymbol.text = '((x==x) AND (x == 1) AND 5 != 5) OR y == "Nice"'
     conditional = res
 
 

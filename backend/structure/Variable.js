@@ -37,21 +37,38 @@ export default class Variable{
 
     set value ({value, type}){
         this.type = validateType(type)
-        if(value == "true"){
-            this._value = true;
-            this.type = "Boolean"
-        } else if(value == "false"){
-            this._value = false;
-            this.type = "Boolean"
-        } else if(isANumber(value)) {
+        if(type == "Input"){
+            if(value == "true"){
+                this._value = true;
+                this.type = "Boolean"
+            } else if(value == "false"){
+                this._value = false;
+                this.type = "Boolean"
+            } else if(isANumber(value)) {
+                this._value = parseFloat(value)
+                this.type = "Number"
+            } else {
+                this._value = value;
+                this.type = "String"
+            }
+
+        } else if(this.type == "String"){
+            this._value = value.replace(/["]/g, "");
+            
+        } else if(this.type == "Boolean"){
+            if(value == "true"){
+                this._value = true;
+            } else if(value == "false"){
+                this._value = false;
+            }
+
+        } else if(this.type == "Number"){
             this._value = parseFloat(value)
-            this.type = "Number"
-        } else if(typeof(value) == "string"){
-            this._value = '"' + value + '"';
-            this.type = "String"
+
         } else {
             this._value = value;
         }
+        
     }
 
     get value (){
@@ -77,6 +94,7 @@ function validateType(type){
 }
 
 function isANumber(value){
+    console.log("isaNumber:", value)
     if(typeof(value) == "string"){
         const num = parseFloat(value);
         if(num && num.toString().length == value.replace(/\s/g, "").length){

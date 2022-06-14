@@ -14,10 +14,14 @@ export default function Concatenator(concatenationOp, flowgram){
                 res = "RUNTIME ERROR: Variable doesn't exist"
                 return res;
             }
-            result += existingVar.value;
+            res.result += existingVar.value;
 
         } else {
-            result += cloneOp[i].Token;
+            if(cloneOp[i].Type == "String Constant"){
+                res.result += cloneOp[i].Token.replace(/["]/g, "");
+            } else {
+                res.result += cloneOp[i].Token;
+            }
         }
     }
 

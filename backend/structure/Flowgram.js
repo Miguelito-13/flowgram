@@ -81,13 +81,13 @@ export default class Flowgram{
 
     addVariable(variableName, value, type){
         let res = {
-            newVar: false,
+            newVar: null,
             error: false
         }
         const existingVar = this.getVariable(variableName, this.variables);
         if (existingVar){
             res.error = "ERROR: Variable already exist";
-            return error;
+            return res;
         }
 
         const newVariable = new Variable(variableName, value, type);
@@ -97,18 +97,20 @@ export default class Flowgram{
         }
 
         this.variables.push(newVariable);
+        res.newVar = existingVar;
+        return res;
     }
 
     updateVariable(variableName, value, type){
         let res = {
-            newVar: false,
+            newVar: null,
             error: false
         }
 
-        const existingVar = this.getVariable(variableName, value);
+        const existingVar = this.getVariable(variableName);
         if(!existingVar){
             res.error = "ERROR: Variable doesn't exist";
-            return error;
+            return res;
         }
 
         existingVar.value = {value: value, type: type};
@@ -117,6 +119,7 @@ export default class Flowgram{
             return res;
         }
 
+        res.newVar = existingVar;
         return res;
     }
 

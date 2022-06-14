@@ -31,7 +31,7 @@ export default function Calculator(mathematicalOp, flowgram){
             }
             if(v.Token == ")"){
                 parenthesisCount--;
-                if(highestPeak != 0){
+                if(highestPeak != 0 && closeIndex == 0){
                     closeIndex = i;
                 }
             }
@@ -39,18 +39,30 @@ export default function Calculator(mathematicalOp, flowgram){
     
         if(highestPeak != 0){
             let subOp = []
-            for(i = openIndex; i <= closeIndex; i++){
+            for(let i = openIndex; i <= closeIndex; i++){
                 subOp.push(opClone[i]);
             }
     
-            opClone[openIndex] = calculate(subOp);                              //Calculate the highest prio operation and replace it with the result ex. ((1 + 1) + 2) -> (2+2)
+            let result = calculate(subOp);                                      //Calculate the highest prio operation and replace it with the result ex. ((1 + 1) + 2) -> (2+2)
+            if(result.error){
+                res.error = result.error;
+                return res;
+            }
+            opClone[openIndex] = result.result;                              
             opClone.splice((openIndex + 1), (closeIndex - openIndex));
+            openIndex = 0;
+            closeIndex = 0;
         } else {
-            opClone[0] = calculate(opClone);                                    //Calculate the simplified mathematical operation ex. 2 + 2 -> 4
+            let result = calculate(opClone);                                    //Calculate the simplified mathematical operation ex. 2 + 2 -> 4
+            if(result.error){
+                res.error = result.error;
+                return res;
+            }
+            opClone[0] = result.result;                                    
         }
     }
 
-    res.result = opClone
+    res.result = opClone[0]
     return res;
 }
 
@@ -86,33 +98,76 @@ function replaceIdentifiers(mathOp, flowgram){
 //Calculate a mathematical operation following MDAS rule
 function calculate(mathOp){
 
+    let res = {
+        result: null,
+        error: false
+    }
+
     let cloneOp = [...mathOp]
-    cloneOp.shift()
-    cloneOp.pop()
+    if(cloneOp[0].Token == "("){
+        cloneOp.shift()
+        cloneOp.pop()
+    }
 
     let status = "MD"                                   //MD - Multiply/Divide      AS - Add/Subtract
     while(cloneOp.length > 1){
         for(let i = 0; i < cloneOp.length; i++){
-            let result
-            if(status = "MD" && cloneOp[i].Token == "*"){
-                result = parseFloat(cloneOp[i-1]) * parseFloat(cloneOp[i+1]);
-            } else if(status = "MD" && cloneOp[i].Token == "/"){
-                result = parseFloat(cloneOp[i-1]) / parseFloat(cloneOp[i+1]);
-            } else if(status = "AS" && cloneOp[i].Token == "+"){
-                result = parseFloat(cloneOp[i-1]) / parseFloat(cloneOp[i+1]);
-            } else if(status = "AS" && cloneOp[i].Token == "-"){
-                result = parseFloat(cloneOp[i-1]) / parseFloat(cloneOp[i+1]);
-            }
+            if(cloneOp[i].Type == "Mathematical Operator"){
+                let result
+                if(status == "MD" && cloneOp[i].Token == "*"){
+                    result = parseFloat(cloneOp[i-1].Token) * parseFloat(cloneOp[i+1].Token);
+                    console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token)
+                    cloneOp[i-1] = {
+                        Token: result,
+                        Type: "Number Constant"
+                    }
+        
+                    cloneOp.splice(i, 2);
+                    i--;
 
-            cloneOp[i-1] = {
-                Token: result,
-                Type: "Number Constant"
+                } else if(status == "MD" && cloneOp[i].Token == "/"){               //TODO return error when i+1 is 0
+                    if(parseFloat(cloneOp[i+1].Token) == 0){
+                        res.error = "RUNTIME ERROR: Cannot divide number with 0";
+                        return res;
+                    }
+                    result = parseFloat(cloneOp[i-1].Token) / parseFloat(cloneOp[i+1].Token);
+                    console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token)
+                    cloneOp[i-1] = {
+                        Token: result,
+                        Type: "Number Constant"
+                    }
+        
+                    cloneOp.splice(i, 2);
+                    i--;
+
+                } else if(status == "AS" && cloneOp[i].Token == "+"){
+                    result = parseFloat(cloneOp[i-1].Token) + parseFloat(cloneOp[i+1].Token);
+                    console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token)
+                    cloneOp[i-1] = {
+                        Token: result,
+                        Type: "Number Constant"
+                    }
+        
+                    cloneOp.splice(i, 2);
+                    i--;
+
+                } else if(status == "AS" && cloneOp[i].Token == "-"){
+                    result = parseFloat(cloneOp[i-1].Token) - parseFloat(cloneOp[i+1].Token);
+                    console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token.Token)
+                    cloneOp[i-1] = {
+                        Token: result,
+                        Type: "Number Constant"
+                    }
+        
+                    cloneOp.splice(i, 2);
+                    i--;
+                }
             }
-            cloneOp.splice(i, 2);
         }
 
         status = status == "MD" ? "AS" : null;
     }
 
-    return cloneOp;
+    res.result = cloneOp[0]
+    return res;
 }

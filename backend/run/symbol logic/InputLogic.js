@@ -14,18 +14,23 @@ export default function InputLogic(symbol, flowgram){
         return res;
     }
 
-    if (classTokens[0].Type == "Identifier"){
+    if (cloneTokens[0].Type == "Identifier"){
         let status = {
             input: null
         }
 
-        // Call UI input function and pass status
-        while(status.input == null && flowgram.status.run){}            // Wait for user input
+        status.input = "15"                                                 // Test Input
+        // Call UI input function and pass status                           
+        // while(status.input == null && flowgram.status.run){}             // Wait for user input
 
+        let ret = flowgram.updateVariable(cloneTokens[0].Token, status.input, "Input")
 
     } else {
         res.error = true;
         return res;
     }
+
+    
+    return res;
 
 }
