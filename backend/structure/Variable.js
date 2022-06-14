@@ -94,7 +94,6 @@ function validateType(type){
 }
 
 function isANumber(value){
-    console.log("isaNumber:", value)
     if(typeof(value) == "string"){
         const num = parseFloat(value);
         if(num && num.toString().length == value.replace(/\s/g, "").length){

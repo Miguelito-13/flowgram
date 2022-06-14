@@ -16,6 +16,7 @@ export default function ConditionalLogic(symbol, flowgram){
             return res;
         }
 
+        console.log(result.result);
         res.nextSymbol = getNextSymbol(symbol, result.result.Token);
     }
     

@@ -113,10 +113,10 @@ function calculateRelation(relationalOp, flowgram){
     if(relationalOp.groupedTokensType == "Relational Operation"){
         let tokenizedTexts = replaceIdentifiers(relationalOp.tokens, "Relational", flowgram).replacedOp
         if(tokenizedTexts && tokenizedTexts[1].Token == "=="){
-            return tokenizedTexts[0].Token == tokenizedTexts[2].Token
+            return tokenizedTexts[0].Token == tokenizedTexts[2].Token && tokenizedTexts[0].Type == tokenizedTexts[2].Type
 
         } else if(tokenizedTexts && tokenizedTexts[1].Token == "!="){
-            return tokenizedTexts[0].Token != tokenizedTexts[2].Token
+            return tokenizedTexts[0].Token != tokenizedTexts[2].Token || tokenizedTexts[0].Type != tokenizedTexts[2].Type
 
         } else {
             if(tokenizedTexts[0].Type == "Number Constant" && tokenizedTexts[2].Type == "Number Constant"){

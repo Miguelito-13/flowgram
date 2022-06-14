@@ -10,6 +10,11 @@ export default async function Run(symbol, flowgram){
         console.log(symbol)
         let result = {}
 
+        if(!flowgram.status.run){
+            resolve()
+            return;
+        }
+
         if(symbol.type == "StartEnd"){
             const groupedTokens = [...symbol.groupedTokens.tokens]
             if(groupedTokens[0].Token == "START"){
@@ -39,6 +44,7 @@ export default async function Run(symbol, flowgram){
 
         if (result.error){
             reject({symbol, error: result.error});
+            return;
         }
 
 
@@ -46,6 +52,7 @@ export default async function Run(symbol, flowgram){
             await Run(result.nextSymbol, flowgram);
         } catch({symbol, error}){
             reject({symbol, error});
+            return;
         }
         
         resolve();

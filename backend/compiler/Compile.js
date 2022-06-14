@@ -16,11 +16,13 @@ export default async function Compile(symbol, root, flowgram){
 
         if (!symbol){
             resolve()
+            return;
         }
 
         if (!flowgram.status.run){
             console.log("Compilation has been stopped or has ended");
             resolve()
+            return;
         }
     
         if (root){
@@ -42,16 +44,19 @@ export default async function Compile(symbol, root, flowgram){
             result = InputOutputValidation(symbol, flowgram);
         } else {
             reject({symbol, error: "ERROR: Invalid Symbol"});
+            return;
         }
 
         if (result.error){
             reject({symbol, error: result.error})
+            return;
         }
 
         console.log(flowgram);
         const res = getNextSymbols(result.symbol);
         if(res.error){
             reject({symbol, error: res.error});
+            return;
         }
 
         for(let i = 0; i < res.connections.length; i++){
@@ -59,6 +64,7 @@ export default async function Compile(symbol, root, flowgram){
                 await Compile(res.connections[i], root, flowgram);
             } catch ({symbol, error}){
                 reject({symbol, error});
+                return;
             }
         }
 

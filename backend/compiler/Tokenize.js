@@ -31,10 +31,17 @@ export default function Tokenize(text){
                 valid = true;
 
                 if (patternType != 'Space'){
-                    result.tokenized.push({
-                        Token: res[0],
-                        Type: patternType
-                    })
+                    if(patternType == "String Constant"){
+                        result.tokenized.push({
+                            Token: res[0].replace(/["]/g, ""),
+                            Type: patternType
+                        })
+                    } else {
+                        result.tokenized.push({
+                            Token: res[0],
+                            Type: patternType
+                        })
+                    }
                 }
 
                 token = token.replace(res[0], ''); 
