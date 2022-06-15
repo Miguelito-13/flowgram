@@ -223,7 +223,15 @@ footer{
     margin: 0px 50px;
     overflow: scroll;
 }
-.output-window p{
+.output-window p.success{
+    color: green;
+    margin-left: 20px;
+}
+.output-window p.warning{
+    color: #f5c71a;
+    margin-left: 20px;
+}
+.output-window p.error{
     color: red;
     margin-left: 20px;
 }

@@ -61,7 +61,7 @@ function handleDrop(ev) {
   if (!dropzone.classList.contains('dropzone')) return;
 
   ev.preventDefault();
-  console.log('DROP', dropzone);
+  // console.log('DROP', dropzone);
   // let data = ev.dataTransfer.getData('text/plain');
   let data = JSON.parse(ev.dataTransfer.getData('application/json'));
   let draggable = document.querySelector(`[data-ts="${data.timestamp}"]`);
@@ -82,7 +82,7 @@ function handleDrop(ev) {
       //same as before... except the method getAsString
       item.getAsString((json)=>{
         let data = JSON.parse(json);
-        console.log('timestamp was', data.timestamp);
+        // console.log('timestamp was', data.timestamp);
       })
     }
   }
