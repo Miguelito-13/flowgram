@@ -124,24 +124,48 @@ function handleClick(ev) { // FOR DELETING A SYMBOL
     let dropzone = ev.target;
     if (!dropzone.classList.contains('dropzone')) return;
     ev.preventDefault();
+    // console.log(dropzone);
     let symbol = dropzone.querySelector("div.dropzone > input");
     if(symbol!=null){ // FOR DELETING SYMBOLS EXCEPT START SYMBOL
-      let dummy = dropzone.querySelector("div.dropzone > input#start");
-      // console.log(dummy);
-      if(dummy==null){
-        symbol.remove();
+      let x = [];
+      let checker = false;
+      var reject;
+      for(i=1;i<7;i++){
+        let dummy = dropzone.querySelector("div.dropzone#A0"+i+" > input#start");
+        x.push(dummy);
+        // console.log(x);
       }
+      for(i=0;i<7;i++){
+        if(x[i]!=null){
+          checker = true;
+          reject = x[i];
+          // console.log(reject);
+        } else {
+          // symbol.remove();
+        }
+      }
+      
+      if(checker == false){
+        let reject = dropzone.querySelector("div.dropzone > input#start");
+        if(reject==null){
+          symbol.remove();
+        } else{
+          reject.remove();
+          // console.log(reject);
+          // console.log(checker);
+        }
+        // console.log(reject);
+        // console.log(symbol);
+      }
+      // console.log(symbol); 
     } else { // FOR DELETING DECISION SYMBOL
       let symbol = dropzone.querySelector("div.dropzone > div.decision-box > input");
       symbol.remove();
       let symbol1 = dropzone.querySelector("div.dropzone > div.decision-box");
       symbol1.remove();
       // console.log(symbol);
-    }
-    
+    } 
   }
-
-  
   // console.log('DROP', dropzone);
 }
 

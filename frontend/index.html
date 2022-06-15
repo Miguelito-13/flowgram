@@ -108,7 +108,8 @@
           all images from pexels.com
         -->
       </section>
-      <section class="drop">
+      <section class="drop" id="canvas">
+        <!-- <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
         <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
         <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
         <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
@@ -130,8 +131,7 @@
         <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
         <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
         <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
-        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
-        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div>
+        <div class="dropzone"></div> <div class="dropzone"> </div><div class="dropzone"></div> -->
        
        
        
@@ -195,6 +195,132 @@
         event.preventDefault();
         var data = document.getElementById("data");
         console.log(data.value);
+      }
+
+      let canvas = document.getElementById("canvas");
+      let place = false;
+
+      for(i=1;i<6;i++){
+        let newElement = document.createElement('div');
+        newElement.classList.add('dropzone');
+        newElement.id = 'A0'+ i;
+        if(i == 3){
+          newElement.innerHTML = '<input type="text" id="start" name="decision" value="START / END" data-ts="1655295083726">';
+        }
+        // newElement.innerHTML = '<p>A0'+i+'</p>';
+        canvas.appendChild(newElement);
+      }
+
+      for(i=1;i<6;i++){
+        let newElement = document.createElement('div');
+        newElement.classList.add('dropzone');
+        newElement.id = 'B0'+ i;
+        // newElement.innerHTML = '<p>B0'+i+'</p>';
+        canvas.appendChild(newElement);
+      }
+
+      for(i=1;i<6;i++){
+        let newElement = document.createElement('div');
+        newElement.classList.add('dropzone');
+        newElement.id = 'C0'+ i;
+        // newElement.innerHTML = '<p>C0'+i+'</p>';
+        canvas.appendChild(newElement);
+      }
+
+      for(i=1;i<6;i++){
+        let newElement = document.createElement('div');
+        newElement.classList.add('dropzone');
+        newElement.id = 'D0'+ i;
+        // newElement.innerHTML = '<p>D0'+i+'</p>';
+        canvas.appendChild(newElement);
+      }
+
+      for(i=1;i<6;i++){
+        let newElement = document.createElement('div');
+        newElement.classList.add('dropzone');
+        newElement.id = 'E0'+ i;
+        // newElement.innerHTML = '<p>E0'+i+'</p>';
+        canvas.appendChild(newElement);
+      }
+
+      for(i=1;i<6;i++){
+        let newElement = document.createElement('div');
+        newElement.classList.add('dropzone');
+        newElement.id = 'F0'+ i;
+        // newElement.innerHTML = '<p>F0'+i+'</p>';
+        canvas.appendChild(newElement);
+      }
+
+      for(i=1;i<6;i++){
+        let newElement = document.createElement('div');
+        newElement.classList.add('dropzone');
+        newElement.id = 'G0'+ i;
+        // newElement.innerHTML = '<p>G0'+i+'</p>';
+        canvas.appendChild(newElement);
+      }
+
+      for(i=1;i<6;i++){
+        let newElement = document.createElement('div');
+        newElement.classList.add('dropzone');
+        newElement.id = 'H0'+ i;
+        // newElement.innerHTML = '<p>H0'+i+'</p>';
+        canvas.appendChild(newElement);
+      }
+
+      for(i=1;i<6;i++){
+        let newElement = document.createElement('div');
+        newElement.classList.add('dropzone');
+        newElement.id = 'I0'+ i;
+        // newElement.innerHTML = '<p>I0'+i+'</p>';
+        canvas.appendChild(newElement);
+      }
+
+      for(i=1;i<6;i++){
+        let newElement = document.createElement('div');
+        newElement.classList.add('dropzone');
+        newElement.id = 'J0'+ i;
+        // newElement.innerHTML = '<p>J0'+i+'</p>';
+        canvas.appendChild(newElement);
+      }
+
+      for(i=1;i<6;i++){
+        let newElement = document.createElement('div');
+        newElement.classList.add('dropzone');
+        newElement.id = 'K0'+ i;
+        // newElement.innerHTML = '<p>K0'+i+'</p>';
+        canvas.appendChild(newElement);
+      }
+
+      for(i=1;i<6;i++){
+        let newElement = document.createElement('div');
+        newElement.classList.add('dropzone');
+        newElement.id = 'L0'+ i;
+        // newElement.innerHTML = '<p>L0'+i+'</p>';
+        canvas.appendChild(newElement);
+      }
+
+      for(i=1;i<6;i++){
+        let newElement = document.createElement('div');
+        newElement.classList.add('dropzone');
+        newElement.id = 'M0'+ i;
+        // newElement.innerHTML = '<p>M0'+i+'</p>';
+        canvas.appendChild(newElement);
+      }
+
+      for(i=1;i<6;i++){
+        let newElement = document.createElement('div');
+        newElement.classList.add('dropzone');
+        newElement.id = 'N0'+ i;
+        // newElement.innerHTML = '<p>N0'+i+'</p>';
+        canvas.appendChild(newElement);
+      }
+
+      for(i=1;i<6;i++){
+        let newElement = document.createElement('div');
+        newElement.classList.add('dropzone');
+        newElement.id = 'O0'+ i;
+        // newElement.innerHTML = '<p>O0'+i+'</p>';
+        canvas.appendChild(newElement);
       }
 
     </script>
