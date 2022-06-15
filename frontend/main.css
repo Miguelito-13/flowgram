@@ -305,7 +305,7 @@ input[type=submit]{
 /* SHAPES STYLE */
 
 #start {
-    margin: 0;
+    margin: 5px;
     padding: 20px;
     height: 50px;
     width: 100px;
@@ -317,7 +317,7 @@ input[type=submit]{
     transform: skew(0deg);
 }
 #input {
-    margin: 0;
+    margin: 5px;
     padding: 20px;
     height: 50px;
     width: 150px;
@@ -328,7 +328,7 @@ input[type=submit]{
     font-family: 'Poppins', sans-serif;
 }
 #process {
-    margin: 0;
+    margin: 5px;
     padding: 20px;
     height: 50px;
     width: 130px;
@@ -340,7 +340,7 @@ input[type=submit]{
 }
 
 #decision {
-    margin: 0;
+    margin: 5px;
     padding: 20px;
     height: 40px;
     width: 190px;
@@ -353,7 +353,7 @@ input[type=submit]{
   }
 
 .decision-box{
-    margin: 0;
+    margin: 5px;
     width: 100%;
     background-image: url(./ThesisSVG/Vector\ 1.svg);
     background-size: contain;
