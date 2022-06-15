@@ -138,6 +138,47 @@ main{
     padding-right: 40px;
 }
 
+.dropbtn {
+    background-color: white;
+    color: black;
+    padding: 16px;
+    font-size: 14px;
+    border: 2px solid black;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content .connector {
+    padding: 10px;
+    width: 120px;
+    height: 120px;
+  }
+  
+  .dropdown-content .connector :hover {background-color: #cccccc}
+  
+  .dropdown:hover .dropdown-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: #cccccc;
+  }
+
 /* .side-bar-items ul{
     list-style: none;
     display: flex;
@@ -264,8 +305,7 @@ input[type=submit]{
 /* SHAPES STYLE */
 
 #start {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 0;
     padding: 20px;
     height: 50px;
     width: 100px;
@@ -276,18 +316,8 @@ input[type=submit]{
     font-family: 'Poppins', sans-serif;
     transform: skew(0deg);
 }
-#connector {
-    margin-left: 30px;
-    height: 50px;
-    width: 30px;
-    background-color: transparent;
-    outline: none;
-    border-top-style: hidden;
-    border-right-style: hidden;
-    border-bottom-style: hidden;
-    border-left-style: 2.5px solid black;
-}
 #input {
+    margin: 0;
     padding: 20px;
     height: 50px;
     width: 150px;
@@ -298,6 +328,7 @@ input[type=submit]{
     font-family: 'Poppins', sans-serif;
 }
 #process {
+    margin: 0;
     padding: 20px;
     height: 50px;
     width: 130px;
@@ -307,28 +338,104 @@ input[type=submit]{
     font-family: 'Poppins', sans-serif;
     transform: skew(0deg);
 }
+
 #decision {
-    height: 100px;
-    width: 200px; 
-    border-style: hidden;
+    margin: 0;
+    padding: 20px;
+    height: 40px;
+    width: 190px;
+    background-color: transparent;
     text-align: center;
     font-family: 'Poppins', sans-serif;
-    outline: none;
-    /* transform:rotate(-45deg); */
-    background-color: transparent; 
-  }
-  
-.decision-box {
-    background-image: url(./ThesisSVG/Vector\ 1.svg);
-    background-size: 200px 100px;
-    height: 100px;
-    width: 200px; 
     transform: skew(0deg);
-    margin-left: 10px;
-    margin-right: 35px;
-    /* background-color: red; */
-    /* border: 2.5px solid black;
+    border: 2px solid transparent;
+    outline: none;
+  }
+
+.decision-box{
+    margin: 0;
+    width: 100%;
+    background-image: url(./ThesisSVG/Vector\ 1.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
     text-align: center;
     font-family: 'Poppins', sans-serif;
-    transform:rotate(45deg); */ 
-  }
+    transform: skew(0deg);
+}
+
+  #connector-vertical {
+    margin-left: 50%;
+    height: 50px;
+    width: 30px;
+    background-color: transparent;
+    outline: none;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-bottom-style: hidden;
+    border-left-style: 2.5px solid black;
+}
+#connector-horizontal {
+    width: 100px;
+    margin:0px;
+    height: 20px;
+    margin-bottom: 25px;
+    background-color: transparent;
+    outline: none;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: 2.5px solid black;
+}
+#connector-down-right {
+    margin-top: 50px;
+    margin-right: 50%;
+    height: 50px;
+    width: 30px;
+    background-color: transparent;
+    outline: none;
+    border-top-style:  2.5px solid black;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    border-right-style: 2.5px solid black;
+}
+
+#connector-down-left {
+    margin-right: 0px;
+    margin-top: 50px;
+    margin-left: 50%;
+    height: 50px;
+    width: 30px;
+    background-color: transparent;
+    outline: none;
+    border-top-style:  2.5px solid black;
+    border-left-style: 2.5px solid black;
+    border-bottom-style: hidden;
+    border-right-style: hidden;
+}
+
+#connector-up-right{
+    margin-bottom: 50px;
+    margin-right: 50%;
+    height: 50px;
+    width: 30px;
+    background-color: transparent;
+    outline: none;
+    border-bottom-style:  2.5px solid black;
+    border-left-style: hidden;
+    border-top-style: hidden;
+    border-right-style: 2.5px solid black;
+}
+
+#connector-up-left{
+    margin-right: 0px;
+    margin-bottom: 50px;
+    margin-left: 50%;
+    height: 50px;
+    width: 30px;
+    background-color: transparent;
+    outline: none;
+    border-bottom-style:  2.5px solid black;
+    border-left-style: 2.5px solid black;
+    border-top-style: hidden;
+    border-right-style: hidden;
+}
