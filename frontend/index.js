@@ -119,15 +119,18 @@ function handleLeave(ev) {
   dropzone.classList.remove('over');
   // console.log('dragleave dropzone');
 }
-function handleClick(ev) {
-  // FOR DELETING A SYMBOL
+function handleClick(ev) { // FOR DELETING A SYMBOL
   if(document.querySelector("button.active")!=null){
     let dropzone = ev.target;
     if (!dropzone.classList.contains('dropzone')) return;
     ev.preventDefault();
     let symbol = dropzone.querySelector("div.dropzone > input");
-    if(symbol!=null){
-      symbol.remove();
+    if(symbol!=null){ // FOR DELETING SYMBOLS EXCEPT START SYMBOL
+      let dummy = dropzone.querySelector("div.dropzone > input#start");
+      // console.log(dummy);
+      if(dummy==null){
+        symbol.remove();
+      }
     } else { // FOR DELETING DECISION SYMBOL
       let symbol = dropzone.querySelector("div.dropzone > div.decision-box > input");
       symbol.remove();
@@ -142,7 +145,7 @@ function handleClick(ev) {
   // console.log('DROP', dropzone);
 }
 
-function deleteSymbol(){
+function deleteSymbol(){ // TO INITIATE DELETE
   // DELETE BUTTON MUST BE ACTIVE TO DELETE SYMBOL
   document.getElementById("delete")
   .addEventListener("click", function(){
