@@ -181,6 +181,9 @@ main{
   .dropzone input.samp:hover{
     cursor: pointer;
   }
+  .dropzone .samp:hover{
+    cursor: pointer;
+  }
 
 /* .side-bar-items ul{
     list-style: none;
