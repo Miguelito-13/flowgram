@@ -115,7 +115,7 @@ main{
     background-color: whitesmoke;
     height: 50px;
     width: 100%;
-    border: #cccccc solid 1px;
+    /* border: #cccccc solid 1px; */
     display: flex;
     justify-content: center;
     align-items: center;
