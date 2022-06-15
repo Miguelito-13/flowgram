@@ -66,6 +66,7 @@ function handleDrop(ev) {
   let data = JSON.parse(ev.dataTransfer.getData('application/json'));
   let draggable = document.querySelector(`[data-ts="${data.timestamp}"]`);
   let clone = draggable.cloneNode(true);
+  clone.classList.add("samp");
   dropzone.append(clone);
   // draggable.remove();
   
@@ -121,52 +122,12 @@ function handleLeave(ev) {
 }
 function handleClick(ev) { // FOR DELETING A SYMBOL
   if(document.querySelector("button.active")!=null){
-    let dropzone = ev.target;
-    if (!dropzone.classList.contains('dropzone')) return;
+    let symbol = ev.target;
+    if (!symbol.classList.contains('samp')) return;
     ev.preventDefault();
-    // console.log(dropzone);
-    let symbol = dropzone.querySelector("div.dropzone > input");
-    if(symbol!=null){ // FOR DELETING SYMBOLS EXCEPT START SYMBOL
-      let x = [];
-      let checker = false;
-      var reject;
-      for(i=1;i<7;i++){
-        let dummy = dropzone.querySelector("div.dropzone#A0"+i+" > input#start");
-        x.push(dummy);
-        // console.log(x);
-      }
-      for(i=0;i<7;i++){
-        if(x[i]!=null){
-          checker = true;
-          reject = x[i];
-          // console.log(reject);
-        } else {
-          // symbol.remove();
-        }
-      }
-      
-      if(checker == false){
-        let reject = dropzone.querySelector("div.dropzone > input#start");
-        if(reject==null){
-          symbol.remove();
-        } else{
-          reject.remove();
-          // console.log(reject);
-          // console.log(checker);
-        }
-        // console.log(reject);
-        // console.log(symbol);
-      }
-      // console.log(symbol); 
-    } else { // FOR DELETING DECISION SYMBOL
-      let symbol = dropzone.querySelector("div.dropzone > div.decision-box > input");
-      symbol.remove();
-      let symbol1 = dropzone.querySelector("div.dropzone > div.decision-box");
-      symbol1.remove();
-      // console.log(symbol);
-    } 
+    symbol.remove();
+    console.log(symbol);
   }
-  // console.log('DROP', dropzone);
 }
 
 function deleteSymbol(){ // TO INITIATE DELETE
@@ -178,6 +139,10 @@ function deleteSymbol(){ // TO INITIATE DELETE
     } else this.classList.add("active");
   });
 
-  // console.log(act);
-  // symbol.remove();
+  document.getElementById("input")
+  .addEventListener("click", function(){
+    if(this.classList.contains("active")){
+      // this.classList.remove("active");
+    } else this.classList.add("active");
+  });
 }

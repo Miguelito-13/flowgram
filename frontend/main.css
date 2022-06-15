@@ -178,6 +178,9 @@ main{
   .dropdown:hover .dropbtn {
     background-color: #cccccc;
   }
+  .dropzone input.samp:hover{
+    cursor: pointer;
+  }
 
 /* .side-bar-items ul{
     list-style: none;
