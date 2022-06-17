@@ -10,6 +10,8 @@ let myData = {
 let canvas = document.getElementById("canvas");
 let zoomLevel = 1;
 let x = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+let output = document.getElementById("output");
+let zoom = document.getElementById("zoom");
 
 document.addEventListener('DOMContentLoaded', () => {
   
@@ -249,11 +251,30 @@ function zoomIn(){ // ZOOM IN CANVAS
     zoomLevel += 0.1;
     canvas.style.zoom = `${zoomLevel}`;
   }
+  let zoomScale = canvas.style.zoom * 100 + "%";
+  zoom.innerHTML =  zoomScale;
+
+  // console.log(zoomScale);
 }
 
 function zoomOut(){ // ZOOM OUT CANVAS
-  if(zoomLevel > 0.7){
+  if(zoomLevel > 0.6){
     zoomLevel -= 0.1;
     canvas.style.zoom = `${zoomLevel}`;
   }
+  let zoomScale = canvas.style.zoom * 100 + "%";
+  zoom.innerHTML =  zoomScale;
+
+  // console.log(zoomScale);
+}
+
+function sampConsole(event) { // DISPLAY OUTPUT ON INPUT WINDOW
+  event.preventDefault();
+  var data = document.getElementById("data");
+  let newElement = document.createElement('p');
+  newElement.classList.add('success');
+  newElement.innerHTML = data.value;
+  output.appendChild(newElement);
+
+  // console.log(newElement);
 }
