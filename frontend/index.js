@@ -134,7 +134,7 @@ function handleClick(ev) { // FOR DELETING A SYMBOL
   }
 }
 
-function arrowSymbol(){
+function arrowSymbol(){ // ARROW BUTTON FUNCTIONS
   let arrow = document.getElementById("arrow");
   arrow.classList.add("active");
 
@@ -164,7 +164,7 @@ function arrowSymbol(){
   });
 }
 
-function textSymbol(){
+function textSymbol(){ // TEXT BUTTON FUNCTIONS
   let arrow = document.getElementById("arrow");
   if(arrow.classList.contains("active")){
     arrow.classList.remove("active");
@@ -197,7 +197,7 @@ function textSymbol(){
 }
 
 function deleteSymbol(){ // TO INITIATE DELETE
-  // DELETE BUTTON MUST BE ACTIVE TO DELETE SYMBOL
+  
   let arrow = document.getElementById("arrow");
   if(arrow.classList.contains("active")){
     arrow.classList.remove("active");
@@ -231,7 +231,7 @@ function deleteSymbol(){ // TO INITIATE DELETE
 
 }
 
-for(i=0;i<26;i++){
+for(i=0;i<26;i++){ // CREATE GRID WITH ID
   for(j=1;j<6;j++){
     let newElement = document.createElement('div');
     newElement.classList.add('dropzone');
@@ -244,14 +244,14 @@ for(i=0;i<26;i++){
   }
 }
 
-function zoomIn(){
+function zoomIn(){ // ZOOM IN CANVAS
   if(zoomLevel < 2){
     zoomLevel += 0.1;
     canvas.style.zoom = `${zoomLevel}`;
   }
 }
 
-function zoomOut(){
+function zoomOut(){ // ZOOM OUT CANVAS
   if(zoomLevel > 0.7){
     zoomLevel -= 0.1;
     canvas.style.zoom = `${zoomLevel}`;
