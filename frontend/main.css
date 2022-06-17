@@ -184,7 +184,7 @@ main{
   
   .dropdown:hover .dropdown-content {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .dropdown:hover .dropbtn {
@@ -455,4 +455,12 @@ input[type=submit]{
     border-left-style: 2.5px solid black;
     border-top-style: hidden;
     border-right-style: hidden;
+}
+.arrow{
+    height: 100px;
+    width: 100%;
+}
+.connector-arrow{
+    height: 100%;
+    width: 100%;
 }
