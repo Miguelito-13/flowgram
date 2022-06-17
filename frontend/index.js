@@ -70,6 +70,7 @@ function handleDrop(ev) {
   let draggable = document.querySelector(`[data-ts="${data.timestamp}"]`);
   let clone = draggable.cloneNode(true);
   clone.classList.add("samp");
+  clone.classList.add("active");
   dropzone.append(clone);
   // draggable.remove();
   
@@ -149,23 +150,17 @@ function arrowSymbol(){
 
   document.querySelectorAll("div.card > input")
   .forEach(function(element){
-    if(arrow.classList.contains("active")){
-     element.classList.add("active");
-    }
+    element.classList.add("active");
   });
 
   document.querySelectorAll("div.dropzone > input")
   .forEach(function(element){
-    if(arrow.classList.contains("active")){
-     element.classList.add("active");
-    }
+    element.classList.add("active");
   });
 
   document.querySelectorAll("div.decision-box > input")
   .forEach(function(element){
-    if(arrow.classList.contains("active")){
-     element.classList.add("active");
-    }
+    element.classList.add("active");
   });
 }
 
@@ -186,14 +181,14 @@ function textSymbol(){
     del.classList.remove("active");
   } 
 
-  document.querySelectorAll("div.card > input")
+  document.querySelectorAll("div.dropzone > input")
   .forEach(function(element){
     if(element.classList.contains("active")){
       element.classList.remove("active");
     }else element.classList.add("active");
   });
 
-  document.querySelectorAll("div.dropzone > input")
+  document.querySelectorAll("div.decision-box > input")
   .forEach(function(element){
     if(element.classList.contains("active")){
       element.classList.remove("active");
@@ -219,15 +214,19 @@ function deleteSymbol(){ // TO INITIATE DELETE
     text.classList.remove("active");
   }
 
+  document.querySelectorAll("div.card > input")
+  .forEach(function(element){
+    element.classList.add("active");
+  });
+
   document.querySelectorAll("div.dropzone > input")
   .forEach(function(element){
-    if(element.classList.contains("active")){
-      if(!arrow.classList.contains("active")){
-        if(!del.classList.contains("active")){
-          element.classList.remove("active");
-        }
-      }
-    }else element.classList.add("active");
+    element.classList.add("active");
+  });
+
+  document.querySelectorAll("div.decision-box > input")
+  .forEach(function(element){
+    element.classList.add("active");
   });
 
 }
