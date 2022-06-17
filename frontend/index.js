@@ -124,7 +124,7 @@ function handleLeave(ev) {
   // console.log('dragleave dropzone');
 }
 function handleClick(ev) { // FOR DELETING A SYMBOL
-  if(document.querySelector("button.active")!=null){
+  if(document.querySelector("button#delete.active")!=null){
     let symbol = ev.target;
     if (!symbol.classList.contains('samp')) return;
     ev.preventDefault();
@@ -133,21 +133,103 @@ function handleClick(ev) { // FOR DELETING A SYMBOL
   }
 }
 
-function deleteSymbol(){ // TO INITIATE DELETE
-  // DELETE BUTTON MUST BE ACTIVE TO DELETE SYMBOL
-  document.getElementById("delete")
-  .addEventListener("click", function(){
-    if(this.classList.contains("active")){
-      this.classList.remove("active");
-    } else this.classList.add("active");
+function arrowSymbol(){
+  let arrow = document.getElementById("arrow");
+  arrow.classList.add("active");
+
+  let del = document.getElementById("delete");
+  if(del.classList.contains("active")){
+    del.classList.remove("active");
+  }
+
+  let text = document.getElementById("text");
+  if(text.classList.contains("active")){
+    text.classList.remove("active");
+  }
+
+  document.querySelectorAll("div.card > input")
+  .forEach(function(element){
+    if(arrow.classList.contains("active")){
+     element.classList.add("active");
+    }
   });
 
-  document.getElementById("input")
-  .addEventListener("click", function(){
-    if(this.classList.contains("active")){
-      // this.classList.remove("active");
-    } else this.classList.add("active");
+  document.querySelectorAll("div.dropzone > input")
+  .forEach(function(element){
+    if(arrow.classList.contains("active")){
+     element.classList.add("active");
+    }
   });
+
+  document.querySelectorAll("div.decision-box > input")
+  .forEach(function(element){
+    if(arrow.classList.contains("active")){
+     element.classList.add("active");
+    }
+  });
+}
+
+function textSymbol(){
+  let arrow = document.getElementById("arrow");
+  if(arrow.classList.contains("active")){
+    arrow.classList.remove("active");
+  }
+
+  let text = document.getElementById("text");
+  if(text.classList.contains("active")){
+    text.classList.remove("active");
+    arrow.classList.add("active");
+  }else text.classList.add("active");
+
+  let del = document.getElementById("delete");
+  if(del.classList.contains("active")){
+    del.classList.remove("active");
+  } 
+
+  document.querySelectorAll("div.card > input")
+  .forEach(function(element){
+    if(element.classList.contains("active")){
+      element.classList.remove("active");
+    }else element.classList.add("active");
+  });
+
+  document.querySelectorAll("div.dropzone > input")
+  .forEach(function(element){
+    if(element.classList.contains("active")){
+      element.classList.remove("active");
+    }else element.classList.add("active");
+  });
+}
+
+function deleteSymbol(){ // TO INITIATE DELETE
+  // DELETE BUTTON MUST BE ACTIVE TO DELETE SYMBOL
+  let arrow = document.getElementById("arrow");
+  if(arrow.classList.contains("active")){
+    arrow.classList.remove("active");
+  }
+
+  let del = document.getElementById("delete");
+  if(del.classList.contains("active")){
+    del.classList.remove("active");
+    arrow.classList.add("active");
+  }else del.classList.add("active");
+
+  let text = document.getElementById("text");
+  if(text.classList.contains("active")){
+    text.classList.remove("active");
+  }
+
+  document.querySelectorAll("div.dropzone > input")
+  .forEach(function(element){
+    if(element.classList.contains("active")){
+      if(!arrow.classList.contains("active")){
+        if(!del.classList.contains("active")){
+          element.classList.remove("active");
+        }
+      }
+    }else element.classList.add("active");
+  });
+
 }
 
 for(i=0;i<26;i++){

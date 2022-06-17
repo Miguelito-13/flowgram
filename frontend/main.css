@@ -78,6 +78,12 @@ header{
     font-size: 25px;
     margin-left: 20px;
 }
+#arrow.active{
+    background-color: #333333;
+}
+#text.active{
+    background-color: #333333;
+}
 #delete.active{
     background-color: #333333;
 }
@@ -115,7 +121,7 @@ main{
     background-color: whitesmoke;
     height: 50px;
     width: 100%;
-    border: #cccccc solid 1px;
+    /* border: #cccccc solid 1px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -124,6 +130,9 @@ main{
     border: #cccccc solid 1px;
     background-color: hsla(0, 0%, 0%, 0.1);
   }
+.dropzone .active:hover{
+    cursor: pointer;
+}
 .cards{
     background-color: #4C4C4C;
     border-top: 3px solid #595959;
@@ -178,12 +187,11 @@ main{
   .dropdown:hover .dropbtn {
     background-color: #cccccc;
   }
-  .dropzone input.samp:hover{
+  .card .active:hover{
     cursor: pointer;
   }
-  .dropzone .samp:hover{
-    cursor: pointer;
-  }
+
+  
 
 /* .side-bar-items ul{
     list-style: none;

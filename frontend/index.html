@@ -23,11 +23,11 @@
         <div class="nav-bar"> 
             <div class="nav-items">
                 <ul> 
-                    <li><button><i class=""><img src="./ThesisSVG/navigation.svg"></i></button></li>
-                    <li><button><i class=""><img src="./ThesisSVG/Text.svg"></i></button></li>
+                    <li><button type="button" onclick="arrowSymbol()" id="arrow" class="active"><i class=""><img src="./ThesisSVG/navigation.svg"></i></button></li>
+                    <li><button type="button" onclick="textSymbol()" id="text" class=""><i class=""><img src="./ThesisSVG/Text.svg"></i></button></li>
                     <li><button onclick="zoomIn()"><i class=""><img src="./ThesisSVG/zoom-in.svg"></i></button></li>             
                     <li><button onclick="zoomOut()"><i class=""><img src="./ThesisSVG/zoom-out.svg"></i></button></li>
-                    <li><button type="button" onclick="deleteSymbol()" id="delete"><i class=""><img src="./ThesisSVG/trash-2.svg"></i></button></li>
+                    <li><button type="button" onclick="deleteSymbol()" id="delete" class=""><i class=""><img src="./ThesisSVG/trash-2.svg"></i></button></li>
                     <!-- <li><button type="button" onclick="deleteSymbol()" id="delete">Delete</button></li> -->
                 </ul>
             </div>
@@ -40,7 +40,7 @@
         <div class="cards">
           
           <div class="card draggable" draggable="true">
-            <input type="text" id="start" name="decision" value="START / END">
+            <input type="text" id="start" name="decision" value="START / END" class="active">
           </div>
 
          
@@ -50,37 +50,37 @@
 
                <div class="connector">
                 <div class="card draggable" draggable="true">
-                  <input type="text" id="connector-vertical" name="decision" value="">
+                  <input type="text" id="connector-vertical" name="decision" value="" class="active">
                 </div>
                </div>
 
                <div class="connector">
                 <div class="card draggable" draggable="true">
-                  <input type="text" id="connector-down-left" name="decision" value="">
+                  <input type="text" id="connector-down-left" name="decision" value="" class="active">
                 </div>
                </div>
 
                <div class="connector">
                 <div class="card draggable" draggable="true">
-                  <input type="text" id="connector-down-right" name="decision" value="">
+                  <input type="text" id="connector-down-right" name="decision" value="" class="active">
                 </div>
                </div>
                
                <div class="connector">
                 <div class="card draggable" draggable="true">
-                  <input type="text" id="connector-horizontal" name="decision" value="">
+                  <input type="text" id="connector-horizontal" name="decision" value="" class="active">
                 </div>
                </div>
 
                <div class="connector">
                 <div class="card draggable" draggable="true">
-                  <input type="text" id="connector-up-left" name="decision" value="">
+                  <input type="text" id="connector-up-left" name="decision" value="" class="active">
                 </div>
                </div>
 
                <div class="connector">
                 <div class="card draggable" draggable="true">
-                  <input type="text" id="connector-up-right" name="decision" value="">
+                  <input type="text" id="connector-up-right" name="decision" value="" class="active">
                 </div>
                </div>
 
@@ -88,15 +88,15 @@
           </div>
 
           <div class="card draggable" draggable="true">
-            <input type="text" id="input" name="decision" value="INPUT / OUTPUT">
+            <input type="text" id="input" name="decision" value="INPUT / OUTPUT" class="active">
           </div>
 
           <div class="card draggable" draggable="true">
-            <input type="text" id="process" name="decision" value="PROCESS">
+            <input type="text" id="process" name="decision" value="PROCESS" class="active">
           </div>
 
           <div class="card draggable" draggable="true">
-            <div class="decision-box">
+            <div class="decision-box active" >
               <input type="text" id="decision" name="decision" value="DECISION">
             </div>
           </div>
@@ -196,10 +196,6 @@
         var data = document.getElementById("data");
         console.log(data.value);
       }
-
-      
-
-      
 
     </script>
     
