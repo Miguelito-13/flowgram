@@ -41,7 +41,7 @@
         <div class="cards">
           
           <div class="card draggable" draggable="true">
-            <input type="text" id="start" name="decision" value="START / END" class="active">
+            <input type="text" disabled id="start" name="decision" value="START / END" class="active">
           </div>
 
          
@@ -51,51 +51,51 @@
 
               <div class="connector">
                 <div class="card draggable" draggable="true">
-                 <div class="arrow">
-                  <img class="connector-arrow" id="connector-right"  src="./ThesisSVG/arrow right.svg" alt="">
+                  <div class="arrow">
+                    <img class="connector-arrow" id="connector-right"  src="./ThesisSVG/arrow right.svg" alt="">
+                  </div>
+                </div>
+              </div>
+
+               <div class="connector">
+                <div class="card draggable" draggable="true">
+                  <div class="arrow">
+                   <img class="connector-arrow" id="connector-down"  src="./ThesisSVG/arrow down.svg" alt="">
+                  </div>
                  </div>
+                </div>
+ 
+
+               <div class="connector">
+                <div class="card draggable" draggable="true">
+                  <div class="arrow">
+                   <img class="connector-arrow" id="connector-up"  src="./ThesisSVG/arrow up.svg" alt="">
+                  </div>
                 </div>
                </div>
 
                <div class="connector">
                 <div class="card draggable" draggable="true">
-                 <div class="arrow">
-                  <img class="connector-arrow" id="connector-down"  src="./ThesisSVG/arrow down.svg" alt="">
+                  <div class="arrow">
+                   <img class="connector-arrow" id="connector-left"  src="./ThesisSVG/arrow left.svg" alt="">
+                  </div>
                  </div>
-                </div>
                </div>
 
-               
-               <div class="connector">
-                <div class="card draggable" draggable="true">
-                 <div class="arrow">
-                  <img class="connector-arrow" id="connector-up"  src="./ThesisSVG/arrow up.svg" alt="">
-                 </div>
-                </div>
-               </div>     
-
-               <div class="connector">
-                <div class="card draggable" draggable="true">
-                 <div class="arrow">
-                  <img class="connector-arrow" id="connector-left"  src="./ThesisSVG/arrow left.svg" alt="">
-                 </div>
-                </div>
-               </div>
-  
             </div>
           </div>
 
           <div class="card draggable" draggable="true">
-            <input type="text" id="input" name="decision" value="INPUT / OUTPUT" class="active">
+            <input type="text" disabled id="input" name="decision" value="INPUT / OUTPUT" class="active">
           </div>
 
           <div class="card draggable" draggable="true">
-            <input type="text" id="process" name="decision" value="PROCESS" class="active">
+            <input type="text" disabled id="process" name="decision" value="PROCESS" class="active">
           </div>
 
           <div class="card draggable" draggable="true">
             <div class="decision-box active" >
-              <input type="text" id="decision" name="decision" value="DECISION">
+              <input type="text" disabled id="decision" name="decision" value="DECISION">
             </div>
           </div>
           
@@ -188,6 +188,12 @@
 
     <script src="index.js"></script>
     <script>
+
+      // function sampConsole(event) { // DISPLAY OUTPUT ON INPUT WINDOW
+      //   event.preventDefault();
+      //   var data = document.getElementById("data");
+      //   console.log(data.value);
+      // }
 
     </script>
     

@@ -34,10 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('footer>p').appendChild(dragElement);
 });
 
+//Gets triggered as soon as the user starts dragging
 function handleDragStart(ev) {
   //user started to drag a draggable from the webpage
   let obj = ev.target;
-  if (!obj.closest('.draggable')) return;
+  let arrow = document.getElementById("arrow");
+  if (!obj.closest('.draggable') || !arrow.classList.contains("active")) return;
+  console.log("Check")
   if(obj.classList.contains('draggable')){
     obj = obj.firstElementChild;
   }
@@ -61,18 +64,20 @@ function handleDragStart(ev) {
   }
   
 }
+
+//Gets triggered when the user lets go of the drag (left click)
 function handleDrop(ev) {
   let dropzone = ev.target;
   if (!dropzone.classList.contains('dropzone')) return;
 
   ev.preventDefault();
   // console.log('DROP', dropzone);
-  // let data = ev.dataTransfer.getData('text/plain');
   let data = JSON.parse(ev.dataTransfer.getData('application/json'));
   let draggable = document.querySelector(`[data-ts="${data.timestamp}"]`);
   let clone = draggable.cloneNode(true);
   clone.classList.add("samp");
   clone.classList.add("active");
+  clone.classList.add("symbol-text");
   dropzone.append(clone);
   // draggable.remove();
   
@@ -96,6 +101,8 @@ function handleDrop(ev) {
   
   
 }
+
+//Gets triggered when the user hovers over an element (grid) Gets triggered continuously
 function handleOver(ev) {
   //fires continually
   let dropzone = ev.target;
@@ -105,12 +112,7 @@ function handleOver(ev) {
   // console.log('dragover dropzone');
 }
 
-//optional but useful visual stuff...
-// function handleCursorGrab(ev) {
-//   let obj = ev.target;
-//   if (!obj.closest('.draggable')) return;
-//   obj.style.cursor = 'grabbing'; //close the hand
-// }
+//Gets triggered when the user's mouse enters an element
 function handleEnter(ev) {
   //fires once
   let dropzone = ev.target;
@@ -119,6 +121,8 @@ function handleEnter(ev) {
   dropzone.classList.add('over');
   // console.log('dragenter dropzone')
 }
+
+//Gets triggered when the user's mouse leaves an element
 function handleLeave(ev) {
   let dropzone = ev.target;
   if (!dropzone.classList.contains('dropzone')) return;
@@ -126,6 +130,7 @@ function handleLeave(ev) {
   dropzone.classList.remove('over');
   // console.log('dragleave dropzone');
 }
+
 function handleClick(ev) { // FOR DELETING A SYMBOL
   if(document.querySelector("button#delete.active")!=null){
     let symbol = ev.target;
@@ -137,17 +142,13 @@ function handleClick(ev) { // FOR DELETING A SYMBOL
 }
 
 function arrowSymbol(){ // ARROW BUTTON FUNCTIONS
-  let arrow = document.getElementById("arrow");
-  arrow.classList.add("active");
+  
+  activateDeactivateArrow(true)
+  activateDeactivateText(false);
 
   let del = document.getElementById("delete");
   if(del.classList.contains("active")){
     del.classList.remove("active");
-  }
-
-  let text = document.getElementById("text");
-  if(text.classList.contains("active")){
-    text.classList.remove("active");
   }
 
   document.querySelectorAll("div.card > input")
@@ -167,16 +168,14 @@ function arrowSymbol(){ // ARROW BUTTON FUNCTIONS
 }
 
 function textSymbol(){ // TEXT BUTTON FUNCTIONS
-  let arrow = document.getElementById("arrow");
-  if(arrow.classList.contains("active")){
-    arrow.classList.remove("active");
-  }
+  
+  activateDeactivateArrow(false)
 
   let text = document.getElementById("text");
   if(text.classList.contains("active")){
-    text.classList.remove("active");
-    arrow.classList.add("active");
-  }else text.classList.add("active");
+    activateDeactivateText(false);
+    activateDeactivateArrow(true)
+  }else activateDeactivateText(true);
 
   let del = document.getElementById("delete");
   if(del.classList.contains("active")){
@@ -199,22 +198,15 @@ function textSymbol(){ // TEXT BUTTON FUNCTIONS
 }
 
 function deleteSymbol(){ // TO INITIATE DELETE
-  
-  let arrow = document.getElementById("arrow");
-  if(arrow.classList.contains("active")){
-    arrow.classList.remove("active");
-  }
+
+  activateDeactivateArrow(false)
+  activateDeactivateText(false)
 
   let del = document.getElementById("delete");
   if(del.classList.contains("active")){
     del.classList.remove("active");
     arrow.classList.add("active");
   }else del.classList.add("active");
-
-  let text = document.getElementById("text");
-  if(text.classList.contains("active")){
-    text.classList.remove("active");
-  }
 
   document.querySelectorAll("div.card > input")
   .forEach(function(element){
@@ -231,19 +223,6 @@ function deleteSymbol(){ // TO INITIATE DELETE
     element.classList.add("active");
   });
 
-}
-
-for(i=0;i<26;i++){ // CREATE GRID WITH ID
-  for(j=1;j<6;j++){
-    let newElement = document.createElement('div');
-    newElement.classList.add('dropzone');
-    newElement.id = x[i] +'0'+ j;
-    if(i == 0 && j == 3){
-      newElement.innerHTML = '<input type="text" id="start" name="decision" value="START / END" data-ts="1655295083726">';
-    }
-    // newElement.innerHTML = '<p>'+x[i]+'0'+j+'</p>';
-    canvas.appendChild(newElement);
-  }
 }
 
 function zoomIn(){ // ZOOM IN CANVAS
@@ -277,4 +256,60 @@ function sampConsole(event) { // DISPLAY OUTPUT ON INPUT WINDOW
   output.appendChild(newElement);
 
   // console.log(newElement);
+}
+
+//Activate/Deactivate arrow function
+function activateDeactivateArrow(activate){
+
+  let arrow = document.getElementById("arrow");
+  let draggables = document.getElementsByClassName("draggable");
+  if(!draggables) return;
+  if(arrow.classList.contains("active") && !activate){                           //Deactivate Arrow
+    arrow.classList.remove("active");
+    for(let i = 0; i < draggables.length; i++){
+      draggables.item(i).setAttribute("draggable", false)
+    }
+    
+  } else if (activate) {                                                          //Activate Arrow
+    arrow.classList.add("active");
+    for(let i = 0; i < draggables.length; i++){
+      draggables.item(i).setAttribute("draggable", true)
+    }
+  }
+}
+
+//Activate/Deactivate text function
+function activateDeactivateText(activate){
+
+  let text = document.getElementById("text");
+  let inputs = document.getElementsByClassName("symbol-text");
+  if(!inputs) return;
+  if(text.classList.contains("active") && !activate){                           //Deactivate Text
+    text.classList.remove("active");
+    for(let i = 0; i < inputs.length; i++){
+      inputs.item(i).disabled = true;
+      console.log(inputs.item(i), inputs.item(i).getAttribute("disabled"))
+    }
+    
+  } else if (activate) {                                                          //Activate Text
+    text.classList.add("active");
+    for(let i = 0; i < inputs.length; i++){
+      inputs.item(i).disabled = false;
+      console.log(inputs.item(i), inputs.item(i).getAttribute("disabled"))
+    }
+  }
+  console.log("Inputs:", inputs, inputs.item(0).getAttribute("disabled"))
+}
+
+for(i=0;i<26;i++){ // CREATE GRID WITH ID
+  for(j=1;j<6;j++){
+    let newElement = document.createElement('div');
+    newElement.classList.add('dropzone');
+    newElement.id = x[i] +'0'+ j;
+    if(i == 0 && j == 3){
+      newElement.innerHTML = '<input type="text" disabled id="start" name="decision" value="START" data-ts="1655295083726">';
+    }
+    // newElement.innerHTML = '<p>'+x[i]+'0'+j+'</p>';
+    canvas.appendChild(newElement);
+  }
 }
