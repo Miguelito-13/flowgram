@@ -7,6 +7,9 @@ let myData = {
   timestamp: 0,
   url: '',
 };
+let canvas = document.getElementById("canvas");
+let zoomLevel = 1;
+let x = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
 document.addEventListener('DOMContentLoaded', () => {
   
@@ -145,4 +148,31 @@ function deleteSymbol(){ // TO INITIATE DELETE
       // this.classList.remove("active");
     } else this.classList.add("active");
   });
+}
+
+for(i=0;i<26;i++){
+  for(j=1;j<6;j++){
+    let newElement = document.createElement('div');
+    newElement.classList.add('dropzone');
+    newElement.id = x[i] +'0'+ j;
+    if(i == 0 && j == 3){
+      newElement.innerHTML = '<input type="text" id="start" name="decision" value="START / END" data-ts="1655295083726">';
+    }
+    // newElement.innerHTML = '<p>'+x[i]+'0'+j+'</p>';
+    canvas.appendChild(newElement);
+  }
+}
+
+function zoomIn(){
+  if(zoomLevel < 2){
+    zoomLevel += 0.1;
+    canvas.style.zoom = `${zoomLevel}`;
+  }
+}
+
+function zoomOut(){
+  if(zoomLevel > 0.7){
+    zoomLevel -= 0.1;
+    canvas.style.zoom = `${zoomLevel}`;
+  }
 }
