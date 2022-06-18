@@ -123,7 +123,7 @@ main{
 }
 .dropzone {
     background-color: whitesmoke;
-    height: 50px;
+    height: 100px;
     width: 100%;
     /* border: #cccccc solid 1px; */
     display: flex;
@@ -254,11 +254,8 @@ footer{
     margin-right: 55px; 
     align-items: center;
 }
-.gear{
-    font-size: 30px;
-    background-color: #4C4C4C;
-    border: none;
-    color: white;
+.output-bar-items button:hover{
+    cursor: pointer;
 }
 .stop{
     background-color: #89888F;

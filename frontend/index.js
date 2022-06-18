@@ -231,8 +231,8 @@ function zoomIn(){ // ZOOM IN CANVAS
     zoomLevel += 0.1;
     canvas.style.zoom = `${zoomLevel}`;
   }
-  let zoomScale = canvas.style.zoom * 100 + "%";
-  zoom.innerHTML =  zoomScale;
+  let zoomScale = canvas.style.zoom * 100;
+  zoom.innerHTML =  zoomScale.toFixed(0) + "%";
 
   // console.log(zoomScale);
 }
@@ -242,8 +242,8 @@ function zoomOut(){ // ZOOM OUT CANVAS
     zoomLevel -= 0.1;
     canvas.style.zoom = `${zoomLevel}`;
   }
-  let zoomScale = canvas.style.zoom * 100 + "%";
-  zoom.innerHTML =  zoomScale;
+  let zoomScale = canvas.style.zoom * 100;
+  zoom.innerHTML =  zoomScale.toFixed(0) + "%";
 
   // console.log(zoomScale);
 }
@@ -330,3 +330,15 @@ let newFlowgram = document.getElementById("new");
 newFlowgram.addEventListener('click', () => {
   window.location.reload();
 });
+
+// RUN BUTTON FUNCTION
+let runButton = document.getElementById("runButton");
+runButton.addEventListener('click', () => {
+  console.log("Run Button Pressed");
+})
+
+// STOP BUTTON FUNCTION
+let stopButton = document.getElementById("stopButton");
+stopButton.addEventListener('click', () => {
+  console.log("Stop Button Pressed");
+})
