@@ -35,6 +35,7 @@ header{
 .tool-bar-items a:hover{
     color: white;
     margin-left: 20px;
+    cursor: pointer;
 }
 
 .nav-bar{

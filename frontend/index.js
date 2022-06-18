@@ -13,6 +13,7 @@ let x = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "
 let output = document.getElementById("output");
 let zoom = document.getElementById("zoom");
 
+
 document.addEventListener('DOMContentLoaded', () => {
   
   //required event listeners
@@ -313,3 +314,19 @@ for(i=0;i<26;i++){ // CREATE GRID WITH ID
     canvas.appendChild(newElement);
   }
 }
+
+// FOR DOWNLOADING FLOWCHART AS IMAGE
+let save = document.getElementById("save");
+save.addEventListener('click', () => {
+  html2canvas(document.getElementById("canvas")).then(canvas => {
+    save.href = canvas.toDataURL("image/jpeg", 0.9);
+    save.download = "flowgram.jpg";
+    // console.log(canvas.toDataURL("image/jpeg", 0.9));
+  })
+});
+
+// FOR NEW FLOWGRAM
+let newFlowgram = document.getElementById("new");
+newFlowgram.addEventListener('click', () => {
+  window.location.reload();
+});
