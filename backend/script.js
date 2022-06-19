@@ -1,4 +1,4 @@
-import startRunCompile, { newFlowgram } from './Main.js'
+import startRunCompile, { createFlowgram } from './Main.js'
 
 const form = document.getElementById('form');
 const input = document.getElementById('code_input')
@@ -8,7 +8,7 @@ form.addEventListener('submit', (e) => {
     
     // Create Test Flowgram
     console.log("Ran");
-    const newFlowgramObj = newFlowgram("Test")
+    const newFlowgramObj = createFlowgram("Test")
     let res = newFlowgramObj.addSymbol("Process")
     if(res.error){
         throw new Error(res.error);

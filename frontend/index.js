@@ -1,3 +1,6 @@
+
+import startRunCompile, {createFlowgram} from '../backend/main.js'
+
 let imgElement = new Image();
 let dragElement = document.createElement('span');
 let myData = {
@@ -12,7 +15,7 @@ let zoomLevel = 1;
 let x = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 let output = document.getElementById("output");
 let zoom = document.getElementById("zoom");
-
+let flowgram = createFlowgram("New Flowgram");
 
 document.addEventListener('DOMContentLoaded', () => {
   
