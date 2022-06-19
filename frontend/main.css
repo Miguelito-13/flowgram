@@ -146,6 +146,9 @@ main{
 .dropzone .active:hover{
     cursor: pointer;
 }
+.dropzone.selected-grid {
+    border: yellow solid 3px;
+}
 .cards{
     background-color: #4C4C4C;
     border-top: 3px solid #595959;
