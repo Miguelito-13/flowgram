@@ -21,15 +21,14 @@
         </div>
 
         <div class="nav-bar"> 
-            <div class="nav-items">
-                <ul> 
+            <div class="nav-items" id="navs">
+                <ul id="navs-ul"> 
                     <li><button type="button" onclick="arrowSymbol()" id="arrow" class="active"><i class=""><img src="./ThesisSVG/navigation.svg"></i></button></li>
                     <li><button type="button" onclick="textSymbol()" id="text" class=""><i class=""><img src="./ThesisSVG/Text.svg"></i></button></li>
                     <li><button type="button" onclick="deleteSymbol()" id="delete" class=""><i class=""><img src="./ThesisSVG/trash-2.svg"></i></button></li>
                     <li><button onclick="zoomIn()"><i class=""><img src="./ThesisSVG/zoom-in.svg"></i></button></li>             
                     <li><button onclick="zoomOut()"><i class=""><img src="./ThesisSVG/zoom-out.svg"></i></button></li>
                     <li><p id="zoom">100%</p></li>
-                    <!-- <li><button type="button" onclick="deleteSymbol()" id="delete">Delete</button></li> -->
                 </ul>
             </div>
         </div>
@@ -46,7 +45,7 @@
 
          
           <div class="dropdown">
-            <button class="dropbtn">CONNECTORS</button>
+            <button class="dropbtn" id="connectors">CONNECTORS</button>
             <div class="dropdown-content">
 
               <div class="connector">

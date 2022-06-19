@@ -342,3 +342,43 @@ let stopButton = document.getElementById("stopButton");
 stopButton.addEventListener('click', () => {
   console.log("Stop Button Pressed");
 })
+
+// CONNECTOR BUTTON FUNCTION
+let connectors = document.getElementById("connectors");
+connectors.addEventListener('click', () => {
+  if(connectors.classList.contains("active")){
+    connectors.classList.remove("active");
+
+    let confirm = document.getElementById("confirm");
+    confirm.remove();
+    let cancel = document.getElementById("cancel");
+    cancel.remove();
+  }else {
+    connectors.classList.add("active");
+
+    // CREATE CONFIRM AND CANCEL BUTTON
+    let navs = document.getElementById("navs-ul");
+    let confirm = document.createElement("li");
+    confirm.id = "confirm";
+    confirm.innerHTML = '<button type="button" class="confirm" id="confirmBtn">Confirm</button>';
+    navs.appendChild(confirm);
+
+    let cancel = document.createElement("li");
+    cancel.id = "cancel";
+    cancel.innerHTML = '<button type="button" class="cancel" id="cancelBtn">Cancel</button>';
+    navs.appendChild(cancel);
+
+    // CONFIRM AND CANCEL BUTTON FUNCTIONS
+    let confirmBtn = document.getElementById("confirmBtn");
+    confirmBtn.addEventListener('click', () => {
+    console.log("Confirm Button Pressed");
+
+    let cancelBtn = document.getElementById("cancelBtn");
+    cancelBtn.addEventListener('click', () => {
+    console.log("Cancel Button Pressed");
+})
+})
+  }
+  // console.log(yes);
+  // console.log("connector pressed");
+})
