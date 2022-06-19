@@ -138,13 +138,29 @@ function handleLeave(ev) {
   // console.log('dragleave dropzone');
 }
 
-function handleClick(ev) { // FOR DELETING A SYMBOL
+function handleClick(ev) { 
+  // FOR DELETING A SYMBOL
   if(document.querySelector("button#delete.active")!=null){
     let symbol = ev.target;
-    if (!symbol.classList.contains('samp')) return;
-    ev.preventDefault();
-    symbol.remove();
-    console.log(symbol);
+    if(symbol.parentNode.classList.contains('samp')){
+      symbol.remove();
+    } 
+    if(symbol.classList.contains('samp')){
+      symbol.remove();
+    } else return;
+    // console.log(symbol);
+  }
+
+  // CONNECTOR FUNCTION (SELECTING SYMBOL FIRST)
+  if(document.querySelector("button#connectors.active")!=null){
+    let dropzone = ev.target
+    if(dropzone.parentNode.classList.contains('samp')){
+      let drop = dropzone.parentNode;
+      console.log(drop.parentNode);
+    }
+    if(dropzone.classList.contains('samp')){
+      console.log(dropzone.parentNode);
+    }
   }
 }
 
@@ -222,7 +238,14 @@ connectors.addEventListener('click', () => {
     let cancelBtn = document.getElementById("cancelBtn");
     cancelBtn.addEventListener('click', () => {
     console.log("Cancel Button Pressed");
-})
+
+    let dropzone = document.querySelector(".dropzone");
+    dropzone.addEventListener('click', () => {
+      if(dropzone.querySelector("div.dropzone > input") != null){
+        console.log(dropzone);
+      }
+    })
+  })
 })
   }
   // console.log(yes);
