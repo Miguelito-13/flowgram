@@ -382,3 +382,25 @@ connectors.addEventListener('click', () => {
   // console.log(yes);
   // console.log("connector pressed");
 })
+
+// FOR MODAL
+let modal = document.getElementById("helpModal");
+let helpBtn = document.getElementById("help");
+let span = document.getElementsByClassName("close")[0];
+
+// OPEN MODAL WHEN HELP BUTTON PRESSED
+helpBtn.onclick = function(){
+  modal.style.display = "block";
+}
+
+// CLOSE MODAL WHEN X BUTTON PRESSED
+span.onclick = function(){
+  modal.style.display = "none";
+}
+
+// CLOSE MODAL WHEN USER CLICKS OUTSIDE THE MODAL
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
