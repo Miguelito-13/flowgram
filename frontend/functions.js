@@ -1,3 +1,7 @@
+let zoomLevel = 1;
+let zoom = document.getElementById("zoom");
+let output = document.getElementById("output");
+
 function arrowSymbol(){ // ARROW BUTTON FUNCTIONS
   
     activateDeactivateArrow(true)
