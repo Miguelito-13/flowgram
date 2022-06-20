@@ -371,6 +371,7 @@ function generateConnectors(){
     let newImg = document.createElement('img')
     newImg.classList.add('grid-connector')
     newImg.classList.add('connector-arrow')
+    newImg.classList.add('deletable')
     newImg.id = from + "-" + to
     newImg.setAttribute('src', ConnectorSVGs[from + "_" + to + (arrow != "" ? "_" + arrow: "")]);
     grid.appendChild(newDiv);
