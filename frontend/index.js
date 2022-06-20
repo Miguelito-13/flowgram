@@ -334,11 +334,6 @@ function generateConnectors(){
 
   if(connectors.classList.contains('active')){
     connectors.classList.remove('active');
-
-    let confirm = document.getElementById('confirm');
-    confirm.remove();
-    let cancel = document.getElementById('cancel');
-    cancel.remove();
   }
 
   for(let i = 1; i < pathCopy.length-1; i++){
