@@ -239,34 +239,9 @@ connectors.addEventListener('click', () => {
       selGrids.item(0).classList.remove('selected-grid');
     }
     selectedGrids = [];
-
-    let confirm = document.getElementById("confirm");
-    confirm.remove();
-    let cancel = document.getElementById("cancel");
-    cancel.remove();
+    
   }else if(!connectors.classList.contains("active") && arrow.classList.contains("active")) {
     connectors.classList.add("active");
-
-    // CREATE CONFIRM AND CANCEL BUTTON
-    let navs = document.getElementById("navs-ul");
-    let confirm = document.createElement("li");
-    confirm.id = "confirm";
-    confirm.innerHTML = '<button type="button" class="confirm" id="confirmBtn">Confirm</button>';
-    navs.appendChild(confirm);
-
-    let cancel = document.createElement("li");
-    cancel.id = "cancel";
-    cancel.innerHTML = '<button type="button" class="cancel" id="cancelBtn">Cancel</button>';
-    navs.appendChild(cancel);
-
-    // CONFIRM AND CANCEL BUTTON FUNCTIONS
-    let confirmBtn = document.getElementById("confirmBtn");
-    confirmBtn.addEventListener('click', () => {
-    console.log("Confirm Button Pressed");
-
-    let cancelBtn = document.getElementById("cancelBtn");
-    cancelBtn.addEventListener('click', () => {
-    console.log("Cancel Button Pressed");
 
     let dropzone = document.querySelector(".dropzone");
     dropzone.addEventListener('click', () => {
@@ -274,8 +249,6 @@ connectors.addEventListener('click', () => {
         console.log(dropzone);
       }
     })
-  })
-})
   }
   // console.log(yes);
   // console.log("connector pressed");
