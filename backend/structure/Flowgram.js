@@ -35,12 +35,12 @@ export default class Flowgram{
         return this._main
     }
 
-    addSymbol(type){
+    addSymbol(type, text){
         let res = {
             newSymbol: false,
             error: false
         }
-        const newSymbol = new Symbol(type);
+        const newSymbol = new Symbol(type, text);
         if(!newSymbol.type){
             res.error = "ERROR: Invalid symbol type";
             return res;

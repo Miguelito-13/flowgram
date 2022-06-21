@@ -297,8 +297,19 @@ function handleSelectPath(ev){
   if(!grid) return;
   let childNode = grid.firstElementChild
   if(selectedGrids.length == 0 && childNode && childNode.classList.contains('symbol')){
-    grid.classList.add('selected-grid');
-    selectedGrids.push(grid.id);
+    let fromSymbol = htmlSymbols[gridsInfo[grid.id].index].backendSymbol
+    if (fromSymbol.type == "Conditional"){
+      //Show UI Modal true or false
+      
+
+    } else if (fromSymbol.type != "Conditional" && !fromSymbol.out){
+      grid.classList.add('selected-grid');
+      selectedGrids.push(grid.id);
+
+    } else {
+      //Display Error
+      return;
+    }
 
   } else if(selectedGrids.length > 0){
     let lastID = selectedGrids[selectedGrids.length-1];
@@ -309,6 +320,7 @@ function handleSelectPath(ev){
       grid.classList.remove('selected-grid');
       selectedGrids.pop()
     } else if(grid.classList.contains('selected-grid')){
+      //Display Error
       return;
     }
 
@@ -390,7 +402,7 @@ function generateConnectors(){
 
   let done = false
   let pathTracked = pathCopy
-  while(!done){
+  while(!done){                                                       // Sets htmlConnector's endSymbolGrid
     let gridInfoTracked = gridsInfo[pathTracked[pathTracked.length - 1]]
     if(gridInfoTracked.type == 'symbol'){
       htmlConnectors[htmlConnectorIndex].endSymbolGrid = pathTracked[pathTracked.length - 1];
@@ -410,6 +422,13 @@ function generateConnectors(){
     htmlConnectors[info.index].connections.push(htmlConnectorIndex)
   }
   htmlSymbols[gridsInfo[pathCopy[0]].index].connections.push(htmlConnectorIndex);
+
+  let fromSymbol = htmlSymbols[gridsInfo[pathCopy[0]].index].backendSymbol
+  let toSymbol = htmlSymbols[gridsInfo[htmlConnectors[htmlConnectorIndex].endSymbolGrid].index].backendSymbol
+  if(fromSymbol.type != 'Conditional'){
+    fromSymbol.out = toSymbol
+    console.log(fromSymbol);
+  }
 
   let selGrids = document.getElementsByClassName('selected-grid');
   while(selGrids.length > 0){
@@ -496,19 +515,27 @@ function addSymbol(dropzone, clone){
   let grid = dropzone.id;
   let cloneType = clone.id
   let type
+  let text
+  let inputHtml = clone
   
   if(cloneType == 'start-end'){
     type = 'StartEnd'
+    text = 'START/END'
   } else if(cloneType == 'process'){
     type = 'Process'
+    text = 'PROCESS'
   } else if(cloneType == 'decision'){
     type = 'Conditional'
+    text = 'DECISION'
+    inputHtml = clone.firstElementChild
   } else if(cloneType == 'input-output'){
     type = 'InputOutput'
+    text = 'INPUT/OUTPUT'
   }
 
-  let result = flowgram.addSymbol(type);
+  let result = flowgram.addSymbol(type, text);
   if (result.error){
+    //Display Error
     return;
   } else {
 
@@ -523,5 +550,12 @@ function addSymbol(dropzone, clone){
       index: htmlSymbols.length-1
     }
 
+    inputHtml.addEventListener('input', (ev) => {
+      result.newSymbol.text = ev.target.value
+    })
   }
+
+  console.log(flowgram);
 }
+
+//=================================================//                   Event Functions
