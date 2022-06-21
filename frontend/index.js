@@ -4,8 +4,8 @@ import ConnectorSVGs from './connectorsvgs.js';
 
 
 let flowgram = createFlowgram("New Flowgram");
-let htmlSymbols = [];                   // {htmlSymbol: <html object>, backendSymbol: <symbol object>}
-let htmlConnectors = [];                // [gridIDs]
+let htmlSymbols = [];                   // {htmlSymbol: <html object>, backendSymbol: <symbol object>, connections: [htmlConnectorsIndex]}
+let htmlConnectors = [];                // {path: [gridIDs], connections:[htmlConnectorsIndex] endSymbolGrid: htmlSymbolIndex}
 let gridsInfo = {};                     // [gridID] = {type: "symbol"/"connector", index: arrayIndex}
 let selectedGrids = [];
 
@@ -83,6 +83,10 @@ function handleDragStart(ev) {
 function handleDrop(ev) {
   let dropzone = ev.target;
   if (!dropzone.classList.contains('dropzone')) return;
+  if (dropzone.classList.contains('dropzone') && dropzone.firstElementChild){
+    dropzone.classList.remove('over');
+    return;
+  }
 
   ev.preventDefault();
   // console.log('DROP', dropzone);
@@ -94,6 +98,8 @@ function handleDrop(ev) {
   clone.classList.add("symbol");
   clone.classList.add("symbol-text");
   dropzone.append(clone);
+  addSymbol(dropzone, clone);
+  console.log(clone)
   // draggable.remove();
   
   // dropzone.textContent += data;
@@ -153,10 +159,10 @@ function handleClick(ev) {
   if(document.querySelector("button#delete.active")!=null){
     let symbol = ev.target;
     if(symbol.parentNode.classList.contains('deletable')){
-      symbol.remove();
+      initialDelete(symbol.parentNode.parentNode);
     } 
     if(symbol.classList.contains('deletable')){
-      symbol.remove();
+      initialDelete(symbol.parentNode);
     } else return;
     // console.log(symbol);
   }
@@ -175,13 +181,14 @@ for(let i=0;i<26;i++){ // CREATE GRID WITH ID
     newElement.classList.add('dropzone');
     newElement.id = x[i] +'0'+ j;
     if(i == 0 && j == 3){
-      newElement.innerHTML = '<input type="text" class="symbol" disabled id="start" name="decision" value="START" data-ts="1655295083726">';
+      newElement.innerHTML = '<input type="text" class="symbol" disabled id="start-end" name="decision" value="START" data-ts="1655295083726">';
     }
     // newElement.innerHTML = '<p>'+x[i]+'0'+j+'</p>';
     canvas.appendChild(newElement);
     htmlSymbols.push({
       htmlSymbol: newElement,
-      backendSymbol: flowgram.main.start
+      backendSymbol: flowgram.main.start,
+      connections: []
     });
 
     gridsInfo[newElement.id] = {
@@ -287,6 +294,7 @@ function handleSelectPath(ev){
     grid = ev.target.parentNode.parentNode;
   }
 
+  if(!grid) return;
   let childNode = grid.firstElementChild
   if(selectedGrids.length == 0 && childNode && childNode.classList.contains('symbol')){
     grid.classList.add('selected-grid');
@@ -313,21 +321,20 @@ function handleSelectPath(ev){
       selectedGrids.push(gridID);
 
       if(childNode != null){
-        if(childNode.classList.contains('grid-connector')){
-          let existingArray = htmlConnectors[gridsInfo[gridID].index];
-          selectedGrids[selectedGrids.length - 1] = existingArray[existingArray.length - 1];
-        }
-
         generateConnectors();
       }
     }
   }
 }
 
-
 function generateConnectors(){
   let pathCopy = [...selectedGrids];
   selectedGrids = [];
+  htmlConnectors.push({
+    path: [...pathCopy],
+    connections: []
+  });
+  let htmlConnectorIndex = htmlConnectors.length - 1
 
   if(connectors.classList.contains('active')){
     connectors.classList.remove('active');
@@ -364,22 +371,157 @@ function generateConnectors(){
 
     let grid = document.getElementById(pathCopy[i]);
     let newDiv = document.createElement('div')
-    newDiv.classList.add('arrow')
     let newImg = document.createElement('img')
     newImg.classList.add('grid-connector')
     newImg.classList.add('connector-arrow')
-    newImg.classList.add('deletable')
-    newImg.id = from + "-" + to
+    newImg.classList.add(from + "-" + to + (arrow != "" ? "-" + arrow: ""))
     newImg.setAttribute('src', ConnectorSVGs[from + "_" + to + (arrow != "" ? "_" + arrow: "")]);
-    grid.appendChild(newDiv);
+    newDiv.classList.add('deletable')
+    newDiv.classList.add('arrow')
     newDiv.appendChild(newImg);
+    grid.appendChild(newDiv);
+    grid.classList.remove('selected-grid');
 
-
-    let selGrids = document.getElementsByClassName('selected-grid');
-    while(selGrids.length > 0){
-      selGrids.item(0).classList.remove('selected-grid');
+    gridsInfo[pathCopy[i]] = {
+      type: "connector",
+      index: htmlConnectorIndex
     }
-    selectedGrids = [];
+  }
+
+  let done = false
+  let pathTracked = pathCopy
+  while(!done){
+    let gridInfoTracked = gridsInfo[pathTracked[pathTracked.length - 1]]
+    if(gridInfoTracked.type == 'symbol'){
+      htmlConnectors[htmlConnectorIndex].endSymbolGrid = pathTracked[pathTracked.length - 1];
+      let endSymbol = htmlSymbols[gridInfoTracked.index];
+      endSymbol.connections.push(htmlConnectorIndex);
+      done = true;
+    } else {
+      pathTracked = htmlConnectors[gridInfoTracked.index].path;
+    }
+    
+  }
+
+  let info = gridsInfo[pathCopy[pathCopy.length - 1]]
+  if(info.type == 'symbol'){
+    htmlSymbols[info.index].connections.push(htmlConnectorIndex)
+  } else {
+    htmlConnectors[info.index].connections.push(htmlConnectorIndex)
+  }
+  htmlSymbols[gridsInfo[pathCopy[0]].index].connections.push(htmlConnectorIndex);
+
+  let selGrids = document.getElementsByClassName('selected-grid');
+  while(selGrids.length > 0){
+    selGrids.item(0).classList.remove('selected-grid');
+  }
+
+} 
+
+function initialDelete(grid){
+  console.log(grid)
+  let gridID = grid.id;
+  let gridInfo = gridsInfo[gridID]
+
+  console.log("gridInfo:", gridInfo);
+
+  if(!gridInfo) return
+
+  if(gridInfo.type == 'symbol'){
+    let htmlSymbol = htmlSymbols[gridInfo.index]
+    let connections = htmlSymbol.connections
+    console.log("htmlSymbol:", htmlSymbol);
+    for(let i = 0; i < connections.length; i++){
+      deleteConnections(connections[i]);
+    }
+
+    if(grid && grid.firstChild){
+      grid.firstChild.remove();
+    }
+    flowgram.removeSymbol(htmlSymbol.backendSymbol);
+    htmlSymbols[gridInfo.index] = null;
+    gridsInfo[gridID] = null;
+
+  } else if(gridInfo.type == 'connector'){
+    deleteConnections(gridInfo.index);
+  }
+}
+
+function deleteConnections(index){
+  let htmlConnector = htmlConnectors[index]
+  console.log("htmlConnector:", htmlConnector);
+  if(!htmlConnector) return;
+
+  let connections = htmlConnector.connections
+  for(let i = 0; i < connections.length; i++){
+    deleteConnections(connections[i]);
+  }
+
+  let path = htmlConnector.path
+  for(let i = 1; i < path.length - 1; i++){
+    let grid = document.getElementById(path[i])
+    if(grid && grid.firstChild){
+      grid.firstChild.remove();
+      gridsInfo[path[i]] = null;
+    }
+  }
+
+  let startInfo = htmlSymbols[gridsInfo[htmlConnector.path[0]].index];
+  let endInfo
+  if(gridsInfo[htmlConnector.endSymbolGrid].type == 'symbol'){
+    endInfo = htmlSymbols[gridsInfo[htmlConnector.endSymbolGrid].index]
+  } else if(gridsInfo[htmlConnector.endSymbolGrid].type == 'connector'){
+    endInfo = htmlConnectors[gridsInfo[htmlConnector.endSymbolGrid].index]
+  }
+
+  for(let i = 0; i < endInfo.connections.length; i++){
+    if(endInfo.connections[i] == index){
+      endInfo.connections.splice(i, 1);
+    }
+  }
+
+  for(let i = 0; i < startInfo.connections.length; i++){
+    if(startInfo.connections[i] == index){
+      startInfo.connections.splice(i, 1);
+    }
+  }
+
+  console.log(startInfo);
+  console.log(endInfo);
+
+  htmlConnectors[index] = null;
+}
+
+function addSymbol(dropzone, clone){
+  let grid = dropzone.id;
+  let cloneType = clone.id
+  let type
+  
+  if(cloneType == 'start-end'){
+    type = 'StartEnd'
+  } else if(cloneType == 'process'){
+    type = 'Process'
+  } else if(cloneType == 'decision'){
+    type = 'Conditional'
+  } else if(cloneType == 'input-output'){
+    type = 'InputOutput'
+  }
+
+  let result = flowgram.addSymbol(type);
+  if (result.error){
+    return;
+  } else {
+
+    htmlSymbols.push({
+      htmlSymbol: clone,
+      backendSymbol: result.newSymbol,
+      connections: []
+    })
+  
+    gridsInfo[grid] = {
+      type: 'symbol',
+      index: htmlSymbols.length-1
+    }
 
   }
 }

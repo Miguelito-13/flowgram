@@ -21,10 +21,10 @@ const ConnectorSVGs = {
     up_right: "./ThesisSVG/plain top right.svg",
     
     down_left_arrow: "./ThesisSVG/arrow bottom left.svg",
-    down_top_arrow: "./ThesisSVG/arrow up.svg",
+    down_up_arrow: "./ThesisSVG/arrow up.svg",
     down_right_arrow: "./ThesisSVG/arrow bottom right.svg",
     down_left: "./ThesisSVG/plain bottom left.svg",
-    down_top: "./ThesisSVG/plain vertical.svg",
+    down_up: "./ThesisSVG/plain vertical.svg",
     down_right: "./ThesisSVG/plain bottom right.svg",
 }
 
