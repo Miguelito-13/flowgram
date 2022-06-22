@@ -14,7 +14,7 @@ form.addEventListener('submit', (e) => {
         throw new Error(res.error);
     }
     newFlowgramObj.main.start.out = res.newSymbol;
-    res.newSymbol.text = 'x = (1 + (1/1) + 2 * 3 + (100)) \n y = "true"'
+    res.newSymbol.text = 'x = (1 + (1/1) + 2 * 3 + (100)) \n y = "true" z = false'
     let pastRes = res
 
 

@@ -50,7 +50,7 @@ export default function LogicCalculator(logicalOp, flowgram){
     }
 
     if(opClone[0].groupedTokensType == "Relational Operation") {
-        opClone[0] = calculateRelation(opClone[0], flowgram);
+        opClone = [calculateRelation(opClone[0], flowgram)];
     }
 
     res.result = opClone[0];

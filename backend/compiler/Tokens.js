@@ -40,7 +40,7 @@ const Tokens = [
         type: 'Number Constant'
     },
     {
-        pattern: /["].*["]/,
+        pattern: /(["'])(?:(?=(\\?))\2.)*?\1/,
         type: 'String Constant'
     },
     {

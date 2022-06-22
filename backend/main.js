@@ -28,6 +28,7 @@ export default async function startRunCompile(flowgram){
         }
         console.log("**************************************")
         console.log("FINISHED COMPILING\n", flowgram)
+        NotifySuccess("FINISHED COMPILING")
         
         flowgram.resetVariables()
         console.log("**************************************")
@@ -37,8 +38,10 @@ export default async function startRunCompile(flowgram){
         flowgram.status.run = false;
         console.log("**************************************")
         console.log("FINISHED RUNNING\n", flowgram)
+        NotifySuccess("FINISHED RUNNING")
     } catch({symbol, error}){
-        NotifyError(symbol, error);
+        flowgram.status.run = false;
+        NotifyError(error, symbol);
     }
 }
 

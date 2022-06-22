@@ -1,3 +1,4 @@
+import { NotifyText } from "../../common/Notify.js";
 import Concatenator from "../logic functions/Concatenator.js";
 
 export default function OutputLogic(symbol, flowgram){
@@ -20,7 +21,7 @@ export default function OutputLogic(symbol, flowgram){
             return res;
         }
 
-        // Call UI function to display output
+        NotifyText(ret.result);
         console.log("OUTPUT ", ret.result)
     }
 

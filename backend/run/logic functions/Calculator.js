@@ -58,7 +58,7 @@ export default function Calculator(mathematicalOp, flowgram){
                 res.error = result.error;
                 return res;
             }
-            opClone[0] = result.result;                                    
+            opClone = [result.result];                                    
         }
     }
 

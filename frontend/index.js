@@ -8,6 +8,11 @@ let htmlSymbols = [];                   // {htmlSymbol: <html object>, backendSy
 let htmlConnectors = [];                // {path: [gridIDs], connections:[htmlConnectorsIndex] endSymbolGrid: htmlSymbolIndex}
 let gridsInfo = {};                     // [gridID] = {type: "symbol"/"connector", index: arrayIndex}
 let selectedGrids = [];
+let connectorType = "none";
+let conditionalConnectorInfo = {
+  active: false,
+  choice: null
+}
 
 //=================================================//
 
@@ -22,6 +27,7 @@ let myData = {
 };
 let canvas = document.getElementById("canvas");
 let x = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
 
 //=================================================//                 Initialize Event listeners
 
@@ -96,7 +102,11 @@ function handleDrop(ev) {
   clone.classList.add("deletable");
   clone.classList.add("active");
   clone.classList.add("symbol");
-  clone.classList.add("symbol-text");
+  if(clone.id=='decision-symbol'){
+    clone.firstElementChild.classList.add("symbol-text");
+  } else {
+    clone.classList.add("symbol-text");
+  }
   dropzone.append(clone);
   addSymbol(dropzone, clone);
   console.log(clone)
@@ -171,6 +181,7 @@ function handleClick(ev) {
   if(document.querySelector("button#connectors.active")!=null){
     handleSelectPath(ev);
   }
+
 }
 
 //=================================================//       Initialize grid
@@ -220,7 +231,12 @@ newFlowgram.addEventListener('click', () => {
 let runButton = document.getElementById("runButton");
 runButton.addEventListener('click', () => {
   console.log("Run Button Pressed");
-  startRunCompile(flowgram);
+  if(flowgram.status.run == false){
+    startRunCompile(flowgram);
+  } else {
+    console.error("ERRORERROEROEROEOR")
+    displayOutput("ERROR: Flowgram is already running!", "error")
+  }
 })
 
 // STOP BUTTON FUNCTION
@@ -264,6 +280,8 @@ connectors.addEventListener('click', () => {
 let helpModal = document.getElementById("helpModal");
 let helpBtn = document.getElementById("help");
 let span = document.getElementsByClassName("close")[0];
+let trueButton = document.getElementById('true');
+let falseButton = document.getElementById('false');
 
 // OPEN MODAL WHEN HELP BUTTON PRESSED
 helpBtn.onclick = function(){
@@ -282,18 +300,28 @@ window.onclick = function(event) {
   }
 }
 
-// FOR CONDITION MODAL
-let conditionModal = document.getElementById("conditionModal");
-var chosen = document.getElementById("chosen"); // FORM ID FOR TRUE/FALSE MODAL
+trueButton.onclick = function(){
+  let conditionModal = document.getElementById("conditionModal");
+  console.log(conditionalConnectorInfo)
+  if(conditionalConnectorInfo.active){
+    conditionalConnectorInfo.active = false;
+    conditionalConnectorInfo.choice = "true";
+    conditionModal.style.display = "none";
+  }
+}
 
-// TO OPEN CONDITION MODAL
-function openCondition(){
-  conditionModal.style.display = "block";
+falseButton.onclick = function(){
+  let conditionModal = document.getElementById("conditionModal");
+  if(conditionalConnectorInfo.active){
+    conditionalConnectorInfo.active = false;
+    conditionalConnectorInfo.choice = "false";
+    conditionModal.style.display = "none";
+  }
 }
 
 //=================================================//                   Separated functions
 
-function handleSelectPath(ev){
+async function handleSelectPath(ev){
   let grid
   if(ev.target.classList.contains('dropzone')){
     grid = ev.target
@@ -303,17 +331,38 @@ function handleSelectPath(ev){
     grid = ev.target.parentNode.parentNode;
   }
 
+  console.log("Check1", grid)
   if(!grid) return;
   let childNode = grid.firstElementChild
   if(selectedGrids.length == 0 && childNode && childNode.classList.contains('symbol')){
     let fromSymbol = htmlSymbols[gridsInfo[grid.id].index].backendSymbol
+    console.log("Check2:", fromSymbol)
     // console.log(fromSymbol.type);
     if (fromSymbol.type == "Conditional"){
+      console.log("Check3")
       //Show UI Modal true or false
-      // openCondition();
-      console.log("TRUE/FALSE MODAL");
+      
+      conditionalConnectorInfo.active = true;
+      let conditionModal = document.getElementById("conditionModal");
+      console.log(conditionModal)
+      conditionModal.style.display = "block";
+
+      while(conditionalConnectorInfo.active && conditionalConnectorInfo.choice == null){
+        await new Promise(r => setTimeout(r, 500));
+        console.log("Test:", conditionalConnectorInfo)
+      }
+      console.log("Info:", conditionalConnectorInfo)
+      if(conditionalConnectorInfo.choice == null){
+        console.error("ERROR: Didn't choose a connector type");
+        return;
+      }
+      connectorType = conditionalConnectorInfo.choice;
+      conditionalConnectorInfo.choice = null;
+      grid.classList.add('selected-grid');
+      selectedGrids.push(grid.id);
 
     } else if (fromSymbol.type != "Conditional" && !fromSymbol.out){
+      console.log("Check4")
       grid.classList.add('selected-grid');
       selectedGrids.push(grid.id);
 
@@ -323,6 +372,7 @@ function handleSelectPath(ev){
     }
 
   } else if(selectedGrids.length > 0){
+    console.log("Check5")
     let lastID = selectedGrids[selectedGrids.length-1];
     let gridID = grid.id;
 
@@ -403,6 +453,14 @@ function generateConnectors(){
     newDiv.classList.add('arrow')
     newDiv.appendChild(newImg);
     grid.appendChild(newDiv);
+
+    if(connectorType != "none" && i == 1){
+      let newP = document.createElement('p')
+      newP.classList.add('arrow-text')
+      newP.textContent = connectorType;
+      newDiv.appendChild(newP);
+    }
+
     grid.classList.remove('selected-grid');
 
     gridsInfo[pathCopy[i]] = {
@@ -438,8 +496,16 @@ function generateConnectors(){
   let toSymbol = htmlSymbols[gridsInfo[htmlConnectors[htmlConnectorIndex].endSymbolGrid].index].backendSymbol
   if(fromSymbol.type != 'Conditional'){
     fromSymbol.out = toSymbol
-    console.log(fromSymbol);
+  } else {
+    if(connectorType == "true"){
+      fromSymbol.true = toSymbol
+    } else {
+      fromSymbol.false = toSymbol
+    }
+    connectorType = "none"
   }
+  
+  console.log(fromSymbol);
 
   let selGrids = document.getElementsByClassName('selected-grid');
   while(selGrids.length > 0){
@@ -516,6 +582,21 @@ function deleteConnections(index){
     }
   }
 
+  if(startInfo.backendSymbol.type != "Conditional"){
+    if(startInfo.backendSymbol.out == endInfo.backendSymbol){
+      startInfo.backendSymbol.out = null;
+    }
+  } else {
+    if(startInfo.backendSymbol.true == endInfo.backendSymbol){
+      startInfo.backendSymbol.true = null;
+    }
+
+    if(startInfo.backendSymbol.false == endInfo.backendSymbol){
+      startInfo.backendSymbol.false = null;
+    }
+
+  }
+
   console.log(startInfo);
   console.log(endInfo);
 
@@ -535,7 +616,7 @@ function addSymbol(dropzone, clone){
   } else if(cloneType == 'process'){
     type = 'Process'
     text = 'PROCESS'
-  } else if(cloneType == 'decision'){
+  } else if(cloneType == 'decision-symbol'){
     type = 'Conditional'
     text = 'DECISION'
     inputHtml = clone.firstElementChild
@@ -546,6 +627,7 @@ function addSymbol(dropzone, clone){
 
   let result = flowgram.addSymbol(type, text);
   if (result.error){
+    console.log(result.error)
     //Display Error
     return;
   } else {
@@ -571,24 +653,14 @@ function addSymbol(dropzone, clone){
 
 let output = document.getElementById("output"); // ID OF OUTPUT WINDOW
 
-function displayOutput(outputType){
-  if(outputType == error){
-    let newElement = document.createElement('p');
-    newElement.classList.add('error');
-    newElement.innerHTML = "text"; // add text here
-    output.appendChild(newElement); 
-  }
-
-  if(outputType == warning){
-    let newElement = document.createElement('p');
-    newElement.classList.add('warning');
-    newElement.innerHTML = "text"; // add text here
-    output.appendChild(newElement);
-  } else {
-    let newElement = document.createElement('p');
-    newElement.innerHTML = "text"; // add text here
-    output.appendChild(newElement);
-  }
+function displayOutput(text, outputType){
+  console.log("Text: ", text, "type: ", outputType)
+  let newElement = document.createElement('p');
+  newElement.classList.add(outputType);
+  newElement.textContent = text; // add text here
+  output.appendChild(newElement); 
 }
 
 //=================================================//                   Event Functions
+
+export default displayOutput;

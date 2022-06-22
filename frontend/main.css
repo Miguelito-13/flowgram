@@ -294,6 +294,10 @@ footer{
     color: red;
     margin-left: 20px;
 }
+.output-window p.text{
+    color: black;
+    margin-left: 20px;
+}
 .input-bar p{
     margin-left: 50px;
 }
@@ -462,8 +466,13 @@ input[type=submit]{
     width: 100%;
 }
 .connector-arrow{
+    position: relative;
+    text-align: center;
     height: 100%;
     width: 100%;
+}
+.arrow-text{
+  position: relative;
 }
 
 .modal {

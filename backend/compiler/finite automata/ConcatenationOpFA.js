@@ -19,12 +19,11 @@ export default function ConcatenationOpFA(tokenizedText, returnRemaining){
 
     let state = 0;                                  // 0 = number or variable, 1 = math operator, 2 = (, 3 = )
     while  (tokenizedClone.length > 0){
-
         if(state == 0 && tokenizedClone[0] && validFirstToken.includes(tokenizedClone[0].Type)){
             res.groupedToken.tokens.push(tokenizedClone[0]);
             tokenizedClone.shift()
             state = 1;
-        } else if(state = 1 && tokenizedClone[0] && tokenizedClone[0].Type == "Concatenator"){
+        } else if(state == 1 && tokenizedClone[0] && tokenizedClone[0].Type == "Concatenator"){
             res.groupedToken.tokens.push(tokenizedClone[0]);
             tokenizedClone.shift()
             state = 0;

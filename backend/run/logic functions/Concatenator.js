@@ -16,7 +16,7 @@ export default function Concatenator(concatenationOp, flowgram){
             }
             res.result += existingVar.value;
 
-        } else {
+        } else if(cloneOp[i].Type != "Concatenator") {
             if(cloneOp[i].Type == "String Constant"){
                 res.result += cloneOp[i].Token.replace(/["]/g, "");
             } else {
