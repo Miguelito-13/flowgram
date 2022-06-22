@@ -260,26 +260,35 @@ connectors.addEventListener('click', () => {
 
 //=================================================//
 
-// FOR MODAL
-let modal = document.getElementById("helpModal");
+// FOR INSTRUCTIONS MODAL
+let helpModal = document.getElementById("helpModal");
 let helpBtn = document.getElementById("help");
 let span = document.getElementsByClassName("close")[0];
 
 // OPEN MODAL WHEN HELP BUTTON PRESSED
 helpBtn.onclick = function(){
-  modal.style.display = "block";
+  helpModal.style.display = "block";
 }
 
 // CLOSE MODAL WHEN X BUTTON PRESSED
 span.onclick = function(){
-  modal.style.display = "none";
+  helpModal.style.display = "none";
 }
 
 // CLOSE MODAL WHEN USER CLICKS OUTSIDE THE MODAL
 window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+  if (event.target == helpModal) {
+    helpModal.style.display = "none";
   }
+}
+
+// FOR CONDITION MODAL
+let conditionModal = document.getElementById("conditionModal");
+var chosen = document.getElementById("chosen"); // FORM ID FOR TRUE/FALSE MODAL
+
+// TO OPEN CONDITION MODAL
+function openCondition(){
+  conditionModal.style.display = "block";
 }
 
 //=================================================//                   Separated functions
@@ -298,9 +307,11 @@ function handleSelectPath(ev){
   let childNode = grid.firstElementChild
   if(selectedGrids.length == 0 && childNode && childNode.classList.contains('symbol')){
     let fromSymbol = htmlSymbols[gridsInfo[grid.id].index].backendSymbol
+    // console.log(fromSymbol.type);
     if (fromSymbol.type == "Conditional"){
       //Show UI Modal true or false
-      
+      // openCondition();
+      console.log("TRUE/FALSE MODAL");
 
     } else if (fromSymbol.type != "Conditional" && !fromSymbol.out){
       grid.classList.add('selected-grid');

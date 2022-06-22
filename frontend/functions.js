@@ -161,3 +161,17 @@ function activateDeactivateText(activate){
       }
     }
 }
+
+// CHOSE TRUE IN CONDITION MODAL
+function choseTrue(){
+  chosen.value = "True";
+  conditionModal.style.display = "none";
+  console.log(chosen.value);
+}
+
+// CHOSE FALSE IN CONDITION MODAL
+function choseFalse(){
+  chosen.value = "False";
+  conditionModal.style.display = "none";
+  console.log(chosen.value);
+}

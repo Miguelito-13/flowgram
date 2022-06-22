@@ -497,6 +497,23 @@ input[type=submit]{
     border: 1px solid #888;
     width: 80%;
   }
+
+  #chosen button{
+    width: 45%;
+    height: 50px;
+    font-size: 20px;
+    color: white;
+  }
+
+  #chosen button.true{
+    background-color: green;
+    border-color: green;
+  }
+
+  #chosen button.false{
+    background: red;
+    border-color: red;
+  }
   
   /* The Close Button */
   .close {
