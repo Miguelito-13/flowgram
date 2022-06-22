@@ -569,4 +569,26 @@ function addSymbol(dropzone, clone){
   console.log(flowgram);
 }
 
+let output = document.getElementById("output"); // ID OF OUTPUT WINDOW
+
+function displayOutput(outputType){
+  if(outputType == error){
+    let newElement = document.createElement('p');
+    newElement.classList.add('error');
+    newElement.innerHTML = "text"; // add text here
+    output.appendChild(newElement); 
+  }
+
+  if(outputType == warning){
+    let newElement = document.createElement('p');
+    newElement.classList.add('warning');
+    newElement.innerHTML = "text"; // add text here
+    output.appendChild(newElement);
+  } else {
+    let newElement = document.createElement('p');
+    newElement.innerHTML = "text"; // add text here
+    output.appendChild(newElement);
+  }
+}
+
 //=================================================//                   Event Functions

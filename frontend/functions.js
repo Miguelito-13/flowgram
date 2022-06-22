@@ -1,6 +1,5 @@
 let zoomLevel = 1;
 let zoom = document.getElementById("zoom");
-let output = document.getElementById("output");
 
 function arrowSymbol(){ // ARROW BUTTON FUNCTIONS
   
@@ -108,7 +107,7 @@ function zoomOut(){ // ZOOM OUT CANVAS
     // console.log(zoomScale);
 }
   
-function sampConsole(event) { // DISPLAY OUTPUT ON INPUT WINDOW
+function sampConsole(event) { // DISPLAY INPUT ON OUTPUT WINDOW
     event.preventDefault();
     var data = document.getElementById("data");
     let newElement = document.createElement('p');
