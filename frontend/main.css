@@ -53,15 +53,6 @@ header{
     margin-top: -.8em;
     align-items: stretch; 
 }
-.nav-items ul li .confirm{
-    align-items: center;
-    background-color: green;
-    margin-left: 50px;
-}
-.nav-items ul li .cancel{
-    align-items: center;
-    background-color: maroon;
-}
 .nav-items a{
     color: #acacac;
     text-decoration: none;
@@ -496,6 +487,27 @@ input[type=submit]{
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+  }
+
+  .modal-content table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table th {
+    border: 1px solid #666;
+    padding: 10px;
+  }
+
+  table td{
+    text-align: center;
+    border: 1px solid #666;
+    padding: 5px;
+  }
+
+  table img{
+    background-color: #333333;
+    padding: 3px;
   }
 
   #chosen button{
