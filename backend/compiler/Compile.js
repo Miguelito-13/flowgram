@@ -23,6 +23,9 @@ export default async function Compile(symbol, root, flowgram){
         console.log("FLOWGRAM STATUS: ", flowgram.status.run)
         console.log("FLOWGRAM STATUS2: ", flowgram.status)
         console.log("FLOWGRAM STATUS3: ", flowgram)
+
+        await new Promise(r => setTimeout(r, 50));             // Wait 250ms before proceeding
+
         if (!flowgram.status.run){
             console.log("Compilation has been stopped or has ended");
             resolve()
