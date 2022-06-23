@@ -3,6 +3,7 @@ import MathematicalOpFA from "./MathematicalOpFA.js";
 
 const validThirdToken = [
     "Number Constant",
+    "Negative Number Constant",
     "Boolean Constant",
     "String Constant",
     "Identifier",

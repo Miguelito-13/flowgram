@@ -8,6 +8,22 @@ const Tokens = [
         type: 'Keyword'
     },
     {
+        pattern: /true|false/,
+        type: 'Boolean Constant'
+    },
+    {
+        pattern: /[-]\d+([.]\d+)?/,
+        type: 'Negative Number Constant'
+    },
+    {
+        pattern: /\d+([.]\d+)?/,
+        type: 'Number Constant'
+    },
+    {
+        pattern: /(["'])(?:(?=(\\?))\2.)*?\1/,
+        type: 'String Constant'
+    },
+    {
         pattern: />=|<=|==|!=|>|</,
         type: 'Relational Operator'
     },
@@ -30,18 +46,6 @@ const Tokens = [
     {
         pattern: /[,]/,
         type: 'Concatenator'
-    },
-    {
-        pattern: /true|false/,
-        type: 'Boolean Constant'
-    }, 
-    {
-        pattern: /\d+([.]\d+)?/,
-        type: 'Number Constant'
-    },
-    {
-        pattern: /(["'])(?:(?=(\\?))\2.)*?\1/,
-        type: 'String Constant'
     },
     {
         pattern: /([A-z]|_)\w*/,   

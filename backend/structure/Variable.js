@@ -5,6 +5,7 @@ const validTypes = {
     ],
     Number: [
         "Number Constant",
+        "Negative Number Constant",
         "Number"
     ],
     Mathematical: [

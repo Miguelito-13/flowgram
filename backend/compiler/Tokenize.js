@@ -12,7 +12,7 @@ import Tokens from './Tokens.js';
     }
 */
 
-export default function Tokenize(text){
+export default function Tokenize(text, isProcessValidation){
     let token = text.replace(/(?:\r\n|\r|\n)/g, ' ');
     let result = {
         tokenized: []
@@ -46,6 +46,18 @@ export default function Tokenize(text){
                             Token: parseFloat(res[0]),
                             Type: patternType
                         })
+                    } else if(patternType == "Negative Number Constant"){
+                        if(isProcessValidation){
+                            result.tokenized.push({
+                                Token: parseFloat(res[0]),
+                                Type: patternType
+                            })
+                        } else {
+                            result.tokenized.push({
+                                Token: parseFloat(res[0]),
+                                Type: "Number Constant"
+                            })
+                        }
                     } else {
                         result.tokenized.push({
                             Token: res[0],

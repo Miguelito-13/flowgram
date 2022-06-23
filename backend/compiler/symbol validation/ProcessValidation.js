@@ -13,7 +13,7 @@ export default function ProcessValidation(symbol, flowgram){
         return res;
     }
 
-    let tokenizedResult = Tokenize(symbol.text)
+    let tokenizedResult = Tokenize(symbol.text, true)
     if (tokenizedResult.error){
         res.error = tokenizedResult.error
         return res;
