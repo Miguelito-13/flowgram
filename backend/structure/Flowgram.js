@@ -140,6 +140,7 @@ export default class Flowgram{
 
         return new Promise((resolve, reject) => {
             this.main.end = null;
+            this.main.start.checked = false;
             this.variables = [];
             for(let i = 0; i < this.symbols.length; i++){
                 this.symbols[i].resetSymbol();
