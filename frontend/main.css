@@ -495,7 +495,11 @@ input[type=submit]{
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 80%; 
+  }
+
+  .modal-content#instructions {
+    padding-bottom: 150px;
   }
 
   .modal-content table {
