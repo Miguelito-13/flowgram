@@ -40,6 +40,6 @@ export default function ConditionValidation(symbol){
         symbol.checked = true;
     }
 
-
+    console.log(symbol)
     return res;
 }

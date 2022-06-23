@@ -37,37 +37,26 @@ export default class Variable{
 
     set value ({value, type}){
         this.type = validateType(type)
-        if(type == "Input"){
-            if(value == "true"){
-                this._value = true;
-                this.type = "Boolean"
-            } else if(value == "false"){
-                this._value = false;
-                this.type = "Boolean"
-            } else if(isANumber(value)) {
-                this._value = parseFloat(value)
-                this.type = "Number"
-            } else {
-                this._value = value;
-                this.type = "String"
-            }
+        this._value = value;
+        // if(type == "Input"){
+        //     this._value = value;
 
-        } else if(this.type == "String"){
-            this._value = value.replace(/["]/g, "");
+        // } else if(this.type == "String"){
+        //     this._value = value.replace(/["]/g, "");
             
-        } else if(this.type == "Boolean"){
-            if(value == "true"){
-                this._value = true;
-            } else if(value == "false"){
-                this._value = false;
-            }
+        // } else if(this.type == "Boolean"){
+        //     if(value == "true"){
+        //         this._value = true;
+        //     } else if(value == "false"){
+        //         this._value = false;
+        //     }
 
-        } else if(this.type == "Number"){
-            this._value = parseFloat(value)
+        // } else if(this.type == "Number"){
+        //     this._value = parseFloat(value)
 
-        } else {
-            this._value = value;
-        }
+        // } else {
+        //     this._value = value;
+        // }
         
     }
 

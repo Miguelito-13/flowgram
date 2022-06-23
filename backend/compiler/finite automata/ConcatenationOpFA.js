@@ -38,7 +38,7 @@ export default function ConcatenationOpFA(tokenizedText, returnRemaining){
 
     }
 
-    if (state == 0){
+    if (state == 0 || (res.groupedToken.tokens.length == 1 && res.groupedToken.tokens[0].Type != "String Constant" && returnRemaining)){
         res.error = "ERROR: Invalid Concatenation Operation";
         return res;
     }

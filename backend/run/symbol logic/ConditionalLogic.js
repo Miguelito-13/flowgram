@@ -7,9 +7,9 @@ export default function ConditionalLogic(symbol, flowgram){
         error: false,
     }
 
-    let conditionalOp = [...symbol.groupedTokens.tokens]
+    let conditionalOp = {...symbol.groupedTokens}
 
-    if(conditionalOp.length > 0){
+    if(conditionalOp){
         let result = LogicCalculator(conditionalOp, flowgram);
         if (result.error){
             res.error = result.error;

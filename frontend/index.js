@@ -1,5 +1,6 @@
 
 import startRunCompile, {createFlowgram} from '../backend/main.js';
+import ConditionalLogic from '../backend/run/symbol logic/ConditionalLogic.js';
 import ConnectorSVGs from './connectorsvgs.js';
 
 
@@ -193,19 +194,19 @@ for(let i=0;i<26;i++){ // CREATE GRID WITH ID
     newElement.id = x[i] +'0'+ j;
     if(i == 0 && j == 3){
       newElement.innerHTML = '<input type="text" class="symbol" disabled id="start-end" name="decision" value="START" data-ts="1655295083726">';
+      htmlSymbols.push({
+        htmlSymbol: newElement,
+        backendSymbol: flowgram.main.start,
+        connections: []
+      });
+  
+      gridsInfo[newElement.id] = {
+        type: "symbol",
+        index: htmlSymbols.length - 1
+      }
     }
     // newElement.innerHTML = '<p>'+x[i]+'0'+j+'</p>';
     canvas.appendChild(newElement);
-    htmlSymbols.push({
-      htmlSymbol: newElement,
-      backendSymbol: flowgram.main.start,
-      connections: []
-    });
-
-    gridsInfo[newElement.id] = {
-      type: "symbol",
-      index: htmlSymbols.length - 1
-    }
   }
 }
 
@@ -244,6 +245,7 @@ let stopButton = document.getElementById("stopButton");
 stopButton.addEventListener('click', () => {
   console.log("Stop Button Pressed");
   flowgram.status.run = false;
+  console.log("Flowgram STOP:", flowgram);
 })
 
 // CONNECTOR BUTTON FUNCTION
@@ -331,15 +333,12 @@ async function handleSelectPath(ev){
     grid = ev.target.parentNode.parentNode;
   }
 
-  console.log("Check1", grid)
   if(!grid) return;
   let childNode = grid.firstElementChild
   if(selectedGrids.length == 0 && childNode && childNode.classList.contains('symbol')){
     let fromSymbol = htmlSymbols[gridsInfo[grid.id].index].backendSymbol
-    console.log("Check2:", fromSymbol)
-    // console.log(fromSymbol.type);
+
     if (fromSymbol.type == "Conditional"){
-      console.log("Check3")
       //Show UI Modal true or false
       
       conditionalConnectorInfo.active = true;
@@ -349,20 +348,34 @@ async function handleSelectPath(ev){
 
       while(conditionalConnectorInfo.active && conditionalConnectorInfo.choice == null){
         await new Promise(r => setTimeout(r, 500));
-        console.log("Test:", conditionalConnectorInfo)
       }
       console.log("Info:", conditionalConnectorInfo)
       if(conditionalConnectorInfo.choice == null){
         console.error("ERROR: Didn't choose a connector type");
         return;
       }
+      
+      if(conditionalConnectorInfo.choice == "true" && fromSymbol.true){
+        conditionalConnectorInfo.choice = null;
+        displayOutput("ERROR: Conditional Symbol already has a true connector", "error");
+        return;
+      } else if(conditionalConnectorInfo.choice == "false" && fromSymbol.false){
+        conditionalConnectorInfo.choice = null;
+        displayOutput("ERROR: Conditional Symbol already has a false connector", "error");
+        return;
+      } 
+      
       connectorType = conditionalConnectorInfo.choice;
       conditionalConnectorInfo.choice = null;
       grid.classList.add('selected-grid');
       selectedGrids.push(grid.id);
 
-    } else if (fromSymbol.type != "Conditional" && !fromSymbol.out){
-      console.log("Check4")
+    } else if (fromSymbol.type != "Conditional"){
+      
+      if(fromSymbol.out){
+        displayOutput("ERROR: Symbol already has a connector", "error");
+        return;
+      }
       grid.classList.add('selected-grid');
       selectedGrids.push(grid.id);
 
@@ -372,16 +385,24 @@ async function handleSelectPath(ev){
     }
 
   } else if(selectedGrids.length > 0){
-    console.log("Check5")
     let lastID = selectedGrids[selectedGrids.length-1];
     let gridID = grid.id;
 
-    
+    console.log(gridsInfo[gridID], gridID)
     if(grid.classList.contains('selected-grid') && grid.id == lastID){        // Deselecting last selected grid
+      if(selectedGrids.length == 1){
+        connectorType = "none";
+        conditionalConnectorInfo.choice = null
+      }
+
       grid.classList.remove('selected-grid');
       selectedGrids.pop()
+      return;
     } else if(grid.classList.contains('selected-grid')){
-      //Display Error
+      displayOutput("Can only deselect the last grid selected.", "warning");
+      return;
+    } else if(selectedGrids.length == 1 && gridsInfo[gridID]){
+      displayOutput("Second grid selected needs to be empty.", "warning");
       return;
     }
 
@@ -393,8 +414,11 @@ async function handleSelectPath(ev){
       grid.classList.add('selected-grid');
       selectedGrids.push(gridID);
 
-      if(childNode != null){
+      if(childNode != null && grid.id != selectedGrids[0]){
         generateConnectors();
+      } else if (childNode != null){
+        displayOutput("ERROR: Symbol cannot be connected to itself.", "error");
+        return;
       }
     }
   }

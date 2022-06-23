@@ -36,6 +36,16 @@ export default function Tokenize(text){
                             Token: res[0].replace(/["]/g, ""),
                             Type: patternType
                         })
+                    } else if(patternType == "Boolean Constant"){
+                        result.tokenized.push({
+                            Token: res[0] == 'true' ? true : false,
+                            Type: patternType
+                        })
+                    } else if(patternType == "Number Constant"){
+                        result.tokenized.push({
+                            Token: parseFloat(res[0]),
+                            Type: patternType
+                        })
                     } else {
                         result.tokenized.push({
                             Token: res[0],

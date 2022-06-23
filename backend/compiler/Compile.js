@@ -19,6 +19,10 @@ export default async function Compile(symbol, root, flowgram){
             return;
         }
 
+
+        console.log("FLOWGRAM STATUS: ", flowgram.status.run)
+        console.log("FLOWGRAM STATUS2: ", flowgram.status)
+        console.log("FLOWGRAM STATUS3: ", flowgram)
         if (!flowgram.status.run){
             console.log("Compilation has been stopped or has ended");
             resolve()

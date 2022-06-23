@@ -5,53 +5,67 @@ export default function LogicCalculator(logicalOp, flowgram){
         error: false,
     }
 
-    let opClone = [...logicalOp]
-    const ret = replaceIdentifiers(opClone, "Logical", flowgram);                            //Replace all variables with their values ex. x AND true -> true AND true
-    if(ret.error){
-        res.error = ret.error;
-        return res;
-    }
+    let opClone = [...logicalOp.tokens];
+    console.log("LOGICAL OP: ", logicalOp)
+    if(logicalOp.groupedTokensType == "Relational Operation"){
+        opClone = [{
+            Token: calculateRelation(logicalOp, flowgram),
+            Type: "Boolean Constant"
+        }];
 
-    while(opClone.length > 1){                                                  
-        let highestPeak = 0
-        let parenthesisCount = 0
-        let openIndex = 0
-        let closeIndex = 0
-    
-        opClone.forEach((v, i) => {                                             //Get highest prio operation to be calculated enclosed in () ex. ((true AND 4==4) OR true) -> (true AND 4==4)
-            if(v.Token == "("){
-                parenthesisCount++;
-                if(parenthesisCount > highestPeak){
-                    highestPeak = parenthesisCount;
-                    openIndex = i;
-                    closeIndex = 0;
+        console.log("OPCLONE: ", opClone)
+    } else {
+        const ret = replaceIdentifiers(opClone, "Logical", flowgram);                            //Replace all variables with their values ex. x AND true -> true AND true
+        if(ret.error){
+            res.error = ret.error;
+            return res;
+        }
+        opClone = ret.replacedOp;
+        
+        console.log("opClone: ", logicalOp)
+        while(opClone.length > 1 && flowgram.status.run){                                                  
+            let highestPeak = 0
+            let parenthesisCount = 0
+            let openIndex = 0
+            let closeIndex = 0
+        
+            opClone.forEach((v, i) => {                                             //Get highest prio operation to be calculated enclosed in () ex. ((true AND 4==4) OR true) -> (true AND 4==4)
+                if(v.Token == "("){
+                    parenthesisCount++;
+                    if(parenthesisCount > highestPeak){
+                        highestPeak = parenthesisCount;
+                        openIndex = i;
+                        closeIndex = 0;
+                    }
                 }
-            }
-            if(v.Token == ")"){
-                parenthesisCount--;
-                if(highestPeak != 0 && closeIndex == 0){
-                    closeIndex = i;
+                if(v.Token == ")"){
+                    parenthesisCount--;
+                    if(highestPeak != 0 && closeIndex == 0){
+                        closeIndex = i;
+                    }
                 }
+            })
+        
+            if(highestPeak != 0){
+                let subOp = []
+                for(let i = openIndex; i <= closeIndex; i++){
+                    subOp.push(opClone[i]);
+                }
+        
+                opClone[openIndex] = calculate(subOp, flowgram);                              //Calculate the highest prio operation and replace it with the result ex. ((true AND 4==4) OR true) -> (true OR true)
+                opClone.splice((openIndex + 1), (closeIndex - openIndex));
+            } else {
+                opClone = [calculate(opClone, flowgram)];                                    //Calculate the simplified logical operation ex. true OR true -> true
             }
-        })
-    
-        if(highestPeak != 0){
-            let subOp = []
-            for(let i = openIndex; i <= closeIndex; i++){
-                subOp.push(opClone[i]);
-            }
-    
-            opClone[openIndex] = calculate(subOp, flowgram);                              //Calculate the highest prio operation and replace it with the result ex. ((true AND 4==4) OR true) -> (true OR true)
-            opClone.splice((openIndex + 1), (closeIndex - openIndex));
-        } else {
-            opClone = [calculate(opClone, flowgram)];                                    //Calculate the simplified logical operation ex. true OR true -> true
-            
         }
     }
 
-    if(opClone[0].groupedTokensType == "Relational Operation") {
-        opClone = [calculateRelation(opClone[0], flowgram)];
-    }
+    // if(opClone[0].groupedTokensType == "Relational Operation") {
+    //     opClone = [{
+    //         Token: calculateRelation(opClone[0], flowgram),
+    //         Type: "Boolean Constant"
+    //     }];
+    // }
 
     res.result = opClone[0];
     return res;
@@ -147,7 +161,7 @@ function calculateRelation(relationalOp, flowgram){
 function replaceIdentifiers(op, opType, flowgram){
 
     let res = {
-        replacedOp: null,
+        replacedOp: op,
         error: false
     }
     let cloneOp = [...op];
