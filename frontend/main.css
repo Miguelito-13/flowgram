@@ -138,7 +138,7 @@ main{
     cursor: pointer;
 }
 .dropzone.selected-grid {
-    border: yellow solid 3px;
+    border: blue solid 1px;
 }
 .cards{
     background-color: #4C4C4C;
@@ -154,19 +154,37 @@ main{
     padding-right: 40px;
 }
 
+.dropdown{
+    display: flex;
+}
+
 .dropbtn {
     background-color: white;
     color: black;
-    padding: 16px;
     font-size: 14px;
-    border: 2px solid black;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-right: white;
+    border: black solid 2px;
+    border-right: white solid;
+    z-index:1;
+    height: 35px;
   }
   
-  .dropdown {
-    position: relative;
-    display: inline-block;
+  .arrow-head {
+    background-color: white;
+    border: black solid 2px;
+    height: 30 px;
+    width: 30px;
+    transform: rotate(-45deg);
+    align-items: center;
+    justify-content: center;
+    margin-left: -13px;
   }
   
   .dropdown-content {
@@ -184,16 +202,11 @@ main{
     height: 120px;
   }
   
-  .dropdown-content .connector :hover {background-color: #cccccc}
-  
   .dropdown:hover .dropdown-content {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
   
-  .dropdown:hover .dropbtn {
-    background-color: #cccccc;
-  }
   .card .active:hover{
     cursor: pointer;
   }
@@ -278,7 +291,7 @@ footer{
 
 .output-window{
     background-color: white;
-    height: 80px;
+    height: 80p x;
     margin: 0px 50px;
     overflow: scroll;
 }
@@ -385,7 +398,7 @@ input[type=submit]{
     transform: skew(0deg);
 }
 
-  #connector-vertical {
+  /* #connector-vertical {
     margin-left: 50%;
     height: 50px;
     width: 30px;
@@ -407,19 +420,7 @@ input[type=submit]{
     border-right-style: hidden;
     border-left-style: hidden;
     border-bottom-style: 2.5px solid black;
-}
-#connector-down-right {
-    margin-top: 50px;
-    margin-right: 50%;
-    height: 50px;
-    width: 30px;
-    background-color: transparent;
-    outline: none;
-    border-top-style:  2.5px solid black;
-    border-left-style: hidden;
-    border-bottom-style: hidden;
-    border-right-style: 2.5px solid black;
-}
+} */
 
 #connector-down-left {
     margin-right: 0px;
@@ -474,6 +475,25 @@ input[type=submit]{
 .arrow-text{
   position: relative;
 }
+
+/* .right-down {
+    margin-top: 50px;
+    margin-left: 43%;
+    width: 100%;
+
+}
+.left-down {
+    margin-top: 50px;
+    margin-right: 50%;
+
+}
+.up-right-arrow {
+    margin-left: 26%;
+} */
+
+
+
+
 
 .modal {
     display: none; /* Hidden by default */
@@ -553,4 +573,9 @@ input[type=submit]{
     color: #000;
     text-decoration: none;
     cursor: pointer;
+  }
+
+  .dropbtn.active{
+    font-weight: bold;
+    color: blue;
   }
