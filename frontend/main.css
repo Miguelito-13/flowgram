@@ -172,7 +172,7 @@ main{
     border-right: white;
     border: black solid 2px;
     border-right: white solid;
-    z-index:1;
+    z-index: 1;
     height: 35px;
   }
   
@@ -498,7 +498,7 @@ input[type=submit]{
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 2; /* Sit on top */
     padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
