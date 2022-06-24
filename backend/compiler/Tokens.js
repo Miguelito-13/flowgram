@@ -32,7 +32,7 @@ const Tokens = [
         type: 'Logical Operator'
     },
     {
-        pattern: /[+]|[-]|[*]|[/]/,
+        pattern: /[+]|[-]|[*]|[/]|[%]/,
         type: 'Mathematical Operator'
     },
     {

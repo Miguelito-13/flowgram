@@ -1,4 +1,4 @@
-import displayOutput from "../../frontend/index.js"
+import {displayOutput} from "../../frontend/index.js"
 
 function NotifyError(message, symbol){
     let mes = message + (symbol ? " Symbol: " + symbol.type : "")

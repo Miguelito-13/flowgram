@@ -107,17 +107,17 @@ function zoomOut(){ // ZOOM OUT CANVAS
     // console.log(zoomScale);
 }
   
-function sampConsole(event) { // DISPLAY INPUT ON OUTPUT WINDOW
-    event.preventDefault();
-    var data = document.getElementById("data");
-    let newElement = document.createElement('p');
-    newElement.classList.add('success');
-    newElement.innerHTML = data.value;
-    output.appendChild(newElement);
-  
-    // console.log(newElement);
-}
+// function sampConsole(event) { // DISPLAY INPUT ON OUTPUT WINDOW
+//   let output = document.getElementById("output"); // ID OF OUTPUT WINDOW
+//   event.preventDefault();
+//   var data = document.getElementById("data");
+//   let newElement = document.createElement('p');
+//   newElement.classList.add('success');
+//   newElement.innerHTML = data.value;
+//   output.appendChild(newElement);
 
+//   // console.log(newElement);
+// }
   
 //Activate/Deactivate arrow function
 function activateDeactivateArrow(activate){

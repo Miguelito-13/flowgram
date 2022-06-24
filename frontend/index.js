@@ -14,6 +14,7 @@ let conditionalConnectorInfo = {
   active: false,
   choice: null
 }
+let inputInfo
 
 //=================================================//
 
@@ -274,6 +275,32 @@ connectors.addEventListener('click', () => {
   }
   // console.log(yes);
   // console.log("connector pressed");
+})
+
+let consoleInput = document.getElementById("data");
+consoleInput.addEventListener('keypress', (e) => {
+  console.log(e)
+  if(e.key === "Enter"){
+    if(typeof inputInfo == "object"){
+      inputInfo.input = consoleInput.value
+      inputInfo = null;
+    }
+
+    displayOutput(consoleInput.value, "text");
+    consoleInput.value = "";
+  }
+})
+
+let consoleSubmit = document.getElementById("submit-button");
+consoleSubmit.addEventListener('click', (e) => {
+  e.preventDefault()
+  if(typeof inputInfo == "object"){
+    inputInfo.input = consoleInput.value
+    inputInfo = null;
+  }
+
+  displayOutput(consoleInput.value, "text");
+  consoleInput.value = "";
 })
 
 //=================================================//
@@ -675,16 +702,23 @@ function addSymbol(dropzone, clone){
   console.log(flowgram);
 }
 
-let output = document.getElementById("output"); // ID OF OUTPUT WINDOW
+function getInput(inputObj){
+  inputInfo = inputObj;
+}
 
+let output = document.getElementById("output"); // ID OF OUTPUT WINDOW
 function displayOutput(text, outputType){
   console.log("Text: ", text, "type: ", outputType)
   let newElement = document.createElement('p');
   newElement.classList.add(outputType);
   newElement.textContent = text; // add text here
   output.appendChild(newElement); 
+  output.scrollTo(0, output.scrollHeight);
 }
 
 //=================================================//                   Event Functions
 
-export default displayOutput;
+export {
+  displayOutput,
+  getInput
+};

@@ -140,6 +140,21 @@ function calculate(mathOp){
                     cloneOp.splice(i, 2);
                     i--;
 
+                } else if(status == "MD" && cloneOp[i].Token == "%"){               //TODO return error when i+1 is 0
+                    if(parseFloat(cloneOp[i+1].Token) == 0){
+                        res.error = "RUNTIME ERROR: Cannot divide number with 0";
+                        return res;
+                    }
+                    result = parseFloat(cloneOp[i-1].Token) % parseFloat(cloneOp[i+1].Token);
+                    console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token)
+                    cloneOp[i-1] = {
+                        Token: result,
+                        Type: "Number Constant"
+                    }
+        
+                    cloneOp.splice(i, 2);
+                    i--;
+
                 } else if(status == "AS" && cloneOp[i].Token == "+"){
                     result = parseFloat(cloneOp[i-1].Token) + parseFloat(cloneOp[i+1].Token);
                     console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token)

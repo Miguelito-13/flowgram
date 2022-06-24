@@ -32,7 +32,7 @@ export default async function Run(symbol, flowgram){
         } else if(symbol.type == "InputOutput"){
             const groupedTokens = [...symbol.groupedTokens.tokens]
             if(groupedTokens[0].Token == "INPUT"){
-                result = InputLogic(symbol, flowgram);
+                result = await InputLogic(symbol, flowgram);
             } else {
                 result = OutputLogic(symbol, flowgram);
             }
