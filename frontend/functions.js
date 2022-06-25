@@ -30,6 +30,7 @@ function arrowSymbol(){ // ARROW BUTTON FUNCTIONS
 function textSymbol(){ // TEXT BUTTON FUNCTIONS
     
     activateDeactivateArrow(false)
+    deactivateConnector()
   
     let text = document.getElementById("text");
     if(text.classList.contains("active")){
@@ -61,6 +62,7 @@ function deleteSymbol(){ // TO INITIATE DELETE
   
     activateDeactivateArrow(false)
     activateDeactivateText(false)
+    deactivateConnector()
   
     let del = document.getElementById("delete");
     if(del.classList.contains("active")){
@@ -173,4 +175,13 @@ function choseFalse(){
   chosen.value = "False";
   conditionModal.style.display = "none";
   console.log(chosen.value);
+}
+
+function deactivateConnector(){
+  let connector = document.getElementById('connectors')
+  connector.classList.remove('active')
+  let gridsSelected = document.getElementsByClassName('selected-grid');
+  while(gridsSelected.length > 0){
+    gridsSelected.item(0).classList.remove('selected-grid');
+  }
 }

@@ -182,6 +182,8 @@ function handleClick(ev) {
   // CONNECTOR FUNCTION (SELECTING SYMBOL FIRST)
   if(document.querySelector("button#connectors.active")!=null){
     handleSelectPath(ev);
+  } else if(selectedGrids.length > 0){
+    selectedGrids =[]
   }
 
 }
@@ -256,12 +258,7 @@ connectors.addEventListener('click', () => {
   if(connectors.classList.contains("active")){
     connectors.classList.remove("active");
 
-    let selGrids = document.getElementsByClassName('selected-grid');
-    console.log(selGrids, selGrids.length)
-    while(selGrids.length > 0){
-      selGrids.item(0).classList.remove('selected-grid');
-    }
-    selectedGrids = [];
+    deselectAll();
     
   }else if(!connectors.classList.contains("active") && arrow.classList.contains("active")) {
     connectors.classList.add("active");
@@ -564,6 +561,14 @@ function generateConnectors(){
   }
 
 } 
+
+function deselectAll(){
+  selectedGrids = [];
+  let gridsSelected = document.getElementsByClassName('selected-grid');
+  while(gridsSelected.length > 0){
+    gridsSelected.item(0).classList.remove('selected-grid');
+  }
+}
 
 function initialDelete(grid){
   console.log(grid)
