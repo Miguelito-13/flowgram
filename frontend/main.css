@@ -474,6 +474,8 @@ input[type=submit]{
 }
 .arrow-text{
   position: relative;
+  margin-top: -100px;
+  margin-left: 25px;
 }
 
 /* .right-down {
