@@ -291,7 +291,8 @@ footer{
 
 .output-window{
     background-color: white;
-    height: 80px;
+    height: 100px;
+    line-height: 0.5;
     margin: 0px 50px;
     overflow: scroll;
 }
