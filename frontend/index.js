@@ -184,6 +184,11 @@ function handleClick(ev) {
     handleSelectPath(ev);
   } else if(selectedGrids.length > 0){
     selectedGrids =[]
+    connectorType ="none";
+    conditionalConnectorInfo = {
+      active: false,
+      choice: null
+    }
   }
 
 }
