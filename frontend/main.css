@@ -581,3 +581,7 @@ input[type=submit]{
     font-weight: bold;
     color: blue;
   }
+
+  .error-highlight{
+    background-color: red;
+  }
