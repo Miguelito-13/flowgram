@@ -143,13 +143,12 @@ main{
 .cards{
     background-color: #4C4C4C;
     border-top: 3px solid #595959;
-    border-bottom: 3px solid #595959;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     padding-left: 30px;
     padding-right: 40px;
 }
@@ -257,6 +256,7 @@ footer{
     background-color: #4C4C4C;
     color: white;
     padding-bottom: 20px;
+    border-top: 3px solid #595959;
 }
 .output-bar{
     display: flex;
@@ -333,6 +333,11 @@ input[type=text]{
 input[type=submit]{
     flex: 1;
     height: 35px;
+    background-color: #89888F;
+    border: none;
+    border-radius: 2rem;
+    color: white;
+    cursor: pointer;
 }
 
 
@@ -356,7 +361,7 @@ input[type=submit]{
     margin: 5px;
     padding: 20px;
     height: 50px;
-    width: 150px;
+    width: 120px;
     background-color: rgb(255, 255, 255);
     border: 2px solid black;
     transform: skew(-20deg);
@@ -368,7 +373,7 @@ input[type=submit]{
     padding: 20px;
     height: 50px;
     width: 130px;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     border: 2px solid black;
     text-align: center;
     font-family: 'Poppins', sans-serif;
@@ -378,8 +383,6 @@ input[type=submit]{
 #decision {
     margin: 5px;
     padding: 20px;
-    height: 40px;
-    width: 190px;
     background-color: transparent;
     text-align: center;
     font-family: 'Poppins', sans-serif;
@@ -389,80 +392,18 @@ input[type=submit]{
   }
 
 .decision-box{
-    margin: 5px;
+    height: 100%;
     width: 100%;
     background-image: url(./ThesisSVG/Vector\ 1.svg);
-    background-size: contain;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     text-align: center;
     font-family: 'Poppins', sans-serif;
     transform: skew(0deg);
 }
 
-  /* #connector-vertical {
-    margin-left: 50%;
-    height: 50px;
-    width: 30px;
-    background-color: transparent;
-    outline: none;
-    border-top-style: hidden;
-    border-right-style: hidden;
-    border-bottom-style: hidden;
-    border-left-style: 2.5px solid black;
-}
-#connector-horizontal {
-    width: 100px;
-    margin:0px;
-    height: 20px;
-    margin-bottom: 25px;
-    background-color: transparent;
-    outline: none;
-    border-top-style: hidden;
-    border-right-style: hidden;
-    border-left-style: hidden;
-    border-bottom-style: 2.5px solid black;
-} */
 
-#connector-down-left {
-    margin-right: 0px;
-    margin-top: 50px;
-    margin-left: 50%;
-    height: 50px;
-    width: 30px;
-    background-color: transparent;
-    outline: none;
-    border-top-style:  2.5px solid black;
-    border-left-style: 2.5px solid black;
-    border-bottom-style: hidden;
-    border-right-style: hidden;
-}
 
-#connector-up-right{
-    margin-bottom: 50px;
-    margin-right: 50%;
-    height: 50px;
-    width: 30px;
-    background-color: transparent;
-    outline: none;
-    border-bottom-style:  2.5px solid black;
-    border-left-style: hidden;
-    border-top-style: hidden;
-    border-right-style: 2.5px solid black;
-}
-
-#connector-up-left{
-    margin-right: 0px;
-    margin-bottom: 50px;
-    margin-left: 50%;
-    height: 50px;
-    width: 30px;
-    background-color: transparent;
-    outline: none;
-    border-bottom-style:  2.5px solid black;
-    border-left-style: 2.5px solid black;
-    border-top-style: hidden;
-    border-right-style: hidden;
-}
 .arrow{
     height: 100px;
     width: 100%;
@@ -478,22 +419,54 @@ input[type=submit]{
   margin-top: -100px;
   margin-left: 25px;
 }
-
-/* .right-down {
-    margin-top: 50px;
-    margin-left: 43%;
-    width: 100%;
-
+.left-up-arrow {
+    object-fit: cover;
 }
-.left-down {
-    margin-top: 50px;
-    margin-right: 50%;
-
+.left-down-arrow{
+    object-fit: cover;
 }
-.up-right-arrow {
-    margin-left: 26%;
-} */
-
+.left-up{
+    object-fit: cover;
+}
+.left-down{
+    object-fit: cover;
+}
+.right-up-arrow{
+    object-fit: cover;
+}
+.right-down-arrow{
+    object-fit: cover;
+}
+.right-up{
+    object-fit: cover;
+}
+.right-down{
+    object-fit: cover;
+}
+.up-left-arrow{
+    object-fit: cover;
+}
+.up-right-arrow{
+    object-fit: cover;
+}
+.up-left{
+    object-fit: cover;
+}
+.up-right{
+    object-fit: cover;
+}
+.down-left-arrow{
+    object-fit: cover;
+}
+.down-right-arrow{
+    object-fit: cover;
+}
+.down-left{
+    object-fit: cover;
+}
+.down-right{
+    object-fit: cover;
+}
 
 
 
