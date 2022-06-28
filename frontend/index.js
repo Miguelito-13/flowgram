@@ -242,8 +242,11 @@ runButton.addEventListener('click', () => {
   console.log("Run Button Pressed");
   if(flowgram.status.run == false){
     startRunCompile(flowgram);
+    let errorGrids = document.getElementsByClassName('error-highlight');
+    while(errorGrids.length > 0){
+      errorGrids.item(0).classList.remove('error-highlight')
+    }
   } else {
-    console.error("ERRORERROEROEROEOR")
     displayOutput("ERROR: Flowgram is already running!", "error")
   }
 })
@@ -717,13 +720,30 @@ function getInput(inputObj){
 }
 
 let output = document.getElementById("output"); // ID OF OUTPUT WINDOW
-function displayOutput(text, outputType){
+function displayOutput(text, outputType, symbol){
   console.log("Text: ", text, "type: ", outputType)
   let newElement = document.createElement('p');
   newElement.classList.add(outputType);
   newElement.textContent = text; // add text here
   output.appendChild(newElement); 
   output.scrollTo(0, output.scrollHeight);
+
+  if(symbol && outputType == "error"){
+    htmlSymbols.forEach((v) => {
+      if(v.backendSymbol == symbol){
+        let grid
+        if(v.htmlSymbol.parentNode.classList.contains("dropzone")){
+          grid = v.htmlSymbol.parentNode;
+        } else if(v.htmlSymbol.parentNode.parentNode.classList.contains("dropzone")){
+          grid = v.htmlSymbol.parentNode.parentNode;
+        }
+
+        if(grid){
+          grid.classList.add("error-highlight")
+        }
+      }
+    })
+  }
 }
 
 //=================================================//                   Event Functions

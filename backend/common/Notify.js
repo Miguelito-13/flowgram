@@ -2,7 +2,7 @@ import {displayOutput} from "../../frontend/index.js"
 
 function NotifyError(message, symbol){
     let mes = message + (symbol ? ", Symbol: " + symbol.type : "")
-    displayOutput(mes, "error")
+    displayOutput(mes, "error", symbol)
 }
 
 function NotifySuccess(message, symbol){
