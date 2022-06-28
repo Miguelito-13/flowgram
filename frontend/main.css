@@ -583,5 +583,6 @@ input[type=submit]{
   }
 
   .error-highlight{
-    background-color: red;
+    border-color: rgb(255, 0, 0);
+    background-color: rgb(236, 177, 177);
   }
