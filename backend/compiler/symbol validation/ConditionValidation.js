@@ -2,7 +2,7 @@ import LogicalOpFA from "../finite automata/LogicalOpFA.js";
 import RelationalOpFA from "../finite automata/RelationalOpFA.js";
 import Tokenize from "../Tokenize.js";
 
-export default function ConditionValidation(symbol){
+export default function ConditionValidation(symbol, flowgram){
 
     let res = {
         symbol: symbol,
@@ -20,8 +20,8 @@ export default function ConditionValidation(symbol){
     }
 
 
-    let response1 = RelationalOpFA(tokenizedResult.tokenized)
-    let response2 = LogicalOpFA(tokenizedResult.tokenized)
+    let response1 = RelationalOpFA(tokenizedResult.tokenized, flowgram)
+    let response2 = LogicalOpFA(tokenizedResult.tokenized, flowgram)
     if (response1.error){
 
         if (response2.error){

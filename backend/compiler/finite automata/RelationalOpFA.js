@@ -5,7 +5,7 @@ const validFirstAndThirdToken = [
     "Identifier"
 ]
 
-export default function RelationalOpFA(tokenizedText){
+export default function RelationalOpFA(tokenizedText, flowgram){
     console.log("- RelationalOpFA")
 
     let tokenizedClone = [...tokenizedText]
@@ -19,6 +19,13 @@ export default function RelationalOpFA(tokenizedText){
 
     //=================================================
     if (tokenizedClone[0] && validFirstAndThirdToken.includes(tokenizedClone[0].Type)){
+        if(tokenizedClone[0].Type == "Identifier"){
+            let existingVar = flowgram.getVariable(tokenizedClone[0].Token);
+            if(!existingVar){
+                res.error = "ERROR: Undefined variable '" + tokenizedClone[0].Token + "'.";
+                return res;
+            }
+        }
         res.groupedToken.tokens.push(tokenizedClone[0])
         tokenizedClone.shift()
     } else {
@@ -37,6 +44,13 @@ export default function RelationalOpFA(tokenizedText){
 
     //=================================================
     if (tokenizedClone[0] && validFirstAndThirdToken.includes(tokenizedClone[0].Type)){
+        if(tokenizedClone[0].Type == "Identifier"){
+            let existingVar = flowgram.getVariable(tokenizedClone[0].Token);
+            if(!existingVar){
+                res.error = "ERROR: Undefined variable '" + tokenizedClone[0].Token + "'.";
+                return res;
+            }
+        }
         res.groupedToken.tokens.push(tokenizedClone[0])
         tokenizedClone.shift()
     } else {

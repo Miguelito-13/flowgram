@@ -171,11 +171,14 @@ function handleClick(ev) {
   if(document.querySelector("button#delete.active")!=null){
     let symbol = ev.target;
     if(symbol.parentNode.classList.contains('deletable')){
+      symbol.parentNode.parentNode.classList.remove('error-highlight')
       initialDelete(symbol.parentNode.parentNode);
     } 
     if(symbol.classList.contains('deletable')){
+      symbol.parentNode.classList.remove('error-highlight')
       initialDelete(symbol.parentNode);
-    } else return;
+    }
+    
     // console.log(symbol);
   }
 
@@ -729,7 +732,9 @@ function displayOutput(text, outputType, symbol){
   output.scrollTo(0, output.scrollHeight);
 
   if(symbol && outputType == "error"){
+    console.log("htmlSymbols: ", htmlSymbols)
     htmlSymbols.forEach((v) => {
+      if(!v) return;
       if(v.backendSymbol == symbol){
         let grid
         if(v.htmlSymbol.parentNode.classList.contains("dropzone")){
