@@ -521,8 +521,24 @@ input[type=submit]{
     border-collapse: collapse;
   }
 
-  .modal h1{
+  .modal h1.title{
     text-align: center;
+  }
+
+  h1{
+    padding-left: 20px;
+  }
+
+  p{
+    padding-left: 30px;
+  }
+
+  .modal ol{
+    padding-left: 60px;
+  }
+
+  .modal ul{
+    padding-left: 70px;
   }
 
   .modal h2{

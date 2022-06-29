@@ -28,7 +28,37 @@
           <div class="modal-content" id="instructions">
             <span class="close">&times;</span>
 
-            <h1>HELP</h1>
+            <h1 class="title">HELP</h1>
+
+            <h1>UI</h1>
+
+            <h2>Environment</h2>
+            <table>
+              <tr>
+                <th>Interface</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>Header</td>
+                <td>Contains the New Prowchart, Download Prowchart and Help buttons.</td>
+              </tr>
+              <tr>
+                <td>Nav bar</td>
+                <td>Contains the Pointer, Text, Trash, Zoom In and Zoom Out buttons</td>
+              </tr>
+              <tr>
+                <td>Canvas</td>
+                <td>Where the user can create a flowchart</td>
+              </tr>
+              <tr>
+                <td>Output Window</td>
+                <td>Displays the output of the flowchart. It can also display errors and warnings.</td>
+              </tr>
+              <tr>
+                <td>Input Window</td>
+                <td>Values that are used in the flowchart are entered here.</td>
+              </tr>
+            </table>
 
             <h2>Command Buttons</h2>
             <table>
@@ -74,56 +104,109 @@
               </tr>
             </table>
 
-            <h2>User Interface</h2>
-            <table>
-              <tr>
-                <th>Interface</th>
-                <th>Description</th>
-              </tr>
-              <tr>
-                <td>Canvas</td>
-                <td>Where the user can create a flowchart</td>
-              </tr>
-              <tr>
-                <td>Output Window</td>
-                <td>Displays the output of the flowchart. It can also display errors and warnings.</td>
-              </tr>
-              <tr>
-                <td>Input Window</td>
-                <td>Values that are used in the flowchart are entered here.</td>
-              </tr>
-            </table>
+            <h2>HOW TO MAKE A FLOWCHART</h2>
+
+            <h2>How to drag and drop</h2>
+              <p>Only the START/END, INPUT/OUTPUT, PROCESS and DECISION symbols can be dragged and dropped on the canvas.</p>
+              <p>Note: The pointer icon must be active in order to drag and drop a symbol.</p>
+              <ol>
+                <li>Click on the pointer icon to make sure it is active.</li>
+                <li>Click and hold on to the symbol from the left.</li>
+                <li>Move the symbol to the desired spot on the canvas.</li>
+                <li>Release the symbol.</li>
+              </ol>
+
+            <h2>How to connect a symbol to another symbol.</h2>
+              <p>Note: The pointer icon must be active to enable the connector.</p>
+              <ol>
+                <li>Click on the connector symbol.</li>
+                <li>Click on the source symbol or the symbol where the path will start.</li>
+                <li>Click on the blank space adjacent to the source symbol.</li>
+                <li>Click on the path where it will point to the destination symbol.</li>
+                <li>If there are any mistakes in drawing the path of the arrow, click again on the highlighted path to remove it.</li>
+                <li>If the destination symbol is clicked, it will automatically generate the symbol based on the highlighted path.</li>
+              </ol>
+              <p>For Decision symbol as the starting symbol:</p>
+              <ol>
+                <li>Click on the connector symbol.</li>
+                <li>Click on the decision symbol.</li>
+                <li>A popup box will appear and choose if the path is TRUE or FALSE.</li>
+                <li>Draw the path leading to the destination symbol.</li>
+                <li>Click again on the connector symbol and then on the decision symbol if there are multiple results on the decision.</li>
+              </ol>
+
+            <h2>How to edit symbol text</h2>
+              <p>Only the symbols that are in the canvas can be edited. Text on the connectors cannot be edited.</p>
+              <ol>
+                <li>Click on the Text icon.</li>
+                <li>Click on the symbol on which the text will be changed.</li>
+                <li>Type the text that will be contained in the symbol</li>
+                <li>Press Enter when finished editing.</li>
+              </ol>
+
+            <h2>How to delete a symbol or arrow/connector</h2>
+              <p>Only the symbols and connectors on the canvas can be deleted.</p>
+              <ol>
+                <li>Click on the trash icon.</li>
+                <li>Click on the desired symbol or connector that will be deleted.</li>
+                <li>If the symbol has a connector, the connector will also be removed.</li>
+                <li>If the user clicked on a part of the connector, the whole connector will be removed</li>
+              </ol>
+
+            <h2>How to run the flowchart</h2>
+              <ol>
+                <li>If the flowchart is complete, click on the Run button</li>
+                <li>If there are any errors on the flowchart, the symbol that contains the error will be highlighted and the output window will prompt an error message.</li>
+                <li>If there are user inputs required, the input window is where it will accept inputs.</li>
+                <li>If the execution is stuck on a loop, the stop button will terminate the execution.</li>
+                <li>The prowchart will finish compiling and running if it doesn't encounter any error.</li>
+              </ol>
 
             <h2>Sample Flowchart</h2>
             <img style="width: 100%;" src="./images/sample2.jpg">
+
+            <h1>PROPER SYNTAX/STRUCTURE</h1>
 
             <h2 style="padding-top: 20px;">Flowchart Symbols</h2>
             <table>
               <tr>
                 <th>Symbol</th>
                 <th>Description</th>
+                <th>Syntax</th>
               </tr>
               <tr>
                 <td><img src="./ThesisSVG/border start.svg"></td>
                 <td>Start and End of the flowchart</td>
+                <td>START or END</td>
               </tr>
               <tr>
                 <td><img src="./ThesisSVG/border connector.svg"></td>
                 <td>Designates the direction of the flowchart</td>
+                <td></td>
               </tr>
               <tr>
                 <td><img src="./ThesisSVG/border input_output.svg"></td>
                 <td>Assigns values to variables and displays the value.</td>
+                <td>INPUT x <br> OUTPUT y <br> OUTPUT "Hello ", z, a</td>
               </tr>
               <tr>
                 <td><img src="./ThesisSVG/border process.svg"></td>
                 <td>Contains a step in the process</td>
+                <td>x = 0 <br> z = y + 9 <br> c = a % c</td>
               </tr>
               <tr>
                 <td><img src="./ThesisSVG/border decision.svg"></td>
                 <td>The outcome of this symbol affects the direction of the flowchart</td>
+                <td>x <= 10 <br> y >= 20 OR (z > 0 AND a == 10)</td>
               </tr>
             </table>
+            <ul>
+              <li>The INPUT/OUTPUT symbol must not contain any mathematical or logical expressions.</li>
+              <li>For OUTPUT, the string must be declared first before concatinating a variable.</li>
+              <li>For mathematical expressions, the prowchart follows the PMDAS rule.</li>
+              <li>The DECISION symbol must not contain any mathematical expressions.</li>
+              <li>The connectors cannot overlap with each other but it can be treated also like a destination symbol. It will follow the direction on where the arrow is headed.</li>
+            </ul>
 
             <h2>Data Types</h2>
             <table>
@@ -152,7 +235,7 @@
             <h2>Conditional Statements</h2>
             <table>
               <tr>
-                <th>Condition</th>
+                <th>Expression</th>
                 <th>Description</th>
               </tr>
               <tr>
@@ -274,7 +357,7 @@
     <!-- CONDITIONAL MODAL -->
     <div id="conditionModal" class="modal">
       <div class="modal-content">
-        <h1>SELECT CONNECTION TYPE</h1>
+        <h1 class="title">SELECT CONNECTION TYPE</h1>
         <form id="chosen" action="">
           <button type="button" class="true" id="true">True</button>
           <button type="button" class="false" id="false">False</button>
