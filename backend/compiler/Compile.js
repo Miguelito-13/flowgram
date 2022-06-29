@@ -108,7 +108,7 @@ function getNextSymbols(symbol){
         if (symbol.out){
             res.connections.push(symbol.out);
         } else {
-            res.error = "COMPILATION ERROR: Missing connection for ", symbol.type, " symbol";
+            res.error = "COMPILATION ERROR: Missing connection for "+ symbol.type + " symbol";
         }
     }
 
