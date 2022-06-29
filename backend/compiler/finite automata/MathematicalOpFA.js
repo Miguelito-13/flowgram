@@ -62,7 +62,7 @@ export default function MathematicalOpFA(tokenizedText, returnRemaining){
                 break;
             }
 
-            res.error = "ERROR: Invalid Mathematical Operation";
+            res.error = "COMPILATION ERROR: Invalid Mathematical Operation";
             return res;
         }
 
@@ -71,10 +71,10 @@ export default function MathematicalOpFA(tokenizedText, returnRemaining){
     }
 
     if(parenthesisCount > 0){
-        res.error = "ERROR: Invalid Mathematical Operation, Missing ')' Symbol";
+        res.error = "COMPILATION ERROR: Invalid Mathematical Operation, Missing ')' Symbol";
         return res;
     } else if(parenthesisCount < 0){
-        res.error = "ERROR: Invalid Mathematical Operation, Unexpected ')' Symbol";
+        res.error = "COMPILATION ERROR: Invalid Mathematical Operation, Unexpected ')' Symbol";
         return res;
     }
 

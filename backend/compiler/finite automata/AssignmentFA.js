@@ -32,7 +32,7 @@ export default function AssignmentFA(tokenizedText, flowgram){
             res.groupedToken.tokens.push(tokenizedClone[0])
             tokenizedClone.shift()    
         } else {         
-            res.error = "ERROR: Invalid assignment syntax";
+            res.error = "COMPILATION ERROR: Invalid assignment syntax";
             return res;
         }
     
@@ -43,7 +43,7 @@ export default function AssignmentFA(tokenizedText, flowgram){
             res.groupedToken.tokens.push(tokenizedClone[0])
             tokenizedClone.shift()
         } else {         
-            res.error = "ERROR: Invalid assignment syntax";
+            res.error = "COMPILATION ERROR: Invalid assignment syntax";
             return res;
         }
     
@@ -59,7 +59,7 @@ export default function AssignmentFA(tokenizedText, flowgram){
                     if (tokenizedClone[0].Type === "Identifier"){
                         const existingVar = flowgram.getVariable(tokenizedClone[0].Token);
                         if(!existingVar){
-                            res.error = "ERROR: Undefined variable '" + tokenizedClone[0].Token + "'"
+                            res.error = "COMPILATION ERROR: Undefined variable '" + tokenizedClone[0].Token + "'"
                             return res;
                         }
             
@@ -74,7 +74,7 @@ export default function AssignmentFA(tokenizedText, flowgram){
             
                 //===========================================
                 } else {
-                    res.error = "ERROR: Invalid assignment syntax";
+                    res.error = "COMPILATION ERROR: Invalid assignment syntax";
                     return res;
                 }
             } else {
@@ -106,7 +106,7 @@ export default function AssignmentFA(tokenizedText, flowgram){
 
     //===========================================
     if (tokenizedClone.length > 0){
-        res.error = "ERROR: Invalid assignment syntax";
+        res.error = "COMPILATION ERROR: Invalid assignment syntax";
         return res;
     }
     

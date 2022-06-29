@@ -27,7 +27,7 @@ export default function StartEndValidation(symbol, flowgram){
     
     if (tokenizedResult.tokenized[0].Token === "END"){
         if (!flowgram.main.start){
-            res.error = "ERROR: Unexpected End without start symbol";
+            res.error = "COMPILATION ERROR: Unexpected End without start symbol";
             return res;
         } else {
             flowgram.main.end = symbol;

@@ -55,7 +55,7 @@ export default async function Compile(symbol, root, flowgram){
         } else if (symbol.type === validTypes[3]){
             result = InputOutputValidation(symbol, flowgram);
         } else {
-            reject({symbol, error: "ERROR: Invalid Symbol"});
+            reject({symbol, error: "COMPILATION ERROR: Invalid Symbol"});
             return;
         }
 
@@ -98,17 +98,17 @@ function getNextSymbols(symbol){
             res.connections.push(symbol.true);
             res.connections.push(symbol.false);
         } else {
-            res.error = "ERROR: Missing connection for conditional symbol";
+            res.error = "COMPILATION ERROR: Missing connection for conditional symbol";
         }
     } else if (symbol.type === "StartEnd" && symbol.tokenizedText[0].Token === "END"){
         if(symbol.out){
-            res.error = "ERROR: Unexpected connection for end symbol";
+            res.error = "COMPILATION ERROR: Unexpected connection for end symbol";
         }
     } else{
         if (symbol.out){
             res.connections.push(symbol.out);
         } else {
-            res.error = "ERROR: Missing connection for ", symbol.type, " symbol";
+            res.error = "COMPILATION ERROR: Missing connection for ", symbol.type, " symbol";
         }
     }
 

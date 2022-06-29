@@ -17,13 +17,13 @@ export default function StartEndFA(tokenizedText){
         res.groupedToken.tokens.push(tokenizedClone[0])
         tokenizedClone.shift()
     } else {
-        res.error = "ERROR: Invalid Syntax for Start/End symbol"
+        res.error = "COMPILATION ERROR: Invalid Syntax for Start/End symbol"
         return res;
     }
 
     //=================================================
     if (tokenizedClone.length > 0){
-        res.error = "ERROR: Invalid Syntax for Start/End symbol"
+        res.error = "COMPILATION ERROR: Invalid Syntax for Start/End symbol"
         return res;
     }
 

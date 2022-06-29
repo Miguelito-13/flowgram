@@ -22,14 +22,14 @@ export default function RelationalOpFA(tokenizedText, flowgram){
         if(tokenizedClone[0].Type == "Identifier"){
             let existingVar = flowgram.getVariable(tokenizedClone[0].Token);
             if(!existingVar){
-                res.error = "ERROR: Undefined variable '" + tokenizedClone[0].Token + "'.";
+                res.error = "COMPILATION ERROR: Undefined variable '" + tokenizedClone[0].Token + "'.";
                 return res;
             }
         }
         res.groupedToken.tokens.push(tokenizedClone[0])
         tokenizedClone.shift()
     } else {
-        res.error = "ERROR: Invalid Syntax for Relational Operation"
+        res.error = "COMPILATION ERROR: Invalid Syntax for Relational Operation"
         return res;
     }
 
@@ -38,7 +38,7 @@ export default function RelationalOpFA(tokenizedText, flowgram){
         res.groupedToken.tokens.push(tokenizedClone[0])
         tokenizedClone.shift()
     } else {
-        res.error = "ERROR: Invalid Syntax for Relational Operation"
+        res.error = "COMPILATION ERROR: Invalid Syntax for Relational Operation"
         return res;
     }
 
@@ -47,20 +47,20 @@ export default function RelationalOpFA(tokenizedText, flowgram){
         if(tokenizedClone[0].Type == "Identifier"){
             let existingVar = flowgram.getVariable(tokenizedClone[0].Token);
             if(!existingVar){
-                res.error = "ERROR: Undefined variable '" + tokenizedClone[0].Token + "'.";
+                res.error = "COMPILATION ERROR: Undefined variable '" + tokenizedClone[0].Token + "'.";
                 return res;
             }
         }
         res.groupedToken.tokens.push(tokenizedClone[0])
         tokenizedClone.shift()
     } else {
-        res.error = "ERROR: Invalid Syntax for Relational Operation"
+        res.error = "COMPILATION ERROR: Invalid Syntax for Relational Operation"
         return res;
     }
 
     //=================================================
     if (tokenizedClone.length > 0){
-        res.error = "ERROR: Invalid Syntax for Relational Operation"
+        res.error = "COMPILATION ERROR: Invalid Syntax for Relational Operation"
         return res;
     }
 

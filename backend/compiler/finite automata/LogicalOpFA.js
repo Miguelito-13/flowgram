@@ -34,7 +34,7 @@ export default function LogicalOpFA(tokenizedText, flowgram){
                     if(tokenizedClone[0].Type == "Identifier"){
                         let existingVar = flowgram.getVariable(tokenizedClone[0].Token);
                         if(!existingVar){
-                            res.error = "ERROR: Undefined variable '" + tokenizedClone[0].Token + "'.";
+                            res.error = "COMPILATION ERROR: Undefined variable '" + tokenizedClone[0].Token + "'.";
                             return res;
                         }
                     }
@@ -47,7 +47,7 @@ export default function LogicalOpFA(tokenizedText, flowgram){
                     parenthesisCount++;
                     state = 0;
                 } else {
-                    res.error = "ERROR: Invalid Syntax for Logical Operation"
+                    res.error = "COMPILATION ERROR: Invalid Syntax for Logical Operation"
                     return res;
                 }
             }
@@ -65,7 +65,7 @@ export default function LogicalOpFA(tokenizedText, flowgram){
             parenthesisCount--;
             state = 1;
         } else if(state == 1 && tokenizedClone.length > 0){
-            res.error = "ERROR: Invalid Syntax for Logical Operation"
+            res.error = "COMPILATION ERROR: Invalid Syntax for Logical Operation"
             return res;
 
         } else if(state == 1){
@@ -74,16 +74,16 @@ export default function LogicalOpFA(tokenizedText, flowgram){
     }
 
     if (state == 0){
-        res.error = "ERROR: Invalid Syntax for Logical Operation"
+        res.error = "COMPILATION ERROR: Invalid Syntax for Logical Operation"
         return res;
     }
 
     
     if (parenthesisCount > 0){
-        res.error = "ERROR: Missing ')' symbol"
+        res.error = "COMPILATION ERROR: Missing ')' symbol"
         return res;
     } else if (parenthesisCount < 0){
-        res.error = "ERROR: Unexpected ')' Symbol"
+        res.error = "COMPILATION ERROR: Unexpected ')' Symbol"
         return res;
     }
 

@@ -18,13 +18,13 @@ export default function OutputExpressionFA(tokenizedText, flowgram){
         res.groupedToken.tokens.push(tokenizedClone[0])
         tokenizedClone.shift()
     } else {
-        res.error = "ERROR: Invalid Syntax for Output Expression"
+        res.error = "COMPILATION ERROR: Invalid Syntax for Output Expression"
         return res;
     }
 
     let result = ConcatenationOpFA(tokenizedClone, false);
     if(result.error){
-        res.error = "ERROR: Invalid Syntax for Output Expression"
+        res.error = "COMPILATION ERROR: Invalid Syntax for Output Expression"
         return res;
     }
 

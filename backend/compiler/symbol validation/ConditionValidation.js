@@ -25,7 +25,7 @@ export default function ConditionValidation(symbol, flowgram){
     if (response1.error){
 
         if (response2.error){
-            res.error = "ERROR: Invalid Syntax for Conditional Symbol"
+            res.error = "COMPILATION ERROR: Invalid Syntax for Conditional Symbol"
             return res
             
         } else {
