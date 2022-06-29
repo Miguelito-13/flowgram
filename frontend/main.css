@@ -151,6 +151,7 @@ main{
     gap: 10px;
     padding-left: 30px;
     padding-right: 40px;
+    overflow-x: hidden;
 }
 
 .dropdown{
@@ -419,7 +420,7 @@ input[type=submit]{
   margin-top: -100px;
   margin-left: 25px;
 }
-.left-up-arrow {
+/* .left-up-arrow {
     object-fit: cover;
 }
 .left-down-arrow{
@@ -465,6 +466,21 @@ input[type=submit]{
     object-fit: cover;
 }
 .down-right{
+    object-fit: cover;
+}
+.right-left-arrow{
+    object-fit: cover;
+} */
+[class*="left"]{
+    object-fit: cover;
+}
+[class*="right"]{
+    object-fit: cover;
+}
+[class*="up"]{
+    object-fit: cover;
+}
+[class*="down"]{
     object-fit: cover;
 }
 
