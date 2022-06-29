@@ -31,7 +31,7 @@ export default function ProcessLogic(symbol, flowgram){
 
     let state = 0;                          //0 - variable name, 1 - equal sign, 2 - value (constants, mathematical op, concatenation, another variable)
     while(groupedClone.length > 0){
-        console.log(groupedClone[0])
+        //console.log(groupedClone[0])
         if (state == 0 && groupedClone[0].Type == "Identifier"){
             varInfo.variableName = groupedClone[0].Token
             groupedClone.shift()
@@ -77,7 +77,7 @@ export default function ProcessLogic(symbol, flowgram){
             }
 
             if(varInfo.variableName && varInfo.value != null && varInfo.type){
-                console.log("VariableInfo:", varInfo);
+                //console.log("VariableInfo:", varInfo);
                 const existingVar = flowgram.getVariable(varInfo.variableName);
                 let result = {}
                 if(existingVar){

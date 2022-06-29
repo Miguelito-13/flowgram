@@ -1,7 +1,7 @@
 
 
 export default function StartEndFA(tokenizedText){
-    console.log("- StartEndFA")
+    //console.log("- StartEndFA")
     
     let tokenizedClone = [...tokenizedText]
     let res = {

@@ -26,10 +26,10 @@ export default function InputLogic(symbol, flowgram){
             getInput(status);                      
             while(status.input == null && flowgram.status.run){                 // Wait for user input
                 await new Promise(r => setTimeout(r, 250));             // Wait 50ms
-                console.log("Waiting for Input...")
+                //console.log("Waiting for Input...")
             }             
 
-            console.log("Input", status.input);
+            //console.log("Input", status.input);
             let ret = flowgram.updateVariable(cloneTokens[0].Token, status.input, "Input")
 
         }

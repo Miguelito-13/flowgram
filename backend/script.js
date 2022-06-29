@@ -7,7 +7,7 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
     
     // Create Test Flowgram
-    console.log("Ran");
+    //console.log("Ran");
     const newFlowgramObj = createFlowgram("Test")
     let res = newFlowgramObj.addSymbol("Process")
     if(res.error){
@@ -65,6 +65,6 @@ form.addEventListener('submit', (e) => {
 
     // ********************************************
 
-    console.log(newFlowgramObj)
+    //console.log(newFlowgramObj)
     startRunCompile(newFlowgramObj);
 });

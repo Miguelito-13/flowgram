@@ -6,14 +6,14 @@ export default function LogicCalculator(logicalOp, flowgram){
     }
 
     let opClone = [...logicalOp.tokens];
-    console.log("LOGICAL OP: ", logicalOp)
+    //console.log("LOGICAL OP: ", logicalOp)
     if(logicalOp.groupedTokensType == "Relational Operation"){
         opClone = [{
             Token: calculateRelation(logicalOp, flowgram),
             Type: "Boolean Constant"
         }];
 
-        console.log("OPCLONE: ", opClone)
+        //console.log("OPCLONE: ", opClone)
     } else {
         const ret = replaceIdentifiers(opClone, "Logical", flowgram);                            //Replace all variables with their values ex. x AND true -> true AND true
         if(ret.error){
@@ -22,7 +22,7 @@ export default function LogicCalculator(logicalOp, flowgram){
         }
         opClone = ret.replacedOp;
         
-        console.log("opClone: ", logicalOp)
+        //console.log("opClone: ", logicalOp)
         while(opClone.length > 1 && flowgram.status.run){                                                  
             let highestPeak = 0
             let parenthesisCount = 0

@@ -4,7 +4,7 @@ import Run from './run/Run.js';
 import Flowgram from "./structure/Flowgram.js";
 
 export function createFlowgram(name){
-    console.log("Created new flowgram");
+    //console.log("Created new flowgram");
     return new Flowgram(name);
 }
 
@@ -16,8 +16,8 @@ export default async function startRunCompile(flowgram){
 
     try{
         flowgram.status.run = true;
-        console.log("**************************************")
-        console.log("COMPILING...")
+        //console.log("**************************************")
+        //console.log("COMPILING...")
         await flowgram.resetFlowgram();
         await Compile(flowgram.main.start, flowgram.main.start, flowgram);
 
@@ -28,17 +28,17 @@ export default async function startRunCompile(flowgram){
             NotifyError("ERROR: Missing End Symbol");
             return;
         }
-        console.log("**************************************")
-        console.log("FINISHED COMPILING\n", flowgram)
+        //console.log("**************************************")
+        //console.log("FINISHED COMPILING\n", flowgram)
         
         flowgram.resetVariables()
-        console.log("**************************************")
-        console.log("RUNNING...")
+        //console.log("**************************************")
+        //console.log("RUNNING...")
         await Run(flowgram.main.start, flowgram);
 
         flowgram.status.run = false;
-        console.log("**************************************")
-        console.log("FINISHED RUNNING\n", flowgram)
+        //console.log("**************************************")
+        //console.log("FINISHED RUNNING\n", flowgram)
         NotifySuccess("FINISHED RUNNING")
     } catch({symbol, error}){
         flowgram.status.run = false;

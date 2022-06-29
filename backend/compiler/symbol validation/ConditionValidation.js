@@ -40,6 +40,6 @@ export default function ConditionValidation(symbol, flowgram){
         symbol.checked = true;
     }
 
-    console.log(symbol)
+    //console.log(symbol)
     return res;
 }

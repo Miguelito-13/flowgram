@@ -6,7 +6,7 @@ const validFirstAndThirdToken = [
 ]
 
 export default function RelationalOpFA(tokenizedText, flowgram){
-    console.log("- RelationalOpFA")
+    //console.log("- RelationalOpFA")
 
     let tokenizedClone = [...tokenizedText]
     let res = {

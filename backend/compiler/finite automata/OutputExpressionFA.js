@@ -2,7 +2,7 @@ import ConcatenationOpFA from "./ConcatenationOpFA.js"
 
 
 export default function OutputExpressionFA(tokenizedText, flowgram){
-    console.log("- OutputExpressionFA")
+    //console.log("- OutputExpressionFA")
 
     let tokenizedClone = [...tokenizedText]
     let res = {

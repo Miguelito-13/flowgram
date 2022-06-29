@@ -1,7 +1,7 @@
 
 
 export default function InputExpressionFA(tokenizedText, flowgram){
-    console.log("- InputExpressionFA")
+    //console.log("- InputExpressionFA")
     
     let tokenizedClone = [...tokenizedText]
     let res = {

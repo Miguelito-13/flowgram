@@ -62,11 +62,11 @@ function handleDragStart(ev) {
   let obj = ev.target;
   let arrow = document.getElementById("arrow");
   if (!obj.closest('.draggable') || !arrow.classList.contains("active")) return;
-  console.log("Check")
+  //console.log("Check")
   if(obj.classList.contains('draggable')){
     obj = obj.firstElementChild;
   }
-  // console.log('DRAGSTART');
+  // //console.log('DRAGSTART');
   // ev.dataTransfer.setDragImage(dragElement, 50, 50);
   // ev.dataTransfer.setDragImage(imgElement, 50, 50);
   // ev.dataTransfer.setData('text/plain', ' No MORE DATA ');
@@ -82,7 +82,7 @@ function handleDragStart(ev) {
   let dataList = ev.dataTransfer.items;
   for(let i=0; i<ev.dataTransfer.items.length; i++){
     let item = ev.dataTransfer.items[i];
-    // console.log(i, item.kind, item.type);
+    // //console.log(i, item.kind, item.type);
   }
   
 }
@@ -97,7 +97,7 @@ function handleDrop(ev) {
   }
 
   ev.preventDefault();
-  // console.log('DROP', dropzone);
+  // //console.log('DROP', dropzone);
   let data = JSON.parse(ev.dataTransfer.getData('application/json'));
   let draggable = document.querySelector(`[data-ts="${data.timestamp}"]`);
   let clone = draggable.cloneNode(true);
@@ -111,7 +111,7 @@ function handleDrop(ev) {
   }
   dropzone.append(clone);
   addSymbol(dropzone, clone);
-  console.log(clone)
+  //console.log(clone)
   // draggable.remove();
   
   // dropzone.textContent += data;
@@ -127,7 +127,7 @@ function handleDrop(ev) {
       //same as before... except the method getAsString
       item.getAsString((json)=>{
         let data = JSON.parse(json);
-        // console.log('timestamp was', data.timestamp);
+        // //console.log('timestamp was', data.timestamp);
       })
     }
   }
@@ -142,7 +142,7 @@ function handleOver(ev) {
   if (!dropzone.classList.contains('dropzone')) return;
   ev.preventDefault();
   // dropzone.classList.add('over'); //can do this in handleEnter
-  // console.log('dragover dropzone');
+  // //console.log('dragover dropzone');
 }
 
 //Gets triggered when the user's mouse enters an element
@@ -152,7 +152,7 @@ function handleEnter(ev) {
   if (!dropzone.classList.contains('dropzone')) return;
   ev.preventDefault();
   dropzone.classList.add('over');
-  // console.log('dragenter dropzone')
+  // //console.log('dragenter dropzone')
 }
 
 //Gets triggered when the user's mouse leaves an element
@@ -161,13 +161,13 @@ function handleLeave(ev) {
   if (!dropzone.classList.contains('dropzone')) return;
   ev.preventDefault();
   dropzone.classList.remove('over');
-  // console.log('dragleave dropzone');
+  // //console.log('dragleave dropzone');
 }
 
 //Gets triggered when the user clicks
 function handleClick(ev) {
   // FOR DELETING A SYMBOL
-  console.log(ev.target, ev.target.parentNode)
+  //console.log(ev.target, ev.target.parentNode)
   if(document.querySelector("button#delete.active")!=null){
     let symbol = ev.target;
     if(symbol.parentNode.classList.contains('deletable')){
@@ -179,7 +179,7 @@ function handleClick(ev) {
       initialDelete(symbol.parentNode);
     }
     
-    // console.log(symbol);
+    // //console.log(symbol);
   }
 
   // CONNECTOR FUNCTION (SELECTING SYMBOL FIRST)
@@ -229,7 +229,7 @@ save.addEventListener('click', () => {
   html2canvas(document.getElementById("canvas")).then(canvas => {
     save.href = canvas.toDataURL("image/jpeg", 0.9);
     save.download = "flowgram.jpg";
-    // console.log(canvas.toDataURL("image/jpeg", 0.9));
+    // //console.log(canvas.toDataURL("image/jpeg", 0.9));
   })
 });
 
@@ -242,7 +242,7 @@ newFlowgram.addEventListener('click', () => {
 // RUN BUTTON FUNCTION
 let runButton = document.getElementById("runButton");
 runButton.addEventListener('click', () => {
-  console.log("Run Button Pressed");
+  //console.log("Run Button Pressed");
   if(flowgram.status.run == false){
     startRunCompile(flowgram);
     let errorGrids = document.getElementsByClassName('error-highlight');
@@ -257,9 +257,9 @@ runButton.addEventListener('click', () => {
 // STOP BUTTON FUNCTION
 let stopButton = document.getElementById("stopButton");
 stopButton.addEventListener('click', () => {
-  console.log("Stop Button Pressed");
+  //console.log("Stop Button Pressed");
   flowgram.status.run = false;
-  console.log("Flowgram STOP:", flowgram);
+  //console.log("Flowgram STOP:", flowgram);
 })
 
 // CONNECTOR BUTTON FUNCTION
@@ -277,17 +277,17 @@ connectors.addEventListener('click', () => {
     let dropzone = document.querySelector(".dropzone");
     dropzone.addEventListener('click', () => {
       if(dropzone.querySelector("div.dropzone > input") != null){
-        console.log(dropzone);
+        //console.log(dropzone);
       }
     })
   }
-  // console.log(yes);
-  // console.log("connector pressed");
+  // //console.log(yes);
+  // //console.log("connector pressed");
 })
 
 let consoleInput = document.getElementById("data");
 consoleInput.addEventListener('keypress', (e) => {
-  console.log(e)
+  //console.log(e)
   if(e.key === "Enter"){
     if(typeof inputInfo == "object"){
       inputInfo.input = consoleInput.value
@@ -339,7 +339,7 @@ window.onclick = function(event) {
 
 trueButton.onclick = function(){
   let conditionModal = document.getElementById("conditionModal");
-  console.log(conditionalConnectorInfo)
+  //console.log(conditionalConnectorInfo)
   if(conditionalConnectorInfo.active){
     conditionalConnectorInfo.active = false;
     conditionalConnectorInfo.choice = "true";
@@ -378,13 +378,13 @@ async function handleSelectPath(ev){
       
       conditionalConnectorInfo.active = true;
       let conditionModal = document.getElementById("conditionModal");
-      console.log(conditionModal)
+      //console.log(conditionModal)
       conditionModal.style.display = "block";
 
       while(conditionalConnectorInfo.active && conditionalConnectorInfo.choice == null){
         await new Promise(r => setTimeout(r, 500));
       }
-      console.log("Info:", conditionalConnectorInfo)
+      //console.log("Info:", conditionalConnectorInfo)
       if(conditionalConnectorInfo.choice == null){
         console.error("ERROR: Didn't choose a connector type");
         return;
@@ -423,7 +423,7 @@ async function handleSelectPath(ev){
     let lastID = selectedGrids[selectedGrids.length-1];
     let gridID = grid.id;
 
-    console.log(gridsInfo[gridID], gridID)
+    //console.log(gridsInfo[gridID], gridID)
     if(grid.classList.contains('selected-grid') && grid.id == lastID){        // Deselecting last selected grid
       if(selectedGrids.length == 1){
         connectorType = "none";
@@ -564,7 +564,7 @@ function generateConnectors(){
     connectorType = "none"
   }
   
-  console.log(fromSymbol);
+  //console.log(fromSymbol);
 
   let selGrids = document.getElementsByClassName('selected-grid');
   while(selGrids.length > 0){
@@ -582,18 +582,18 @@ function deselectAll(){
 }
 
 function initialDelete(grid){
-  console.log(grid)
+  //console.log(grid)
   let gridID = grid.id;
   let gridInfo = gridsInfo[gridID]
 
-  console.log("gridInfo:", gridInfo);
+  //console.log("gridInfo:", gridInfo);
 
   if(!gridInfo) return
 
   if(gridInfo.type == 'symbol'){
     let htmlSymbol = htmlSymbols[gridInfo.index]
     let connections = htmlSymbol.connections
-    console.log("htmlSymbol:", htmlSymbol);
+    //console.log("htmlSymbol:", htmlSymbol);
     for(let i = 0; i < connections.length; i++){
       deleteConnections(connections[i]);
     }
@@ -612,7 +612,7 @@ function initialDelete(grid){
 
 function deleteConnections(index){
   let htmlConnector = htmlConnectors[index]
-  console.log("htmlConnector:", htmlConnector);
+  //console.log("htmlConnector:", htmlConnector);
   if(!htmlConnector) return;
 
   let connections = htmlConnector.connections
@@ -664,8 +664,8 @@ function deleteConnections(index){
 
   }
 
-  console.log(startInfo);
-  console.log(endInfo);
+  //console.log(startInfo);
+  //console.log(endInfo);
 
   htmlConnectors[index] = null;
 }
@@ -694,7 +694,7 @@ function addSymbol(dropzone, clone){
 
   let result = flowgram.addSymbol(type, text);
   if (result.error){
-    console.log(result.error)
+    //console.log(result.error)
     //Display Error
     return;
   } else {
@@ -715,7 +715,7 @@ function addSymbol(dropzone, clone){
     })
   }
 
-  console.log(flowgram);
+  //console.log(flowgram);
 }
 
 function getInput(inputObj){
@@ -724,7 +724,7 @@ function getInput(inputObj){
 
 let output = document.getElementById("output"); // ID OF OUTPUT WINDOW
 function displayOutput(text, outputType, symbol){
-  console.log("Text: ", text, "type: ", outputType)
+  //console.log("Text: ", text, "type: ", outputType)
   let newElement = document.createElement('p');
   newElement.classList.add(outputType);
   newElement.textContent = text; // add text here
@@ -732,7 +732,7 @@ function displayOutput(text, outputType, symbol){
   output.scrollTo(0, output.scrollHeight);
 
   if(symbol && outputType == "error"){
-    console.log("htmlSymbols: ", htmlSymbols)
+    //console.log("htmlSymbols: ", htmlSymbols)
     htmlSymbols.forEach((v) => {
       if(!v) return;
       if(v.backendSymbol == symbol){

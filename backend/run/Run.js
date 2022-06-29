@@ -6,8 +6,8 @@ import ProcessLogic from "./symbol logic/ProcessLogic.js";
 export default async function Run(symbol, flowgram){
 
     return new Promise(async (resolve, reject) => {
-        console.log("===============================")
-        console.log(symbol)
+        //console.log("===============================")
+        //console.log(symbol)
         let result = {}
 
         await new Promise(r => setTimeout(r, 50));             // Wait 50ms before proceeding
@@ -41,8 +41,8 @@ export default async function Run(symbol, flowgram){
             result = ConditionalLogic(symbol, flowgram);
 
         }
-        console.log(flowgram);
-        console.log(result);
+        //console.log(flowgram);
+        //console.log(result);
 
         if (result.error){
             reject({symbol, error: result.error});

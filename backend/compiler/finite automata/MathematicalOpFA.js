@@ -5,7 +5,7 @@ const validFirstToken = [
 ]
 
 export default function MathematicalOpFA(tokenizedText, returnRemaining){
-    console.log("- MathematicalOpFA")
+    //console.log("- MathematicalOpFA")
     let tokenizedClone = [...tokenizedText]
     let res = {
         groupedToken: {
@@ -20,8 +20,8 @@ export default function MathematicalOpFA(tokenizedText, returnRemaining){
     let pastCount = 1;                                  // 0 = number or variable, 1 = math operator, 2 = (, 3 = )
     let checkedIndex = 0
     while  (tokenizedClone.length > 0){
-        console.log("TokenToken:", tokenizedClone[0], " State: ", pastCount)
-        console.log((pastCount == 0 || pastCount == 3) && tokenizedClone[0] && tokenizedClone[0].Type == "Negative Number Constant")
+        //console.log("TokenToken:", tokenizedClone[0], " State: ", pastCount)
+        //console.log((pastCount == 0 || pastCount == 3) && tokenizedClone[0] && tokenizedClone[0].Type == "Negative Number Constant")
 
         if((pastCount == 1 || pastCount == 2) && tokenizedClone[0] && validFirstToken.includes(tokenizedClone[0].Type)){
             if(tokenizedClone.Type == "Negative Number Constant"){

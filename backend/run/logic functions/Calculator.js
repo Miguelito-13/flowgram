@@ -116,7 +116,7 @@ function calculate(mathOp){
                 let result
                 if(status == "MD" && cloneOp[i].Token == "*"){
                     result = parseFloat(cloneOp[i-1].Token) * parseFloat(cloneOp[i+1].Token);
-                    console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token)
+                    //console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token)
                     cloneOp[i-1] = {
                         Token: result,
                         Type: "Number Constant"
@@ -131,7 +131,7 @@ function calculate(mathOp){
                         return res;
                     }
                     result = parseFloat(cloneOp[i-1].Token) / parseFloat(cloneOp[i+1].Token);
-                    console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token)
+                    //console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token)
                     cloneOp[i-1] = {
                         Token: result,
                         Type: "Number Constant"
@@ -146,7 +146,7 @@ function calculate(mathOp){
                         return res;
                     }
                     result = parseFloat(cloneOp[i-1].Token) % parseFloat(cloneOp[i+1].Token);
-                    console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token)
+                    //console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token)
                     cloneOp[i-1] = {
                         Token: result,
                         Type: "Number Constant"
@@ -157,7 +157,7 @@ function calculate(mathOp){
 
                 } else if(status == "AS" && cloneOp[i].Token == "+"){
                     result = parseFloat(cloneOp[i-1].Token) + parseFloat(cloneOp[i+1].Token);
-                    console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token)
+                    //console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token)
                     cloneOp[i-1] = {
                         Token: result,
                         Type: "Number Constant"
@@ -168,7 +168,7 @@ function calculate(mathOp){
 
                 } else if(status == "AS" && cloneOp[i].Token == "-"){
                     result = parseFloat(cloneOp[i-1].Token) - parseFloat(cloneOp[i+1].Token);
-                    console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token.Token)
+                    //console.log("Operation:", cloneOp[i-1].Token, cloneOp[i].Token, cloneOp[i+1].Token.Token)
                     cloneOp[i-1] = {
                         Token: result,
                         Type: "Number Constant"

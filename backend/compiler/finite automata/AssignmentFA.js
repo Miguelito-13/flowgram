@@ -11,7 +11,7 @@ const validThirdToken = [
 
 
 export default function AssignmentFA(tokenizedText, flowgram){
-    console.log("- AssignmentFA")
+    //console.log("- AssignmentFA")
     
     let tokenizedClone = [...tokenizedText];
     let res = {
@@ -25,7 +25,7 @@ export default function AssignmentFA(tokenizedText, flowgram){
     let variableInfo = {}                                           //name: "", value: "", type: ""
     while(tokenizedClone.length > 0){
 
-        console.log("Check0:", tokenizedClone[0])
+        //console.log("Check0:", tokenizedClone[0])
         //===========================================
         if (tokenizedClone[0] && tokenizedClone[0].Type === "Identifier"){                   //Check first token (~x~ = 1)
             variableInfo.name = tokenizedClone[0].Token
@@ -36,7 +36,7 @@ export default function AssignmentFA(tokenizedText, flowgram){
             return res;
         }
     
-        console.log("Check1:", tokenizedClone[0])
+        //console.log("Check1:", tokenizedClone[0])
 
         //===========================================
         if (tokenizedClone[0] && tokenizedClone[0].Type === "Assign Operator"){             //Check second token (x ~=~ 1)
@@ -47,12 +47,12 @@ export default function AssignmentFA(tokenizedText, flowgram){
             return res;
         }
     
-        console.log("Check2:", tokenizedClone[0])
+        //console.log("Check2:", tokenizedClone[0])
         let result = MathematicalOpFA(tokenizedClone, true);            //Check rest of the tokens (x = ~1 + 1~)
-        console.log("result:", result)
+        //console.log("result:", result)
         if (result.error || result.remainingTokens.length == tokenizedClone.length){
             result = ConcatenationOpFA(tokenizedClone, true);            //Check rest of the tokens (x = ~"Hello" , "Hi"~)
-            console.log("RESULT:", result)
+            //console.log("RESULT:", result)
             if (result.error || result.remainingTokens.length == tokenizedClone.length){
                 //===========================================
                 if (tokenizedClone[0] && validThirdToken.includes(tokenizedClone[0].Type)){          //Check third token (x = ~1~)
@@ -93,7 +93,7 @@ export default function AssignmentFA(tokenizedText, flowgram){
         if(variableInfo.name && variableInfo.value && variableInfo.type){
 
             const existingVariable = flowgram.getVariable(variableInfo.name);
-            console.log("Variable Info:", variableInfo);
+            //console.log("Variable Info:", variableInfo);
             if(existingVariable){
                 flowgram.updateVariable(variableInfo.name, variableInfo.value, variableInfo.type)
             } else {

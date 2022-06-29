@@ -22,7 +22,7 @@ export default function OutputLogic(symbol, flowgram){
         }
 
         NotifyText(ret.result);
-        console.log("OUTPUT ", ret.result)
+        //console.log("OUTPUT ", ret.result)
     }
 
     return res;

@@ -6,7 +6,7 @@ const validFirstToken = [
 ]
 
 export default function ConcatenationOpFA(tokenizedText, returnRemaining){
-    console.log("- ConcatenationOpFA")
+    //console.log("- ConcatenationOpFA")
     let tokenizedClone = [...tokenizedText]
     let res = {
         groupedToken: {

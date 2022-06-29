@@ -20,9 +20,9 @@ export default async function Compile(symbol, root, flowgram){
         }
 
 
-        console.log("FLOWGRAM STATUS: ", flowgram.status.run)
-        console.log("FLOWGRAM STATUS2: ", flowgram.status)
-        console.log("FLOWGRAM STATUS3: ", flowgram)
+        //console.log("FLOWGRAM STATUS: ", flowgram.status.run)
+        //console.log("FLOWGRAM STATUS2: ", flowgram.status)
+        //console.log("FLOWGRAM STATUS3: ", flowgram)
 
         await new Promise(r => setTimeout(r, 50));             // Wait 250ms before proceeding
 
@@ -32,7 +32,7 @@ export default async function Compile(symbol, root, flowgram){
         }
 
         if (!flowgram.status.run){
-            console.log("Compilation has been stopped or has ended");
+            //console.log("Compilation has been stopped or has ended");
             resolve()
             return;
         }
@@ -41,10 +41,10 @@ export default async function Compile(symbol, root, flowgram){
             symbol.root = root;
         }
     
-        console.log("============================");
-        console.log("Symbol Type:", symbol.type);
-        console.log("Symbol Text:", symbol.text);
-        console.log("Finite Automata Checked:")
+        //console.log("============================");
+        //console.log("Symbol Type:", symbol.type);
+        //console.log("Symbol Text:", symbol.text);
+        //console.log("Finite Automata Checked:")
         let result
         if (symbol.type === validTypes[0]){
             result = StartEndValidation(symbol, flowgram);
@@ -64,7 +64,7 @@ export default async function Compile(symbol, root, flowgram){
             return;
         }
 
-        console.log(flowgram);
+        //console.log(flowgram);
         const res = getNextSymbols(result.symbol);
         if(res.error){
             reject({symbol, error: res.error});

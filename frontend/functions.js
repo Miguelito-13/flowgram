@@ -95,7 +95,7 @@ function zoomIn(){ // ZOOM IN CANVAS
     let zoomScale = canvas.style.zoom * 100;
     zoom.innerHTML =  zoomScale.toFixed(0) + "%";
   
-    // console.log(zoomScale);
+    // //console.log(zoomScale);
 }
   
 function zoomOut(){ // ZOOM OUT CANVAS
@@ -106,7 +106,7 @@ function zoomOut(){ // ZOOM OUT CANVAS
     let zoomScale = canvas.style.zoom * 100;
     zoom.innerHTML =  zoomScale.toFixed(0) + "%";
   
-    // console.log(zoomScale);
+    // //console.log(zoomScale);
 }
   
 // function sampConsole(event) { // DISPLAY INPUT ON OUTPUT WINDOW
@@ -118,7 +118,7 @@ function zoomOut(){ // ZOOM OUT CANVAS
 //   newElement.innerHTML = data.value;
 //   output.appendChild(newElement);
 
-//   // console.log(newElement);
+//   // //console.log(newElement);
 // }
   
 //Activate/Deactivate arrow function
@@ -151,14 +151,14 @@ function activateDeactivateText(activate){
       text.classList.remove("active");
       for(let i = 0; i < inputs.length; i++){
         inputs.item(i).disabled = true;
-        console.log(inputs.item(i), inputs.item(i).getAttribute("disabled"))
+        //console.log(inputs.item(i), inputs.item(i).getAttribute("disabled"))
       }
       
     } else if (activate) {                                                          //Activate Text
       text.classList.add("active");
       for(let i = 0; i < inputs.length; i++){
         inputs.item(i).disabled = false;
-        console.log(inputs.item(i), inputs.item(i).getAttribute("disabled"))
+        //console.log(inputs.item(i), inputs.item(i).getAttribute("disabled"))
       }
     }
 }
@@ -167,14 +167,14 @@ function activateDeactivateText(activate){
 function choseTrue(){
   chosen.value = "True";
   conditionModal.style.display = "none";
-  console.log(chosen.value);
+  //console.log(chosen.value);
 }
 
 // CHOSE FALSE IN CONDITION MODAL
 function choseFalse(){
   chosen.value = "False";
   conditionModal.style.display = "none";
-  console.log(chosen.value);
+  //console.log(chosen.value);
 }
 
 function deactivateConnector(){

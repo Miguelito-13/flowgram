@@ -6,7 +6,7 @@ const validFirstAndThirdToken = [
 ]
 
 export default function LogicalOpFA(tokenizedText, flowgram){
-    console.log("- LogicalOpFA")
+    //console.log("- LogicalOpFA")
 
     let tokenizedClone = [...tokenizedText]
     let res = {
