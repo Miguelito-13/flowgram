@@ -499,8 +499,18 @@ input[type=submit]{
   }
 
   .modal-content table {
-    width: 100%;
+    margin: auto;
+    width: 80%;
     border-collapse: collapse;
+  }
+
+  .modal h1{
+    text-align: center;
+  }
+
+  .modal h2{
+    padding-left: 20px;
+    padding-top: 20px;
   }
 
   table th {
