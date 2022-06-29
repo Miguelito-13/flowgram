@@ -99,7 +99,7 @@ function validateType(type){
 function isANumber(value){
     if(typeof(value) == "string"){
         const num = parseFloat(value);
-        if(num && num.toString().length == value.replace(/\s/g, "").length){
+        if(num != null && num.toString().length == value.replace(/\s/g, "").length){
             return true;
         } else {
             return false;
