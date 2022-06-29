@@ -151,7 +151,7 @@ main{
     gap: 10px;
     padding-left: 30px;
     padding-right: 40px;
-    overflow-x: hidden;
+    overflow: auto;
 }
 
 .dropdown{
