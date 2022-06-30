@@ -250,7 +250,7 @@ runButton.addEventListener('click', () => {
       errorGrids.item(0).classList.remove('error-highlight')
     }
   } else {
-    displayOutput("ERROR: Flowgram is already running!", "error")
+    displayOutput("ERROR: Prowchart is already running!", "error")
   }
 })
 
