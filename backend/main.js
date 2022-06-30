@@ -22,7 +22,7 @@ export default async function startRunCompile(flowgram){
         await Compile(flowgram.main.start, flowgram.main.start, flowgram);
 
         if(flowgram.main.end){
-            NotifySuccess("FINISHED COMPILING")
+            NotifySuccess(" ")
         } else {
             flowgram.status.run = false;
             NotifyError("ERROR: Missing End Symbol");
@@ -39,7 +39,7 @@ export default async function startRunCompile(flowgram){
         flowgram.status.run = false;
         //console.log("**************************************")
         //console.log("FINISHED RUNNING\n", flowgram)
-        NotifySuccess("FINISHED RUNNING")
+        NotifySuccess("Plowchart Finished Running.")
     } catch({symbol, error}){
         flowgram.status.run = false;
         NotifyError(error, symbol);
