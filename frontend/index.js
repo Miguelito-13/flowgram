@@ -676,7 +676,7 @@ function addSymbol(dropzone, clone){
   
   if(cloneType == 'start-end'){
     type = 'StartEnd'
-    text = 'START/END'
+    text = 'END'
   } else if(cloneType == 'process'){
     type = 'Process'
     text = 'PROCESS'
