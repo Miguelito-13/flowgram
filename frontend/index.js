@@ -586,7 +586,7 @@ function initialDelete(grid){
   //console.log("gridInfo:", gridInfo);
 
   if(!gridInfo) return
-
+//
   if(gridInfo.type == 'symbol'){
     let htmlSymbol = htmlSymbols[gridInfo.index]
     let connections = htmlSymbol.connections
