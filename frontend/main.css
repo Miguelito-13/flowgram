@@ -507,8 +507,10 @@ input[type=submit]{
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
+    padding-bottom: 50px;
     border: 1px solid #888;
     width: 80%; 
+    border-radius: 20px;
   }
 
   .modal-content#instructions {
@@ -562,7 +564,7 @@ input[type=submit]{
   }
 
   #chosen button{
-    width: 45%;
+    width: 35%;
     height: 50px;
     font-size: 20px;
     color: white;
@@ -571,11 +573,17 @@ input[type=submit]{
   #chosen button.true{
     background-color: green;
     border-color: green;
+    border-radius: 30px;
+    margin: auto;
+    margin-left: 10%;
   }
 
   #chosen button.false{
     background: red;
     border-color: red;
+    border-radius: 30px;
+    margin: auto;
+    margin-right: 10%;
   }
   
   /* The Close Button */
