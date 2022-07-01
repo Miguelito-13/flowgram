@@ -10,7 +10,7 @@ export default async function Run(symbol, flowgram){
         //console.log(symbol)
         let result = {}
 
-        await new Promise(r => setTimeout(r, 50));             // Wait 50ms before proceeding
+        await new Promise(r => setTimeout(r, 10));             // Wait 50ms before proceeding
 
         if(!flowgram.status.run){
             resolve()
