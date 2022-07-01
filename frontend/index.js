@@ -636,13 +636,13 @@ function deleteConnections(index){
 
   for(let i = 0; i < endInfo.connections.length; i++){
     if(endInfo.connections[i] == index){
-      endInfo.connections.splice(i, 1);
+      endInfo.connections[i] = null;
     }
   }
 
   for(let i = 0; i < startInfo.connections.length; i++){
     if(startInfo.connections[i] == index){
-      startInfo.connections.splice(i, 1);
+      startInfo.connections[i] == null;
     }
   }
 
