@@ -25,7 +25,7 @@ export default async function startRunCompile(flowgram){
             NotifySuccess(" ")
         } else {
             flowgram.status.run = false;
-            NotifyError("ERROR: Missing End Symbol");
+            NotifyError("COMPILATION ERROR: Missing End Symbol");
             return;
         }
         //console.log("**************************************")

@@ -84,7 +84,7 @@ function replaceIdentifiers(mathOp, flowgram){
                     Type: "Number Constant"
                 }
             } else {
-                res.error = "RUNTIME ERROR: Variable " + cloneOp[i].Token + " is Not a Number"
+                res.error = "RUNTIME ERROR: Variable " + cloneOp[i].Token + " is not a number"
                 return res;
             }
         }

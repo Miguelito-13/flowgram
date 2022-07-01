@@ -176,7 +176,7 @@ function replaceIdentifiers(op, opType, flowgram){
                         Type: "Boolean Constant"
                     }
                 } else {
-                    res.error = "RUNTIME ERROR: Variable " + cloneOp[i].Token + " is Not a Boolean"
+                    res.error = "RUNTIME ERROR: Variable " + cloneOp[i].Token + " is not a boolean"
                     return res;
                 }
             } else {

@@ -250,7 +250,7 @@ runButton.addEventListener('click', () => {
       errorGrids.item(0).classList.remove('error-highlight')
     }
   } else {
-    displayOutput("ERROR: Prowchart is already running!", "error")
+    displayOutput("ERROR: Prowchart is already running.", "error")
   }
 })
 
@@ -451,9 +451,6 @@ async function handleSelectPath(ev){
 
       if(childNode != null && grid.id != selectedGrids[0]){
         generateConnectors();
-      } else if (childNode != null){
-        displayOutput("ERROR: Symbol cannot be connected to itself.", "error");
-        return;
       }
     }
   }
