@@ -206,7 +206,7 @@ for(let i=0;i<26;i++){ // CREATE GRID WITH ID
     if(i == 0 && j == 3){
       newElement.innerHTML = '<input type="text" class="symbol" disabled id="start-end" name="decision" value="START" data-ts="1655295083726">';
       htmlSymbols.push({
-        htmlSymbol: newElement,
+        htmlSymbol: newElement.firstElementChild,
         backendSymbol: flowgram.main.start,
         connections: []
       });
@@ -728,10 +728,12 @@ function displayOutput(text, outputType, symbol){
   output.appendChild(newElement); 
   output.scrollTo(0, output.scrollHeight);
 
+  console.log(symbol, htmlSymbols);
   if(symbol && outputType == "error"){
     //console.log("htmlSymbols: ", htmlSymbols)
     htmlSymbols.forEach((v) => {
       if(!v) return;
+
       if(v.backendSymbol == symbol){
         let grid
         if(v.htmlSymbol.parentNode.classList.contains("dropzone")){
