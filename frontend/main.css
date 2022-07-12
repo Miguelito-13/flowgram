@@ -83,6 +83,11 @@ header{
 #zoom{
     color: white;
 }
+#save.disabled{                             /*@kags*/ 
+    color: grey;
+    pointer-events: none;
+    cursor: default;
+}
 
 
 
@@ -114,6 +119,15 @@ main{
     gap: 0px;
 }
 .dropzone {
+    background-color: whitesmoke;
+    height: 100px;
+    width: 100%;
+    border: #cccccc solid 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dropzone-image {
     background-color: whitesmoke;
     height: 100px;
     width: 100%;

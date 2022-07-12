@@ -97,6 +97,7 @@ function handleDrop(ev) {
   }
 
   ev.preventDefault();
+  activateDeactivateDownload(false);
   // //console.log('DROP', dropzone);
   let data = JSON.parse(ev.dataTransfer.getData('application/json'));
   let draggable = document.querySelector(`[data-ts="${data.timestamp}"]`);
@@ -173,10 +174,12 @@ function handleClick(ev) {
     if(symbol.parentNode.classList.contains('deletable')){
       symbol.parentNode.parentNode.classList.remove('error-highlight')
       initialDelete(symbol.parentNode.parentNode);
+      activateDeactivateDownload(false);
     } 
     if(symbol.classList.contains('deletable')){
       symbol.parentNode.classList.remove('error-highlight')
       initialDelete(symbol.parentNode);
+      activateDeactivateDownload(false);
     }
     
     // //console.log(symbol);
@@ -226,9 +229,21 @@ for(let i=0;i<26;i++){ // CREATE GRID WITH ID
 // FOR DOWNLOADING FLOWCHART AS IMAGE
 let save = document.getElementById("save");
 save.addEventListener('click', () => {
+  let dropzones = document.getElementsByClassName('dropzone');
+  while(dropzones.length > 0){
+    dropzones.item(0).classList.add('dropzone-image');
+    dropzones.item(0).classList.remove('dropzone');
+  }
+
   html2canvas(document.getElementById("canvas")).then(canvas => {
     save.href = canvas.toDataURL("image/jpeg", 0.9);
     save.download = "flowgram.jpg";
+
+    let dropzones = document.getElementsByClassName('dropzone-image');
+    while(dropzones.length > 0){
+      dropzones.item(0).classList.add('dropzone');
+      dropzones.item(0).classList.remove('dropzone-image');
+    }
     // //console.log(canvas.toDataURL("image/jpeg", 0.9));
   })
 });
@@ -245,6 +260,7 @@ runButton.addEventListener('click', () => {
   //console.log("Run Button Pressed");
   if(flowgram.status.run == false){
     startRunCompile(flowgram);
+    activateDeactivateDownload(true);
     let errorGrids = document.getElementsByClassName('error-highlight');
     while(errorGrids.length > 0){
       errorGrids.item(0).classList.remove('error-highlight')
@@ -457,6 +473,7 @@ async function handleSelectPath(ev){
 }
 
 function generateConnectors(){
+  activateDeactivateDownload(false);
   let pathCopy = [...selectedGrids];
   selectedGrids = [];
   htmlConnectors.push({
@@ -715,6 +732,15 @@ function addSymbol(dropzone, clone){
   //console.log(flowgram);
 }
 
+let downloadButton = document.getElementById('save')
+function activateDeactivateDownload(enabled){
+  if(enabled){
+    downloadButton.classList.remove('disabled');
+  } else {
+    downloadButton.classList.add('disabled');
+  }
+}
+
 function getInput(inputObj){
   inputInfo = inputObj;
 }
@@ -730,6 +756,7 @@ function displayOutput(text, outputType, symbol){
 
   console.log(symbol, htmlSymbols);
   if(symbol && outputType == "error"){
+    activateDeactivateDownload(false);
     //console.log("htmlSymbols: ", htmlSymbols)
     htmlSymbols.forEach((v) => {
       if(!v) return;
