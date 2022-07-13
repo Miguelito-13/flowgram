@@ -84,9 +84,13 @@ header{
     color: white;
 }
 #save.disabled{                             /*@kags*/ 
-    color: grey;
+    
     pointer-events: none;
     cursor: default;
+}
+
+#save.disabled button i img{
+    filter: invert(45%) sepia(11%) saturate(22%) hue-rotate(347deg) brightness(91%) contrast(85%);
 }
 
 
